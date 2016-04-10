@@ -6,14 +6,14 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 // reducers
-import myAppStore from './reducers/myApp';
+import myAppStore from './reducers/kanbanApp';
 
 // react components
-import ShowNote from './containers/ShowNote';
+import TasksContainer from './containers/TasksContainer';
 
 const App = (props) => (
   <Provider store={createStore(myAppStore)}>
-    <ShowNote />
+    <TasksContainer />
   </Provider>
 )
 
