@@ -9,14 +9,14 @@ import { Provider } from 'react-redux';
 import myAppStore from './reducers/kanbanApp';
 
 // react components
-import { KanbanApp } from './components';
+import { Hero } from './components';
 import CreateTaskContainer from './containers/CreateTaskContainer';
 import TasksContainer from './containers/TasksContainer';
 
 const App = (props) => (
   <Provider store={createStore(myAppStore)}>
     <div>
-      <KanbanApp />
+      <Hero />
       <CreateTaskContainer />
       <TasksContainer />
     </div>
