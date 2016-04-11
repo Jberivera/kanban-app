@@ -1,16 +1,8 @@
-import createReducer from 'redux-createreducer';
-import addToDo from './addToDo';
+import { combineReducers } from 'redux';
+import tasks from './tasks';
 
-const initialState = {
-  tasks: {
-    toDo: [],
-    inProgress: [],
-    done: []
-  }
-};
+const kanbanApp = combineReducers({
+  tasks
+});
 
-const actionHandlers = {
-  'ADDTODO': (state, action) => Object.assign({}, state, { tasks: Object.assign({}, state.tasks, { toDo: addToDo(state.tasks.toDo, action)}) })
-};
-
-export default createReducer(initialState, actionHandlers);
+export default kanbanApp;
