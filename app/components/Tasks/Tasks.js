@@ -5,8 +5,8 @@ const Tasks = ({ toDo, inProgress, done }) => {
   toDo = toDo.map((task) => {
     return (
       <li>
-        <a>task.title</a>
-        <p>task.description</p>
+        <a>{task.title}</a>
+        <p>{task.description}</p>
       </li>
     );
   });
@@ -14,8 +14,8 @@ const Tasks = ({ toDo, inProgress, done }) => {
   inProgress = inProgress.map((task) => {
     return (
       <li>
-        <a>task.title</a>
-        <p>task.description</p>
+        <a>{task.title}</a>
+        <p>{task.description}</p>
       </li>
     );
   });
@@ -23,8 +23,8 @@ const Tasks = ({ toDo, inProgress, done }) => {
   done = done.map((task) => {
     return (
       <li>
-        <a>task.title</a>
-        <p>task.description</p>
+        <a>{task.title}</a>
+        <p>{task.description}</p>
       </li>
     );
   });
