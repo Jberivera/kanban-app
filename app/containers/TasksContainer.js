@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state, ownProps) => {
   const { toDo, inProgress, done } = state.tasks;
-  console.log(toDo, inProgress, done);
+
   return {
     toDo: toDo,
     inProgress: inProgress,
