@@ -7,7 +7,7 @@ const CreateTask = ({ addToDo }) => {
     const { title, description } = e.currentTarget;
     e.preventDefault();
 
-    addToDo(title.value, description.value);
+    addToDo(Date.now(), title.value, description.value);
   }
 
   return (

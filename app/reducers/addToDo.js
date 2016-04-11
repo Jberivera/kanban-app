@@ -6,6 +6,7 @@ const initialState = {
 
 const actionHandlers = {
   'ADDTODO': (state, action) => [...state, {
+    'id': action.id,
     'title': action.title,
     'description': action.description
   }]

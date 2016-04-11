@@ -7,8 +7,8 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addToDo: (title, description) => {
-      dispatch({ type: 'ADDTODO', 'title': title, 'description': description });
+    addToDo: (id, title, description) => {
+      dispatch({ type: 'ADDTODO', id: id, 'title': title, 'description': description });
     }
   };
 };

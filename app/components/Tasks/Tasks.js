@@ -4,7 +4,7 @@ import './Tasks.scss';
 const Tasks = ({ toDo, inProgress, done }) => {
   toDo = toDo.map((task) => {
     return (
-      <li>
+      <li key={task.id}>
         <a>{task.title}</a>
         <p>{task.description}</p>
       </li>
@@ -13,7 +13,7 @@ const Tasks = ({ toDo, inProgress, done }) => {
 
   inProgress = inProgress.map((task) => {
     return (
-      <li>
+      <li key={task.id}>
         <a>{task.title}</a>
         <p>{task.description}</p>
       </li>
@@ -22,7 +22,7 @@ const Tasks = ({ toDo, inProgress, done }) => {
 
   done = done.map((task) => {
     return (
-      <li>
+      <li key={task.id}>
         <a>{task.title}</a>
         <p>{task.description}</p>
       </li>
@@ -30,7 +30,7 @@ const Tasks = ({ toDo, inProgress, done }) => {
   });
 
   return (
-    <div>
+    <div className='tasks'>
       <ul>
         { toDo }
       </ul>
