@@ -1,7 +1,7 @@
 import React from 'react';
-import css from './KanbanApp.scss';
+import css from './Hero.scss';
 
-const KanbanApp = () => {
+const Hero = () => {
   return (
     <h1 className={css.mainTitle}>
       Hello KanbanApp
@@ -9,4 +9,4 @@ const KanbanApp = () => {
   );
 }
 
-export default KanbanApp;
+export default Hero;
