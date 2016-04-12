@@ -16,7 +16,7 @@ const CreateTask = ({ addToDo }) => {
       <label>Title</label>
       <input type="text" name="title"></input>
       <label>description</label>
-      <input type="text" name="description"></input>
+      <textarea name="description" rows="4" cols="50"></textarea>
       <input type="submit" value="add toDo"></input>
     </form>
   );
