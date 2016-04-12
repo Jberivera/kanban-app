@@ -22,17 +22,18 @@ const CreateTask = ({ addToDo }) => {
   );
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return Object.assign({}, state);
-};
-
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    addToDo: (id, title, description) => {
-      dispatch({ type: 'ADDTODO', id: id, 'title': title, 'description': description });
+    addToDo(id, title, description) {
+      dispatch({
+        type: 'ADDTODO',
+        id,
+        title,
+        description
+      });
     }
   };
 };
 
 export { CreateTask };
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTask);
+export default connect(null, mapDispatchToProps)(CreateTask);
