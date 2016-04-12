@@ -1,7 +1,8 @@
 import React from 'react';
-import './Tasks.scss';
+import { connect } from 'react-redux';
+import './TasksWall.scss';
 
-const Tasks = ({ toDo, inProgress, done }) => {
+const TasksWall = ({ toDo, inProgress, done }) => {
   toDo = toDo.map((task) => {
     return (
       <li key={task.id}>
@@ -30,7 +31,7 @@ const Tasks = ({ toDo, inProgress, done }) => {
   });
 
   return (
-    <div className='tasks'>
+    <div className='TasksWall'>
       <ul>
         { toDo }
       </ul>
@@ -44,4 +45,23 @@ const Tasks = ({ toDo, inProgress, done }) => {
   );
 }
 
-export default Tasks;
+const mapStateToProps = (state, ownProps) => {
+  const { toDo, inProgress, done } = state.tasks;
+
+  return {
+    toDo: toDo,
+    inProgress: inProgress,
+    done: done
+  }
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    onClick: () => {
+      dispatch({ type: 'INCREMENT' });
+    }
+  };
+};
+
+export { TasksWall };
+export default connect(mapStateToProps, mapDispatchToProps)(TasksWall);
