@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateTask from './CreateTask';
+import { CreateTask } from './CreateTask';
 import expect, { createSpy } from 'expect';
 import { shallow } from 'enzyme';
 
