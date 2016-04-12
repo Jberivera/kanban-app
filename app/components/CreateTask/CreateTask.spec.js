@@ -9,7 +9,6 @@ describe('<CreateTask />', () => {
     const addToDo = createSpy();
     const preventDefault = createSpy();
     const e = { preventDefault, currentTarget: {
-      id: 1,
       title: '',
       description: ''
     }};
