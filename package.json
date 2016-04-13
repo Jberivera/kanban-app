@@ -9,7 +9,12 @@
     "build": "webpack",
     "start": "webpack-dev-server"
   },
-  "keywords": ["boilerplate", "webpack", "react", "redux"],
+  "keywords": [
+    "kanban",
+    "react",
+    "redux",
+    "webpack"
+  ],
   "author": "jberivera",
   "license": "MIT",
   "devDependencies": {
@@ -46,9 +51,9 @@
     "react": "^15.0.0",
     "react-dom": "^15.0.0",
     "react-redux": "^4.4.1",
-    "react-router": "^2.0.1",
     "redux": "^3.3.1",
     "redux-createreducer": "^2.0.0",
-    "redux-simple-router": "^2.0.4"
+    "redux-simple-router": "^2.0.4",
+    "rrtr": "^2.1.2"
   }
 }
