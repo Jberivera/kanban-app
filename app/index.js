@@ -13,7 +13,7 @@ import { Hero, NewTaskForm, TasksWall } from './components';
 
 const App = (props) => (
   <Provider store={createStore(myAppStore)}>
-    <div>
+    <div className="main-container">
       <Hero />
       <NewTaskForm />
       <TasksWall />
