@@ -1,0 +1,11 @@
+.task-wall {
+  display: block;
+}
+
+.task-group {
+  display: inline-block;
+  vertical-align: top;
+  min-width: 33.33%;
+  min-height: 500px;
+  border: solid 2px #000;
+}
