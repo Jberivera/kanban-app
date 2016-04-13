@@ -2,47 +2,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import css from './TasksWall.scss';
 
+import Task from '../Task/Task';
+
 const TasksWall = ({ toDo, inProgress, done }) => {
-  toDo = toDo.map((task) => {
-    return (
-      <li key={task.id}>
-        <a>{task.title}</a>
-        <p>{task.description}</p>
-      </li>
-    );
-  });
-
-  inProgress = inProgress.map((task) => {
-    return (
-      <li key={task.id}>
-        <a>{task.title}</a>
-        <p>{task.description}</p>
-      </li>
-    );
-  });
-
-  done = done.map((task) => {
-    return (
-      <li key={task.id}>
-        <a>{task.title}</a>
-        <p>{task.description}</p>
-      </li>
-    );
-  });
 
   return (
     <div className={ css['tasks-wall'] }>
       <ul className={ css['task-group'] }>
         <h2>toDo</h2>
-        { toDo }
+        { toDo.map(Task) }
       </ul>
       <ul className={ css['task-group'] }>
         <h2>inProgress</h2>
-        { inProgress }
+        { inProgress.map(Task) }
       </ul>
       <ul className={ css['task-group'] }>
         <h2>Done</h2>
-        { done }
+        { done.map(Task) }
       </ul>
     </div>
   );
