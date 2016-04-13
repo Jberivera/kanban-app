@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import './CreateTask.scss';
+import './NewTaskForm.scss';
 
-const CreateTask = ({ addToDo }) => {
+const NewTaskForm = ({ addToDo }) => {
 
   function onSubmit(e) {
     const { title, description } = e.currentTarget;
@@ -35,5 +35,5 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   };
 };
 
-export { CreateTask };
-export default connect(null, mapDispatchToProps)(CreateTask);
+export { NewTaskForm };
+export default connect(null, mapDispatchToProps)(NewTaskForm);
