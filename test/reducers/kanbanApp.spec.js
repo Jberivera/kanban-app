@@ -22,7 +22,7 @@ describe('kanbanApp reducer', () => {
         done: []
       }
     };
-    const action = { type: 'ADDTODO', id: '1', 'title': 'new task', 'description': 'something to do' }
+    const action = { type: 'ADD_TODO', id: '1', 'title': 'new task', 'description': 'something to do' }
 
     expect(kanbanApp(initialState, action)).toEqual(after);
   });
