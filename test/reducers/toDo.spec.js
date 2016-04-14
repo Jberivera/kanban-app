@@ -1,15 +1,15 @@
 import expect from 'expect';
-import addToDo from '../../app/reducers/addToDo';
+import toDo from '../../app/reducers/toDo';
 import {
-  addToDo as addToDoCreator
+  addToDo
 } from '../../app/actions/action-creators';
 
-describe('addToDo reducer', () => {
+describe('toDo reducer', () => {
   it('should add a new toDo', () => {
     const before = [];
     const after = [{ id: '1', 'title': 'new task', 'description': 'something to do' }];
-    const action = addToDoCreator('1', 'new task', 'something to do');
+    const action = addToDo(1, 'new task', 'something to do');
 
-    expect(addToDo(before, action)).toEqual(after);
+    expect(toDo(before, action)).toEqual(after);
   });
 });

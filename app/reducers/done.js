@@ -1,12 +1,10 @@
 import createReducer from 'redux-createreducer';
-import { ADD_TODO } from '../actions/action-creators';
+import { MOVE_DONE } from '../actions/action-creators';
 
-const initialState = {
-  toDo: []
-};
+const initialState = [];
 
 const actionHandlers = {
-  [ADD_TODO]: (state, action) => [...state, {
+  [MOVE_DONE]: (state, action) => [...state, {
     'id': action.id,
     'title': action.title,
     'description': action.description
