@@ -33,6 +33,13 @@ describe('kanbanApp reducer', () => {
   });
 
   it('should move a toDo to inProgress', () => {
+    const before = {
+      tasks: {
+        toDo: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
+        inProgress: [],
+        done: []
+      }
+    };
     const after = {
       tasks: {
         toDo: [],
@@ -46,6 +53,13 @@ describe('kanbanApp reducer', () => {
   });
 
   it('should move an inProgress to Done', () => {
+    const before = {
+      tasks: {
+        toDo: [],
+        inProgress: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
+        done: []
+      }
+    };
     const after = {
       tasks: {
         toDo: [],
