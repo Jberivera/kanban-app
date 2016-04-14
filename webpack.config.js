@@ -45,7 +45,7 @@ module.exports = merge(common, {
       progress: true,
       stats: 'errors-only',
       host: process.env.HOST,
-      port: process.env.PORT || DEFAULT_PORT
+      port: DEFAULT_PORT
     },
     plugins: [
       new webpack.HotModuleReplacementPlugin()
