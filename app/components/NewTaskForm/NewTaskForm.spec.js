@@ -3,7 +3,7 @@ import { NewTaskForm } from './NewTaskForm';
 import expect, { createSpy, spyOn } from 'expect';
 import { shallow } from 'enzyme';
 
-describe('<CreateTask />', () => {
+describe('<NewTaskForm />', () => {
 
   it('simulates submit event', () => {
     const addToDo = createSpy();
