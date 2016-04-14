@@ -1,15 +1,12 @@
-import createReducer from 'redux-createreducer';
-import addToDo from './addToDo';
-import { ADD_TODO } from '../actions/action-creators';
+import { combineReducers } from 'redux';
+import toDo from './toDo';
+import inProgress from './inProgress';
+import done from './done';
 
-const initialState = {
-  toDo: [],
-  inProgress: [],
-  done: []
-};
+const tasks = combineReducers({
+  toDo,
+  inProgress,
+  done
+});
 
-const actionHandlers = {
-  [ADD_TODO]: (state, action) => Object.assign({}, state, { toDo: addToDo(state.toDo, action) })
-};
-
-export default createReducer(initialState, actionHandlers);
+export default tasks;
