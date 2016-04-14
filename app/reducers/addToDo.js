@@ -1,11 +1,12 @@
 import createReducer from 'redux-createreducer';
+import { ADD_TODO } from '../actions/action-creators';
 
 const initialState = {
   toDo: []
 };
 
 const actionHandlers = {
-  'ADDTODO': (state, action) => [...state, {
+  [ADD_TODO]: (state, action) => [...state, {
     'id': action.id,
     'title': action.title,
     'description': action.description

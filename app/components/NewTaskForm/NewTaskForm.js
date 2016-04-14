@@ -1,5 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  addToDo
+} from '../../actions/action-creators';
+
 import './NewTaskForm.scss';
 
 const NewTaskForm = ({ addToDo }) => {
@@ -22,18 +27,9 @@ const NewTaskForm = ({ addToDo }) => {
   );
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    addToDo(id, title, description) {
-      dispatch({
-        type: 'ADDTODO',
-        id,
-        title,
-        description
-      });
-    }
-  };
-};
+const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+  addToDo
+}, dispatch);
 
 export { NewTaskForm };
 export default connect(null, mapDispatchToProps)(NewTaskForm);

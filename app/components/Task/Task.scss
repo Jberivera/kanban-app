@@ -1,0 +1,24 @@
+.task-item {
+  border: solid 1px #000;
+  list-style-type: none;
+  width: 95%;
+  margin: auto;
+  text-align: center;
+  background-color: #E4DED7;
+}
+
+.task-item-title {
+  display: inline-block;
+  width: 100%;
+  font-size: 22px;
+  text-decoration: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 10px 0 0 0;
+  margin: 0 0 10px 0;
+  background-color: #BC907A;
+}
+
+.task-item-description {
+  padding: 0 10% 20px 10%;
+}
