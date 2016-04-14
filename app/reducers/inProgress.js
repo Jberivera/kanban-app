@@ -1,5 +1,8 @@
 import createReducer from 'redux-createreducer';
-import { MOVE_INPROGRESS } from '../actions/action-creators';
+import {
+  MOVE_INPROGRESS,
+  MOVE_DONE
+} from '../actions/action-creators';
 
 const initialState = [];
 
@@ -8,7 +11,8 @@ const actionHandlers = {
     'id': action.id,
     'title': action.title,
     'description': action.description
-  }]
+  }],
+  [MOVE_DONE]: (state, action) => state.filter((task) => task.id !== action.id)
 };
 
 export default createReducer(initialState, actionHandlers);
