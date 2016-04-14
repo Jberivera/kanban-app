@@ -1,5 +1,8 @@
 import expect from 'expect';
 import kanbanApp from '../../app/reducers/kanbanApp';
+import {
+  addToDo
+} from '../../app/actions/action-creators';
 
 const initialState = {
   tasks: {
@@ -22,7 +25,7 @@ describe('kanbanApp reducer', () => {
         done: []
       }
     };
-    const action = { type: 'ADD_TODO', id: '1', 'title': 'new task', 'description': 'something to do' }
+    const action = addToDo('1', 'new task', 'something to do');
 
     expect(kanbanApp(initialState, action)).toEqual(after);
   });
