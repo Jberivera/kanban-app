@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import styles from './Task.scss';
-import className from 'classname/bind';
+import classNames from 'classnames/bind';
 
-const css = className.bind(styles);
+const css = classNames.bind(styles);
 
 const Task = ({ id, title, description }) => {
   return (
