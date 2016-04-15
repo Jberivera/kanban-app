@@ -8,18 +8,24 @@ const TasksWall = ({ toDo, inProgress, done }) => {
 
   return (
     <div className={ css['tasks-wall'] }>
-      <ul className={ css['task-group'] }>
-        <h2>toDo</h2>
-        { toDo.map(Task) }
-      </ul>
-      <ul className={ css['task-group'] }>
-        <h2>inProgress</h2>
-        { inProgress.map(Task) }
-      </ul>
-      <ul className={ css['task-group'] }>
-        <h2>Done</h2>
-        { done.map(Task) }
-      </ul>
+      <div className={ css['task-group'] }>
+        <h2 className={ css['task-group-title'] }>toDo</h2>
+        <ul className={ css['task-group-list'] }>
+          { toDo.map(Task) }
+        </ul>
+      </div>
+      <div className={ css['task-group'] }>
+        <h2 className={ css['task-group-title'] }>inProgress</h2>
+        <ul className={ css['task-group-list'] }>
+          { inProgress.map(Task) }
+        </ul>
+      </div>
+      <div className={ css['task-group'] }>
+        <h2 className={ css['task-group-title'] }>Done</h2>
+        <ul className={ css['task-group-list'] }>
+          { done.map(Task) }
+        </ul>
+      </div>
     </div>
   );
 }
