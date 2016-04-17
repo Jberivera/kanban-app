@@ -13,7 +13,7 @@ const NewTaskForm = ({ addToDo }) => {
     const { title, description } = e.currentTarget;
     e.preventDefault();
 
-    addToDo(Date.now(), title.value, description.value);
+    addToDo(Date.now().toString(), title.value, description.value);
   }
 
   return (
