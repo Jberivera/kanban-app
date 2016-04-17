@@ -1,6 +1,13 @@
 .tasks-wall {
   display: block;
   background: #f1f0ee;
+  -webkit-user-select:none;
+  user-select:none;
+
+  *, *::before, *::after {
+    -webkit-user-select:none;
+    user-select:none;
+  }
 }
 
 .task-group {
