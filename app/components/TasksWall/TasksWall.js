@@ -37,7 +37,7 @@ const TasksWall = ({
     const task = findTask(e.target);
     if (task) {
       let data = {
-        group: task.parentNode.parentNode.getAttribute('data-group'),
+        group: findGroup(task),
         id: task.getAttribute('data-id'),
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
