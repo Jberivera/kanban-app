@@ -8,7 +8,7 @@ import {
   moveDone
 } from '../../actions/action-creators';
 
-import Task from '../Task/Task';
+import TaskGroup from '../TaskGroup/TaskGroup';
 
 const css = classNames.bind(styles);
 
@@ -47,7 +47,7 @@ const TasksWall = ({
   }
 
   function findTask(element) {
-    if (element.classList.contains(css('task-group'))) {
+    if (element.classList.contains('js-task-group')) {
       return null;
     }
     if (element.tagName === 'LI') {
@@ -57,7 +57,7 @@ const TasksWall = ({
   }
 
   function findGroup(element) {
-    if (element.classList.contains(css('task-group'))) {
+    if (element.classList.contains('js-task-group')) {
       return element.getAttribute('data-group');
     }
     return findGroup(element.parentNode);
@@ -65,24 +65,9 @@ const TasksWall = ({
 
   return (
     <div className={ css('tasks-wall') } onMouseDown={ onMouseDown }>
-      <div className={ css('task-group') } data-group="ToDo">
-        <h2 className={ css('task-group-title') }>toDo</h2>
-        <ul className={ css('task-group-list', 'toDo') }>
-          { toDo.map(Task) }
-        </ul>
-      </div>
-      <div className={ css('task-group') } data-group="InProgress">
-        <h2 className={ css('task-group-title') }>inProgress</h2>
-        <ul className={ css('task-group-list', 'inProgress') }>
-          { inProgress.map(Task) }
-        </ul>
-      </div>
-      <div className={ css('task-group')} data-group="Done">
-        <h2 className={ css('task-group-title') }>Done</h2>
-        <ul className={ css('task-group-list', 'done') }>
-          { done.map(Task) }
-        </ul>
-      </div>
+      <TaskGroup array={ toDo } name="ToDo" />
+      <TaskGroup array={ inProgress } name="InProgress" />
+      <TaskGroup array={ done} name="Done" />
     </div>
   );
 }
