@@ -7,6 +7,8 @@ import {
   moveInProgress,
   moveDone
 } from '../../actions/action-creators';
+import { findTask, findGroup } from '../../js/findUp';
+import { getOffsetLeft, getOffsetTop } from '../../js/getOffset';
 
 import TaskGroup from '../TaskGroup/TaskGroup';
 
@@ -23,13 +25,24 @@ const TasksWall = ({
     'InProgress': 'Done'
   };
 
-  function onMouseUp({ group, id, title, description }) {
+  function onMouseUp({ elem, group, id, title, description }) {
     return function mouseUp(e) {
       const taskGroup = findGroup(e.target);
+      elem.style.transform = 'none';
       e.currentTarget.removeEventListener('mouseup', mouseUp);
+      e.currentTarget.onmousemove = null;
       if (taskGroup === fromTo[group]) {
         actions[`move${taskGroup}`](id, title, description);
       }
+    }
+  }
+
+  function onMouseMove(task) {
+    let x = 0, y = 0;
+    return function mouseMove(e) {
+      x = e.x - getOffsetLeft(task);
+      y = e.y - getOffsetTop(task) + task.offsetHeight;
+      task.style.transform = `translate(${x}px, ${y}px)`;
     }
   }
 
@@ -37,30 +50,15 @@ const TasksWall = ({
     const task = findTask(e.target);
     if (task) {
       let data = {
+        elem: task,
         group: findGroup(task),
         id: task.getAttribute('data-id'),
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
       };
       e.currentTarget.addEventListener('mouseup', onMouseUp(data));
+      e.currentTarget.onmousemove = onMouseMove(task);
     }
-  }
-
-  function findTask(element) {
-    if (element.classList.contains('js-task-group')) {
-      return null;
-    }
-    if (element.tagName === 'LI') {
-      return element;
-    }
-    return findTask(element.parentNode);
-  }
-
-  function findGroup(element) {
-    if (element.classList.contains('js-task-group')) {
-      return element.getAttribute('data-group');
-    }
-    return findGroup(element.parentNode);
   }
 
   return (
