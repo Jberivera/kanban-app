@@ -19,13 +19,8 @@ const tasks = {
 }
 
 describe('<TasksWall />', () => {
-  it('has a three ul elements', () => {
+  it('has three <TaskGroup> components', () => {
     const wrapper = shallow(<TasksWall toDo={ tasks.toDo } inProgress={ tasks.inProgress } done={ tasks.done }/>);
-    expect(wrapper.find('ul').length).toBe(3);
-  });
-
-  it('create li elements', () => {
-    const wrapper = shallow(<TasksWall toDo={ tasks.toDo } inProgress={ tasks.inProgress } done={ tasks.done }/>);
-    expect(wrapper.find('li').length).toBe(6);
+    expect(wrapper.find('TaskGroup').length).toBe(3);
   });
 });
