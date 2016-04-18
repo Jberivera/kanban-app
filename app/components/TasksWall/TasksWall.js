@@ -38,10 +38,13 @@ const TasksWall = ({
   }
 
   function onMouseMove(task) {
-    let x = 0, y = 0;
+    let x = 0,
+      y = 0,
+      left = getOffsetLeft(task),
+      top = getOffsetTop(task);
     return function mouseMove(e) {
-      x = e.x - getOffsetLeft(task);
-      y = e.y - getOffsetTop(task) + task.offsetHeight + document.scrollingElement.scrollTop;
+      x = e.x - left;
+      y = e.y - top + task.offsetHeight + document.scrollingElement.scrollTop;
       task.style.transform = `translate(${x}px, ${y}px)`;
     }
   }
