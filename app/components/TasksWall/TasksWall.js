@@ -41,7 +41,7 @@ const TasksWall = ({
     let x = 0, y = 0;
     return function mouseMove(e) {
       x = e.x - getOffsetLeft(task);
-      y = e.y - getOffsetTop(task) + task.offsetHeight;
+      y = e.y - getOffsetTop(task) + task.offsetHeight + document.scrollingElement.scrollTop;
       task.style.transform = `translate(${x}px, ${y}px)`;
     }
   }
