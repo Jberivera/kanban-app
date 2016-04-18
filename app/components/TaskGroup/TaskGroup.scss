@@ -1,11 +1,7 @@
 .task-group {
   position: relative;
-  display: inline-block;
-  vertical-align: top;
-  min-width: 33.33%;
-  min-height: 80vh;
-  max-height: 80vh;
-  border: solid 2px #fff;
+  flex: 1;
+  min-height: 150px;
 }
 
 .task-group-title {
@@ -21,11 +17,11 @@
 }
 
 .task-group-list {
-  position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
-  padding-top: 70px;
+  margin-top: 30px;
+  margin-bottom: 15px;
 }
 
 .ToDo {
