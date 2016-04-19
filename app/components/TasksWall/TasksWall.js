@@ -42,7 +42,7 @@ const TasksWall = ({
   function onMouseMove(task) {
     let x = 0,
       y = 0,
-      left = getOffsetLeft(task),
+      left = getOffsetLeft(task) + task.offsetWidth / 2,
       top = getOffsetTop(task) - 10;
     return function mouseMove(e) {
       x = e.x - left;
