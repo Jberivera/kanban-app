@@ -28,7 +28,9 @@ const TasksWall = ({
   function onMouseUp({ elem, group, id, title, description }) {
     return function mouseUp(e) {
       const taskGroup = findGroup(e.target);
+      document.body.style.cursor = 'default';
       elem.style.transform = 'none';
+      elem.style.position = 'static';
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
       if (taskGroup === fromTo[group]) {
@@ -41,10 +43,10 @@ const TasksWall = ({
     let x = 0,
       y = 0,
       left = getOffsetLeft(task),
-      top = getOffsetTop(task);
+      top = getOffsetTop(task) - 10;
     return function mouseMove(e) {
       x = e.x - left;
-      y = e.y - top + task.offsetHeight + document.scrollingElement.scrollTop;
+      y = e.y - top + document.scrollingElement.scrollTop;
       task.style.transform = `translate(${x}px, ${y}px)`;
     }
   }
@@ -59,6 +61,8 @@ const TasksWall = ({
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
       };
+      task.style.position = 'relative';
+      document.body.style.cursor = 'move';
       e.currentTarget.addEventListener('mouseup', onMouseUp(data));
       e.currentTarget.onmousemove = onMouseMove(task);
     }
