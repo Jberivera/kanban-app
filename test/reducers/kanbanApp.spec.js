@@ -49,7 +49,7 @@ describe('kanbanApp reducer', () => {
     };
     const action = moveInProgress('1', 'new task', 'something to do');
 
-    expect(kanbanApp(initialState, action)).toEqual(after);
+    expect(kanbanApp(before, action)).toEqual(after);
   });
 
   it('should move an inProgress to Done', () => {
@@ -69,6 +69,6 @@ describe('kanbanApp reducer', () => {
     };
     const action = moveDone('1', 'new task', 'something to do');
 
-    expect(kanbanApp(initialState, action)).toEqual(after);
+    expect(kanbanApp(before, action)).toEqual(after);
   });
 });
