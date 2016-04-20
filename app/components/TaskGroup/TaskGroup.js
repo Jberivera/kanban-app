@@ -7,6 +7,7 @@ const css = classNames.bind(styles);
 import Task from '../Task/Task';
 
 const TaskGroup = ({ array, name }) => {
+  name = `${name[0].toUpperCase()}${name.slice(1)}`;
 
   return (
     <div className={ css('task-group', 'js-task-group') } data-group={ name }>

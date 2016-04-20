@@ -15,9 +15,7 @@ import TaskGroup from '../TaskGroup/TaskGroup';
 const css = classNames.bind(styles);
 
 const TasksWall = ({
-  toDo,
-  inProgress,
-  done,
+  tasks,
   ...actions
 }) => {
   const fromTo = {
@@ -26,6 +24,7 @@ const TasksWall = ({
   };
 
   function onMouseUp({ elem, group, id, title, description }) {
+
     return function mouseUp(e) {
       const taskGroup = findGroup(e.target);
       document.body.style.cursor = 'default';
@@ -44,6 +43,7 @@ const TasksWall = ({
       y = 0,
       left = getOffsetLeft(task) + task.offsetWidth / 2,
       top = getOffsetTop(task) - 10;
+
     return function mouseMove(e) {
       x = e.x - left;
       y = e.y - top + document.scrollingElement.scrollTop;
@@ -70,15 +70,21 @@ const TasksWall = ({
 
   return (
     <div className={ css('tasks-wall') } onMouseDown={ onMouseDown }>
-      <TaskGroup array={ toDo } name="ToDo" />
-      <TaskGroup array={ inProgress } name="InProgress" />
-      <TaskGroup array={ done} name="Done" />
+      {
+        Object.keys(tasks).map((key) => {
+          return (
+            <TaskGroup key={ key } array={ tasks[key] } name={ key } />
+          );
+        })
+      }
     </div>
   );
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return Object.assign({}, state.tasks);
+  return {
+    tasks: Object.assign({}, state.tasks)
+  };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
