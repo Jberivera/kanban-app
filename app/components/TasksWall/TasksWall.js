@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import styles from './TasksWall.scss';
 import classNames from 'classnames/bind';
 import {
-  moveInProgress,
-  moveDone
+  addToDo,
+  moveFromTo
 } from '../../actions/action-creators';
 import { findTask, findGroup } from '../../js/findUp';
 import { getOffsetLeft, getOffsetTop } from '../../js/getOffset';
@@ -16,25 +16,24 @@ const css = classNames.bind(styles);
 
 const TasksWall = ({
   tasks,
-  ...actions
+  addToDo,
+  moveFromTo
 }) => {
   const fromTo = {
     'ToDo': 'InProgress',
     'InProgress': 'Done'
   };
 
-  function onMouseUp({ elem, group, id, title, description }) {
+  function onMouseUp({ elem, groupFrom, id, title, description }) {
 
     return function mouseUp(e) {
-      const taskGroup = findGroup(e.target);
+      const groupTo = findGroup(e.target);
       document.body.style.cursor = 'default';
       elem.style.transform = 'none';
       elem.style.position = 'static';
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
-      if (taskGroup === fromTo[group]) {
-        actions[`move${taskGroup}`](id, title, description);
-      }
+      moveFromTo(id, title, description, groupFrom, groupTo);
     }
   }
 
@@ -56,7 +55,7 @@ const TasksWall = ({
     if (task) {
       let data = {
         elem: task,
-        group: findGroup(task),
+        groupFrom: findGroup(task),
         id: task.getAttribute('data-id'),
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
@@ -88,8 +87,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  moveInProgress,
-  moveDone
+  addToDo,
+  moveFromTo
 }, dispatch);
 
 export { TasksWall };
