@@ -2,8 +2,7 @@ import expect from 'expect';
 import kanbanApp from '../../app/reducers/kanbanApp';
 import {
   addToDo,
-  moveInProgress,
-  moveDone
+  moveFromTo,
 } from '../../app/actions/action-creators';
 
 const initialState = {
@@ -47,7 +46,7 @@ describe('kanbanApp reducer', () => {
         done: []
       }
     };
-    const action = moveInProgress('1', 'new task', 'something to do');
+    const action = moveFromTo('1', 'new task', 'something to do', 'toDo', 'inProgress');
 
     expect(kanbanApp(before, action)).toEqual(after);
   });
@@ -67,7 +66,7 @@ describe('kanbanApp reducer', () => {
         done: [{ id: '1', 'title': 'new task', 'description': 'something to do' }]
       }
     };
-    const action = moveDone('1', 'new task', 'something to do');
+    const action = moveFromTo('1', 'new task', 'something to do', 'inProgress', 'done');
 
     expect(kanbanApp(before, action)).toEqual(after);
   });
