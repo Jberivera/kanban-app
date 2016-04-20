@@ -20,7 +20,7 @@ const tasks = {
 
 describe('<TasksWall />', () => {
   it('has three <TaskGroup> components', () => {
-    const wrapper = shallow(<TasksWall toDo={ tasks.toDo } inProgress={ tasks.inProgress } done={ tasks.done }/>);
+    const wrapper = shallow(<TasksWall tasks={ tasks }/>);
     expect(wrapper.find('TaskGroup').length).toBe(3);
   });
 });
