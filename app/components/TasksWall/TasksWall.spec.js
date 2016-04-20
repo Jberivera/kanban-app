@@ -16,7 +16,7 @@ const tasks = {
     { 'title': 'new task', 'description': 'something to do' },
     { 'title': 'new task', 'description': 'something to do' }
   ]
-}
+};
 
 describe('<TasksWall />', () => {
   it('has three <TaskGroup> components', () => {
