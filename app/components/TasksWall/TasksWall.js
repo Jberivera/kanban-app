@@ -19,10 +19,6 @@ const TasksWall = ({
   addToDo,
   moveFromTo
 }) => {
-  const fromTo = {
-    'ToDo': 'InProgress',
-    'InProgress': 'Done'
-  };
 
   function onMouseUp({ elem, groupFrom, id, title, description }) {
 
