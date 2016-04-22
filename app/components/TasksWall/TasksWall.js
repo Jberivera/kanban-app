@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styles from './TasksWall.scss';
+import taskStyles from '../Task/Task.scss';
 import classNames from 'classnames/bind';
 import {
   addToDo,
@@ -13,6 +14,7 @@ import { getOffsetLeft, getOffsetTop } from '../../js/getOffset';
 import TaskGroup from '../TaskGroup/TaskGroup';
 
 const css = classNames.bind(styles);
+const taskCss = classNames.bind(taskStyles);
 
 const TasksWall = ({
   tasks,
@@ -30,7 +32,7 @@ const TasksWall = ({
       elem.style.transform = 'none';
       elem.style.position = 'static';
       elem.parentNode.firstChild.style.removeProperty('display');
-      document.body.classList.remove('drag-active');
+      document.body.classList.remove(taskCss('drag-active'));
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
       if (groupFrom !== groupTo) {
@@ -41,10 +43,11 @@ const TasksWall = ({
 
   function onMouseMove(content) {
     let x = 0,
-      y = 0;
+      y = 0,
+      left = getOffsetLeft(content) + content.offsetWidth / 2;
+
     return function mouseMove(e) {
-      let left = getOffsetLeft(content) + content.offsetWidth / 2,
-        top = getOffsetTop(content) - 10;
+      let top = getOffsetTop(content) - 10;
       x = e.x - left;
       y = e.y - top + document.scrollingElement.scrollTop;
       content.style.transform = `translate(${x}px, ${y}px)`;
@@ -64,8 +67,9 @@ const TasksWall = ({
       };
       content.style.position = 'relative';
       task.firstChild.style.display = 'none';
+      task.style.background = 'rgba(0, 0, 0, 0.1)';
       document.body.style.cursor = 'move';
-      document.body.classList.add('drag-active');
+      document.body.classList.add(taskCss('drag-active'));
       e.currentTarget.addEventListener('mouseup', onMouseUp(data));
       e.currentTarget.onmousemove = onMouseMove(content);
     }
