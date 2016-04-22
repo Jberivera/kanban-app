@@ -6,9 +6,25 @@ import classNames from 'classnames/bind';
 const css = classNames.bind(styles);
 
 const Task = ({ id, title, description }, i) => {
+
+  function onMouseOut(e) {
+    const task = e.target.parentNode;
+    task.style.padding = '0';
+    task.removeEventListener('mouseout', onMouseOut);
+  }
+
+  function onMouseEnter(e) {
+    const task = e.target.parentNode;
+    const height = task.offsetHeight;
+    task.style.padding = `${height}px 0 0`;
+    task.firstChild.style.height = `${height}px`;
+    task.addEventListener('mouseout', onMouseOut);
+  }
+
   return (
     <li key={ id } className={ css('task-item') } data-id={ id } data-index={ i }>
-      <div className={ css('task-item-box', 'js-item-box') }>
+      <div className={ css('fake-mouseenter', 'fake-ondrag') } onMouseEnter={ onMouseEnter }></div>
+      <div className={ css('task-item-content', 'js-item-content') }>
         <a href={ `#${id}` } className={ css('task-item-title', 'js-task-title') } draggable="false">{ title }</a>
         <p className={ css('task-item-description', 'js-task-description') }>{ description }</p>
       </div>

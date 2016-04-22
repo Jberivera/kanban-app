@@ -27,40 +27,46 @@ const TasksWall = ({
       document.body.style.cursor = 'default';
       elem.style.transform = 'none';
       elem.style.position = 'static';
+      elem.parentNode.firstChild.style.removeProperty('display');
+      document.body.classList.remove('drag-active');
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
-      moveFromTo(id, title, description, groupFrom, groupTo);
+      if (groupFrom !== groupTo) {
+        moveFromTo(id, title, description, groupFrom, groupTo);
+      }
     }
   }
 
-  function onMouseMove(box) {
+  function onMouseMove(content) {
     let x = 0,
       y = 0,
-      left = getOffsetLeft(box) + box.offsetWidth / 2,
-      top = getOffsetTop(box) - 10;
+      left = getOffsetLeft(content) + content.offsetWidth / 2,
+      top = getOffsetTop(content) - 10;
 
     return function mouseMove(e) {
       x = e.x - left;
       y = e.y - top + document.scrollingElement.scrollTop;
-      box.style.transform = `translate(${x}px, ${y}px)`;
+      content.style.transform = `translate(${x}px, ${y}px)`;
     }
   }
 
   function onMouseDown(e) {
     const task = findTask(e.target);
     if (task) {
-      const box = task.querySelector('.js-item-box')
+      const content = task.querySelector('.js-item-content');
       let data = {
-        elem: task,
+        elem: content,
         groupFrom: findGroup(task),
         id: task.getAttribute('data-id'),
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
       };
-      box.style.position = 'relative';
+      content.style.position = 'relative';
+      task.firstChild.style.display = 'none';
       document.body.style.cursor = 'move';
+      document.body.classList.add('drag-active');
       e.currentTarget.addEventListener('mouseup', onMouseUp(data));
-      e.currentTarget.onmousemove = onMouseMove(box);
+      e.currentTarget.onmousemove = onMouseMove(content);
     }
   }
 
