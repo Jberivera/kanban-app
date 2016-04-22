@@ -1,6 +1,7 @@
 import createReducer from 'redux-createreducer';
 import {
   ADD_TODO,
+  RE_ORDER,
   MOVE_FROM_TO
 } from '../actions/action-creators';
 
@@ -22,7 +23,7 @@ const actionHandlers = {
   [MOVE_FROM_TO]: (state, action) => {
     const arrayFrom = state[action.groupFrom];
     const arrayTo = state[action.groupTo];
-    let { index } = action;
+    const { index } = action;
 
     return Object.assign({}, state, {
       [action.groupFrom]: arrayFrom.filter((task) => task.id !== action.id),
@@ -34,6 +35,24 @@ const actionHandlers = {
           'description': action.description
         },
         ...arrayTo.slice(index)
+      ]
+    });
+  },
+  [RE_ORDER]: (state, action) => {
+    const arrayFrom = state[action.groupFrom];
+    const { index } = action;
+
+    const auxArray = arrayFrom.filter((task) => task.id !== action.id);
+
+    return Object.assign({}, state, {
+      [action.groupFrom]: [
+        ...auxArray.slice(0, index),
+        {
+          'id': action.id,
+          'title': action.title,
+          'description': action.description
+        },
+        ...auxArray.slice(index)
       ]
     });
   }
