@@ -22,15 +22,19 @@ const actionHandlers = {
   [MOVE_FROM_TO]: (state, action) => {
     const arrayFrom = state[action.groupFrom];
     const arrayTo = state[action.groupTo];
+    let { index } = action;
 
     return Object.assign({}, state, {
       [action.groupFrom]: arrayFrom.filter((task) => task.id !== action.id),
       [action.groupTo]: [
-        ...arrayTo, {
-        'id': action.id,
-        'title': action.title,
-        'description': action.description
-      }]
+        ...arrayTo.slice(0, index),
+        {
+          'id': action.id,
+          'title': action.title,
+          'description': action.description
+        },
+        ...arrayTo.slice(index)
+      ]
     });
   }
 };
