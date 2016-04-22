@@ -6,6 +6,7 @@ import taskStyles from '../Task/Task.scss';
 import classNames from 'classnames/bind';
 import {
   addToDo,
+  reOrder,
   moveFromTo
 } from '../../actions/action-creators';
 import { findTask, findGroup } from '../../js/findUp';
@@ -19,6 +20,7 @@ const taskCss = classNames.bind(taskStyles);
 const TasksWall = ({
   tasks,
   addToDo,
+  reOrder,
   moveFromTo
 }) => {
 
@@ -27,7 +29,11 @@ const TasksWall = ({
     return function mouseUp(e) {
       const groupTo = findGroup(e.target);
       const task = findTask(e.target);
-      const index = task ? task.getAttribute('data-index') : 0;
+      let index = 0;
+      if (task) {
+        index = task.getAttribute('data-index');
+        task.style.padding = '0';
+      }
       document.body.style.cursor = 'default';
       elem.style.transform = 'none';
       elem.style.position = 'static';
@@ -36,7 +42,9 @@ const TasksWall = ({
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
       if (groupFrom !== groupTo) {
-        moveFromTo(id, title, description, groupFrom, groupTo, index);
+        moveFromTo(id, title, description, groupFrom, groupTo, Number(index));
+      } else {
+        reOrder(id, title, description, groupFrom, Number(index));
       }
     }
   }
@@ -96,6 +104,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
   addToDo,
+  reOrder,
   moveFromTo
 }, dispatch);
 
