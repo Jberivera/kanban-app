@@ -19,10 +19,6 @@ const TasksWall = ({
   addToDo,
   moveFromTo
 }) => {
-  const fromTo = {
-    'ToDo': 'InProgress',
-    'InProgress': 'Done'
-  };
 
   function onMouseUp({ elem, groupFrom, id, title, description }) {
 
@@ -31,39 +27,46 @@ const TasksWall = ({
       document.body.style.cursor = 'default';
       elem.style.transform = 'none';
       elem.style.position = 'static';
+      elem.parentNode.firstChild.style.removeProperty('display');
+      document.body.classList.remove('drag-active');
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
-      moveFromTo(id, title, description, groupFrom, groupTo);
+      if (groupFrom !== groupTo) {
+        moveFromTo(id, title, description, groupFrom, groupTo);
+      }
     }
   }
 
-  function onMouseMove(task) {
+  function onMouseMove(content) {
     let x = 0,
       y = 0,
-      left = getOffsetLeft(task) + task.offsetWidth / 2,
-      top = getOffsetTop(task) - 10;
+      left = getOffsetLeft(content) + content.offsetWidth / 2,
+      top = getOffsetTop(content) - 10;
 
     return function mouseMove(e) {
       x = e.x - left;
       y = e.y - top + document.scrollingElement.scrollTop;
-      task.style.transform = `translate(${x}px, ${y}px)`;
+      content.style.transform = `translate(${x}px, ${y}px)`;
     }
   }
 
   function onMouseDown(e) {
     const task = findTask(e.target);
     if (task) {
+      const content = task.querySelector('.js-item-content');
       let data = {
-        elem: task,
+        elem: content,
         groupFrom: findGroup(task),
         id: task.getAttribute('data-id'),
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
       };
-      task.style.position = 'relative';
+      content.style.position = 'relative';
+      task.firstChild.style.display = 'none';
       document.body.style.cursor = 'move';
+      document.body.classList.add('drag-active');
       e.currentTarget.addEventListener('mouseup', onMouseUp(data));
-      e.currentTarget.onmousemove = onMouseMove(task);
+      e.currentTarget.onmousemove = onMouseMove(content);
     }
   }
 
