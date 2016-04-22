@@ -24,6 +24,8 @@ const TasksWall = ({
 
     return function mouseUp(e) {
       const groupTo = findGroup(e.target);
+      const task = findTask(e.target);
+      const index = task ? task.getAttribute('data-index') : 0;
       document.body.style.cursor = 'default';
       elem.style.transform = 'none';
       elem.style.position = 'static';
@@ -32,18 +34,17 @@ const TasksWall = ({
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
       if (groupFrom !== groupTo) {
-        moveFromTo(id, title, description, groupFrom, groupTo);
+        moveFromTo(id, title, description, groupFrom, groupTo, index);
       }
     }
   }
 
   function onMouseMove(content) {
     let x = 0,
-      y = 0,
-      left = getOffsetLeft(content) + content.offsetWidth / 2,
-      top = getOffsetTop(content) - 10;
-
+      y = 0;
     return function mouseMove(e) {
+      let left = getOffsetLeft(content) + content.offsetWidth / 2,
+        top = getOffsetTop(content) - 10;
       x = e.x - left;
       y = e.y - top + document.scrollingElement.scrollTop;
       content.style.transform = `translate(${x}px, ${y}px)`;
