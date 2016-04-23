@@ -11,6 +11,7 @@ import {
 } from '../../actions/action-creators';
 import { findTask, findGroup } from '../../js/findUp';
 import { getOffsetLeft, getOffsetTop } from '../../js/getOffset';
+import resetInlineStyles from '../../js/resetInlineStyles';
 
 import TaskGroup from '../TaskGroup/TaskGroup';
 
@@ -32,12 +33,9 @@ const TasksWall = ({
       let index = 0;
       if (task) {
         index = task.getAttribute('data-index');
-        task.style.padding = '0';
+        resetInlineStyles(task);
       }
-      document.body.style.cursor = 'default';
-      elem.style.transform = 'none';
-      elem.style.position = 'static';
-      elem.parentNode.firstChild.style.removeProperty('display');
+      resetInlineStyles(elem, document.body, elem.parentNode.firstChild);
       document.body.classList.remove(taskCss('drag-active'));
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
