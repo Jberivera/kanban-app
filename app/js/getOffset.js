@@ -14,9 +14,14 @@ export function getOffsetLeft(element, offset = 0) {
   return getOffsetLeft(element.parentNode, offset);
 }
 
-export default function getOffset(element) {
-  return {
-    left: getOffsetLeft(element),
-    top: getOffsetTop(element)
+export default function getOffset(element, offset = { left: 0, top: 0 }) {
+  if (element.tagName === 'BODY') {
+    return offset;
+  }
+  offset = {
+    left: offset.left + element.offsetLeft,
+    top: offset.top + element.offsetTop
   };
+
+  return getOffset(element.parentNode, offset);
 }
