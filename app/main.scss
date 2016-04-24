@@ -1,4 +1,7 @@
+@import './scss/fonts';
+
 *, *:before, *:after {
+  font-family: inherit;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -12,11 +15,12 @@ html, body {
 
 body {
   background: #fff;
+  font-family: 'Poiret One';
 }
 
 :global .main-container {
   position: relative;
-  width: 90%;
+  width: 95%;
   height: 100%;
   margin: auto;
 }
