@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import styles from './Task.scss';
 import classNames from 'classnames/bind';
 
