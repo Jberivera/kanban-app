@@ -1,9 +1,9 @@
 import React from 'react';
-import { NewTaskForm } from './NewTaskForm';
+import { NewTask } from './NewTask';
 import expect, { createSpy, spyOn } from 'expect';
 import { shallow } from 'enzyme';
 
-describe('<NewTaskForm />', () => {
+describe('<NewTask />', () => {
 
   it('simulates submit event', () => {
     const addToDo = createSpy();
@@ -14,7 +14,7 @@ describe('<NewTaskForm />', () => {
     }};
 
     const wrapper = shallow(
-      <NewTaskForm addToDo={ addToDo } />
+      <NewTask addToDo={ addToDo } />
     );
     const form = wrapper.find('form');
     form.simulate('submit', e);

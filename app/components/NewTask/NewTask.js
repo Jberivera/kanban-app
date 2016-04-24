@@ -5,7 +5,7 @@ import {
   addToDo
 } from '../../actions/action-creators';
 
-import './NewTaskForm.scss';
+import './NewTask.scss';
 
 const NewTaskForm = ({ addToDo }) => {
 
