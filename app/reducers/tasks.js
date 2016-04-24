@@ -8,7 +8,7 @@ import {
 const initialState = {
   toDo: [],
   inProgress: [],
-  done: []
+  Done: []
 };
 
 const actionHandlers = {
