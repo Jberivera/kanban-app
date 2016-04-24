@@ -5,25 +5,23 @@ import {
   addToDo
 } from '../../actions/action-creators';
 
-import './NewTask.scss';
+import style from './NewTask.scss';
+import classNames from 'classNames/bind';
+
+const css = classNames.bind(style);
+const TITLE = 'new to do';
+const DESCRIPTION = 'description';
 
 const NewTaskForm = ({ addToDo }) => {
 
-  function onSubmit(e) {
-    const { title, description } = e.currentTarget;
-    e.preventDefault();
-
-    addToDo(Date.now().toString(), title.value, description.value);
+  function onClick(e) {
+    addToDo(Date.now().toString(), TITLE, DESCRIPTION);
   }
 
   return (
-    <form onSubmit={ onSubmit }>
-      <label>Title</label>
-      <input type="text" name="title"></input>
-      <label>description</label>
-      <textarea name="description" rows="4" cols="50"></textarea>
-      <input type="submit" value="add toDo"></input>
-    </form>
+    <button onClick={ onClick }>
+      +
+    </button>
   );
 }
 
