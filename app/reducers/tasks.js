@@ -23,8 +23,8 @@ const actionHandlers = {
   [MOVE_FROM_TO]: (state, action) => {
     const arrayFrom = state[action.groupFrom];
     const arrayTo = state[action.groupTo];
-    const { index } = action;
-
+    let { index } = action;
+    index = index !== -1 ? index : arrayTo.length;
     return Object.assign({}, state, {
       [action.groupFrom]: arrayFrom.filter((task) => task.id !== action.id),
       [action.groupTo]: [
