@@ -1,11 +1,16 @@
 import React from 'react';
-import css from './Hero.scss';
+import style from './Hero.scss';
+import classNames from 'classnames/bind';
+
+const css = classNames.bind(style);
 
 const Hero = () => {
   return (
-    <h1 className={css.mainTitle}>
-      Hello KanbanApp
-    </h1>
+    <div className={css('hero')}>
+      <h1 className={css('mainTitle')}>
+        Hello KanbanApp
+      </h1>
+    </div>
   );
 }
 

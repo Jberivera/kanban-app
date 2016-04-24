@@ -18,6 +18,10 @@ body {
   font-family: sans-serif;
 }
 
+:global .app {
+  height: 100%;
+}
+
 :global .main-container {
   position: relative;
   width: 95%;
