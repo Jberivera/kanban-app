@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styles from './TasksWall.scss';
-import taskStyles from '../Task/Task.scss';
 import classNames from 'classnames/bind';
 import {
   addToDo,
@@ -16,7 +15,7 @@ import resetInlineStyles from '../../js/resetInlineStyles';
 import TaskGroup from '../TaskGroup/TaskGroup';
 
 const css = classNames.bind(styles);
-const taskCss = classNames.bind(taskStyles);
+const DRAG_ACTIVE = 'drag-active';
 
 const TasksWall = ({
   tasks,
@@ -36,7 +35,7 @@ const TasksWall = ({
         resetInlineStyles(task);
       }
       resetInlineStyles(elem, document.body, elem.parentNode.firstChild);
-      document.body.classList.remove(taskCss('drag-active'));
+      document.body.classList.remove(DRAG_ACTIVE);
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
       if (groupFrom !== groupTo) {
@@ -47,12 +46,19 @@ const TasksWall = ({
     }
   }
 
-  function onMouseMove(content) {
+  function onMouseMove(task, content) {
     let x = 0,
       y = 0,
       left = getOffsetLeft(content) + content.offsetWidth / 2;
 
     return function mouseMove(e) {
+      if (!document.body.classList.contains(DRAG_ACTIVE)) {
+        document.body.classList.add(DRAG_ACTIVE);
+        content.style.position = 'relative';
+        task.firstChild.style.display = 'none';
+        task.style.background = 'rgba(0, 0, 0, 0.1)';
+        document.body.style.cursor = 'move';
+      }
       let top = getOffsetTop(content) - 10;
       x = e.x - left;
       y = e.y - top + document.scrollingElement.scrollTop;
@@ -62,7 +68,7 @@ const TasksWall = ({
 
   function onMouseDown(e) {
     const task = findTask(e.target);
-    if (task) {
+    if (task && !task.querySelector('.js-editMode')) {
       const content = task.querySelector('.js-item-content');
       let data = {
         elem: content,
@@ -71,13 +77,9 @@ const TasksWall = ({
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
       };
-      content.style.position = 'relative';
-      task.firstChild.style.display = 'none';
-      task.style.background = 'rgba(0, 0, 0, 0.1)';
-      document.body.style.cursor = 'move';
-      document.body.classList.add(taskCss('drag-active'));
+
       e.currentTarget.addEventListener('mouseup', onMouseUp(data));
-      e.currentTarget.onmousemove = onMouseMove(content);
+      e.currentTarget.onmousemove = onMouseMove(task, content);
     }
   }
 
