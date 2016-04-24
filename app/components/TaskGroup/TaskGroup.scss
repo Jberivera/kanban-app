@@ -1,7 +1,6 @@
 .task-group {
   position: relative;
   flex: 1;
-  min-height: 150px;
   border-right-color: #000;
   border-right-style: solid;
   border-right-width: 2px;
@@ -12,10 +11,11 @@
 }
 
 .task-group-title {
+  font-family: 'Poiret One';
   height: 50px;
   text-align: center;
   padding-top: 10px;
-  background: #1352a2;
+  background: #008BBA;
   color: #f1f0ee;
   border-bottom-color: #000;
   border-bottom-style: solid;
@@ -39,6 +39,6 @@
   color: #FFD464;
 }
 
-.done {
+.Done {
   color: #588C73;
 }

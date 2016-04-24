@@ -15,7 +15,11 @@ html, body {
 
 body {
   background: #fff;
-  font-family: 'Poiret One';
+  font-family: sans-serif;
+}
+
+:global .app {
+  height: 100%;
 }
 
 :global .main-container {

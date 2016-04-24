@@ -84,9 +84,9 @@ const TasksWall = ({
   return (
     <div className={ css('tasks-wall') } onMouseDown={ onMouseDown }>
       {
-        Object.keys(tasks).map((key) => {
+        Object.keys(tasks).map((key, i) => {
           return (
-            <TaskGroup key={ key } array={ tasks[key] } name={ key } />
+            <TaskGroup key={ key } array={ tasks[key] } name={ key } addbtn={ !i }/>
           );
         })
       }

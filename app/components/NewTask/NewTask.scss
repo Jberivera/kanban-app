@@ -1,0 +1,30 @@
+.addTask-btn {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: 10px;
+  top: 13px;
+  border: 2px solid;
+  background: #f1f0ee;
+  border-radius: 12px;
+
+  &:before, &:after {
+    content: '';
+    position: absolute;
+    background: #588C73;
+  }
+
+  &:before {
+    width: 3px;
+    height: 11px;
+    left: 9px;
+    top: 5px;
+  }
+
+  &:after {
+    width: 11px;
+    height: 3px;
+    left: 5px;
+    top: 9px;
+  }
+}

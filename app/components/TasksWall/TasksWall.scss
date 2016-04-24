@@ -3,8 +3,9 @@
   display: flex;
   justify-content: space-around;
   background: #F1F0EE;
-  -webkit-user-select:none;
-  user-select:none;
+  -webkit-user-select: none;
+  user-select: none;
+  min-height: 70%;
 
   *, *::before, *::after {
     -webkit-user-select:none;

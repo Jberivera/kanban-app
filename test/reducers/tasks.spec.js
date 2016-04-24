@@ -7,7 +7,7 @@ import {
 const initialState = {
   toDo: [],
   inProgress: [],
-  done: []
+  Done: []
 };
 
 describe('tasks reducer', () => {
@@ -15,7 +15,7 @@ describe('tasks reducer', () => {
     const after = {
       toDo: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
       inProgress: [],
-      done: []
+      Done: []
     };
     const action = addToDo(1, 'new task', 'something to do');
 
