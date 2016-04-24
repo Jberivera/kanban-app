@@ -13,16 +13,18 @@
   border: 10px solid #E0E4CC;
   background: #E0E4CC;
   z-index: 10;
+  min-height: 125px
 }
 
-.drag-active {
+:global .drag-active {
 
-  .fake-ondrag {
+  .g-fake-ondrag {
     display: block;
     background: rgba(0, 0, 0, 0.1);
+    z-index: 1;
   }
 
-  .task-item {
+  .g-task-item {
     background: transparent;
   }
 }
@@ -52,7 +54,7 @@
 }
 
 .task-item-description {
-  padding: 0 3px 20px;
+  padding: 0 3px 30px;
   text-align: left;
   color: #333332;
 }

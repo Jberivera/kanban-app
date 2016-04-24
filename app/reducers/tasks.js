@@ -1,6 +1,7 @@
 import createReducer from 'redux-createreducer';
 import {
   ADD_TODO,
+  EDIT_TASK,
   RE_ORDER,
   MOVE_FROM_TO
 } from '../actions/action-creators';
@@ -20,6 +21,22 @@ const actionHandlers = {
       'description': action.description
     }]
   }),
+  [EDIT_TASK]: (state, action) => {
+    const arrayFrom = state[action.groupFrom];
+    const index = arrayFrom.findIndex((task) => task.id === action.id);
+
+    return Object.assign({}, state, {
+      [action.groupFrom]: [
+        ...arrayFrom.slice(0, index),
+        {
+          'id': action.id,
+          'title': action.title,
+          'description': action.description
+        },
+        ...arrayFrom.slice(index + 1)
+      ]
+    });
+  },
   [MOVE_FROM_TO]: (state, action) => {
     const arrayFrom = state[action.groupFrom];
     const arrayTo = state[action.groupTo];
