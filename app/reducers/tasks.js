@@ -15,11 +15,13 @@ const initialState = {
 const actionHandlers = {
   [ADD_TODO]: (state, action) => Object.assign({}, state, {
     toDo: [
-      ...state.toDo, {
-      'id': action.id,
-      'title': action.title,
-      'description': action.description
-    }]
+      {
+        'id': action.id,
+        'title': action.title,
+        'description': action.description
+      },
+      ...state.toDo
+    ]
   }),
   [EDIT_TASK]: (state, action) => {
     const arrayFrom = state[action.groupFrom];
