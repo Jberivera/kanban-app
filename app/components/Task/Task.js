@@ -30,7 +30,7 @@ const Task = ({ id, title, description }, i) => {
         <a href={ `#${id}` } className={ css('task-item-title', 'js-task-title') } draggable="false">{ title }</a>
         <p className={ css('task-item-description', 'js-task-description') }>{ description }</p>
       </div>
-      <EditTask id={ id } />
+      <EditTask id={ id } title={ title } description={ description } />
     </li>
   );
 }

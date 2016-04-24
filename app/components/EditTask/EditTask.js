@@ -10,7 +10,7 @@ import {
 
 const css = classNames.bind(styles);
 
-const EditTask = ({ id, editTask }) => {
+const EditTask = ({ id, title, description, editTask }) => {
 
   function onClick(e) {
     e.target.parentNode.classList.toggle('js-editMode');
@@ -32,9 +32,9 @@ const EditTask = ({ id, editTask }) => {
       </button>
       <form className={ css('edit-form', 'g-edit-form') } onSubmit={ onSubmit }>
         <label>Title</label>
-        <input className={ css('edit-title') } type="text" name="title"></input>
+        <input className={ css('edit-title') } type="text" name="title" defaultValue={ title }></input>
         <label>Description</label>
-        <textarea className={ css('edit-description') } name="description" rows="3"></textarea>
+        <textarea className={ css('edit-description') } name="description" defaultValue={ description } rows="3"></textarea>
         <input type="submit" value="save"></input>
       </form>
     </div>
