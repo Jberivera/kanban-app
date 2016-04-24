@@ -6,13 +6,13 @@ import {
 } from '../../actions/action-creators';
 
 import style from './NewTask.scss';
-import classNames from 'classNames/bind';
+import classNames from 'classnames/bind';
 
 const css = classNames.bind(style);
 const TITLE = 'new to do';
 const DESCRIPTION = 'description';
 
-const NewTaskForm = ({ addToDo }) => {
+const NewTask = ({ addToDo }) => {
 
   function onClick(e) {
     addToDo(Date.now().toString(), TITLE, DESCRIPTION);
@@ -29,5 +29,5 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
   addToDo
 }, dispatch);
 
-export { NewTaskForm };
-export default connect(null, mapDispatchToProps)(NewTaskForm);
+export { NewTask };
+export default connect(null, mapDispatchToProps)(NewTask);

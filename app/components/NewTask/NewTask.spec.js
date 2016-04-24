@@ -5,20 +5,12 @@ import { shallow } from 'enzyme';
 
 describe('<NewTask />', () => {
 
-  it('simulates submit event', () => {
+  it('simulates click event', () => {
     const addToDo = createSpy();
-    const preventDefault = createSpy();
-    const e = { preventDefault, currentTarget: {
-      title: '',
-      description: ''
-    }};
-
     const wrapper = shallow(
       <NewTask addToDo={ addToDo } />
     );
-    const form = wrapper.find('form');
-    form.simulate('submit', e);
+    wrapper.find('button').simulate('click');
     expect(addToDo).toHaveBeenCalled();
-    expect(preventDefault).toHaveBeenCalled();
   });
 });

@@ -9,7 +9,7 @@ const initialState = {
   tasks: {
     toDo: [],
     inProgress: [],
-    done: []
+    Done: []
   }
 };
 
@@ -23,7 +23,7 @@ describe('kanbanApp reducer', () => {
       tasks: {
         toDo: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
         inProgress: [],
-        done: []
+        Done: []
       }
     };
     const action = addToDo('1', 'new task', 'something to do');
@@ -36,14 +36,14 @@ describe('kanbanApp reducer', () => {
       tasks: {
         toDo: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
         inProgress: [],
-        done: []
+        Done: []
       }
     };
     const after = {
       tasks: {
         toDo: [],
         inProgress: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
-        done: []
+        Done: []
       }
     };
     const action = moveFromTo('1', 'new task', 'something to do', 'toDo', 'inProgress');
@@ -56,17 +56,17 @@ describe('kanbanApp reducer', () => {
       tasks: {
         toDo: [],
         inProgress: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
-        done: []
+        Done: []
       }
     };
     const after = {
       tasks: {
         toDo: [],
         inProgress: [],
-        done: [{ id: '1', 'title': 'new task', 'description': 'something to do' }]
+        Done: [{ id: '1', 'title': 'new task', 'description': 'something to do' }]
       }
     };
-    const action = moveFromTo('1', 'new task', 'something to do', 'inProgress', 'done');
+    const action = moveFromTo('1', 'new task', 'something to do', 'inProgress', 'Done');
 
     expect(kanbanApp(before, action)).toEqual(after);
   });
