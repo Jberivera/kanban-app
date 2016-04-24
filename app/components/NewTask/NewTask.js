@@ -9,7 +9,7 @@ import style from './NewTask.scss';
 import classNames from 'classnames/bind';
 
 const css = classNames.bind(style);
-const TITLE = 'new to do';
+const TITLE = 'new';
 const DESCRIPTION = 'description';
 
 const NewTask = ({ addToDo }) => {
@@ -19,8 +19,7 @@ const NewTask = ({ addToDo }) => {
   }
 
   return (
-    <button onClick={ onClick }>
-      +
+    <button onClick={ onClick } className={ css('addTask-btn') }>
     </button>
   );
 }
