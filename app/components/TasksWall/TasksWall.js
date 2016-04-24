@@ -30,7 +30,7 @@ const TasksWall = ({
     return function mouseUp(e) {
       const groupTo = findGroup(e.target);
       const task = findTask(e.target);
-      let index = 0;
+      let index = -1;
       if (task) {
         index = task.getAttribute('data-index');
         resetInlineStyles(task);
