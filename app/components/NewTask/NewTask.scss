@@ -8,6 +8,10 @@
   background: #f1f0ee;
   border-radius: 12px;
 
+  &:focus {
+    outline: 0;
+  }
+
   &:before, &:after {
     content: '';
     position: absolute;
