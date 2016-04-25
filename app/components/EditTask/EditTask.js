@@ -13,14 +13,14 @@ const css = classNames.bind(styles);
 const EditTask = ({ id, title, description, editTask }) => {
 
   function onClick(e) {
-    e.target.parentNode.classList.toggle('js-editMode');
+    e.target.parentNode.parentNode.classList.toggle('js-editMode');
   };
 
   function onSubmit(e) {
     const { title, description } = e.currentTarget;
     const groupFrom = findGroup(e.target);
     e.preventDefault();
-    e.currentTarget.parentNode.classList.remove('js-editMode');
+    e.currentTarget.parentNode.parentNode.classList.remove('js-editMode');
 
     editTask(id, groupFrom, title.value, description.value);
   }
