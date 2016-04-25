@@ -39,6 +39,7 @@
 }
 
 .task-item-title {
+  position: relative;
   display: inline-block;
   width: 100%;
   font-size: 20px;
@@ -51,6 +52,7 @@
   background: #333332;
   color: inherit;
   border-radius: 2px;
+  z-index: 13;
 }
 
 .task-item-description {
