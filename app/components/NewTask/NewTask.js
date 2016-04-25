@@ -7,15 +7,17 @@ import {
 
 import style from './NewTask.scss';
 import classNames from 'classnames/bind';
+import generateKey from '../../js/generateKey';
 
 const css = classNames.bind(style);
-const TITLE = 'new';
+const TITLE = 'task';
 const DESCRIPTION = 'description';
 
-const NewTask = ({ addToDo }) => {
+const NewTask = ({ count, addToDo }) => {
 
   function onClick(e) {
-    addToDo(Date.now().toString(), TITLE, DESCRIPTION);
+    const key = generateKey(count);
+    addToDo(key, `${TITLE} ${key}`, DESCRIPTION);
   }
 
   return (
@@ -24,9 +26,17 @@ const NewTask = ({ addToDo }) => {
   );
 }
 
+const mapStateToProps = ({ tasks }, ownProps) => {
+  return {
+    count: Object.keys(tasks).reduce((acum, key) => {
+      return tasks[key].length + acum;
+    }, 0)
+  };
+};
+
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
   addToDo
 }, dispatch);
 
 export { NewTask };
-export default connect(null, mapDispatchToProps)(NewTask);
+export default connect(mapStateToProps, mapDispatchToProps)(NewTask);
