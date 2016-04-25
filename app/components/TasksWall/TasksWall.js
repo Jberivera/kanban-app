@@ -68,7 +68,7 @@ const TasksWall = ({
 
   function onMouseDown(e) {
     const task = findTask(e.target);
-    if (task && !task.querySelector('.js-editMode')) {
+    if (task && !task.classList.contains('js-editMode')) {
       const content = task.querySelector('.js-item-content');
       let data = {
         elem: content,
