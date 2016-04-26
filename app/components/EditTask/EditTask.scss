@@ -35,6 +35,7 @@
 }
 
 .edit-form {
+  position: absolute;
   display: none;
   height: 100%;
   width: 100%;
@@ -44,11 +45,25 @@
 }
 
 .edit-title {
-  width: 100%;
+  display: block;
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  padding: 10px 0;
+  width: 90%;
+  text-transform: uppercase;
+  font-weight: 700;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
 }
 
 .edit-description {
-  width: 100%;
+  display: block;
+  width: 90%;
+  resize: none;
+  margin: auto;
   resize: none;
 }
 

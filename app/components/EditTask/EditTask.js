@@ -31,9 +31,7 @@ const EditTask = ({ id, title, description, editTask }) => {
         edit
       </button>
       <form className={ css('edit-form', 'g-edit-form') } onSubmit={ onSubmit }>
-        <label>Title</label>
         <input className={ css('edit-title') } type="text" name="title" defaultValue={ title }></input>
-        <label>Description</label>
         <textarea className={ css('edit-description') } name="description" defaultValue={ description } rows="3"></textarea>
         <input type="submit" value="save"></input>
       </form>
