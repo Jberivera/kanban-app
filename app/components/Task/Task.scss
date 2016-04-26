@@ -29,6 +29,10 @@
   }
 }
 
+:global .g-task-item.js-editMode {
+  z-index: 1;
+}
+
 .fake-ondrag {
   display: none;
   position: absolute;
