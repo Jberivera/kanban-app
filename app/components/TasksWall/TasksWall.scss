@@ -1,11 +1,16 @@
 .tasks-wall {
   position: relative;
+
   display: flex;
-  justify-content: space-around;
-  background: #F1F0EE;
+
+  min-height: 70%;
+
   -webkit-user-select: none;
   user-select: none;
-  min-height: 70%;
+
+  background: #F1F0EE;
+
+  justify-content: space-around;
 
   *, *::before, *::after {
     -webkit-user-select:none;
