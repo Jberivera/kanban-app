@@ -2,12 +2,9 @@
   position: absolute;
   top: 13px;
   right: 10px;
-
   width: 25px;
   height: 25px;
-
   cursor: pointer;
-
   border: 2px solid;
   border-radius: 12px;
   background: #f1f0ee;
@@ -18,16 +15,13 @@
 
   &:before, &:after {
     position: absolute;
-
     content: '';
-
-    background: #588C73;
+    background: #588c73;
   }
 
   &:before {
     top: 5px;
     left: 9px;
-
     width: 3px;
     height: 11px;
   }
@@ -35,7 +29,6 @@
   &:after {
     top: 9px;
     left: 5px;
-
     width: 11px;
     height: 3px;
   }

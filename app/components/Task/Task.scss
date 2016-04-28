@@ -1,34 +1,25 @@
 .task-item {
   position: relative;
-
   width: 90%;
   margin: auto;
   margin-bottom: 7px;
-
   list-style-type: none;
-
   background: rgba(0, 0, 0, 0.1);
 }
 
 .task-item-content {
   z-index: 10;
-
   width: 100%;
   min-height: 125px;
-
   text-align: center;
-
-  border: 10px solid #E0E4CC;
-  background: #E0E4CC;
+  border: 10px solid #e0e4cc;
+  background: #e0e4cc;
 }
 
 :global .drag-active {
-
   .g-fake-ondrag {
     z-index: 1;
-
     display: block;
-
     background: rgba(0, 0, 0, 0.1);
   }
 
@@ -45,9 +36,7 @@
   position: absolute;
   top: 0;
   left: 0;
-
   display: none;
-
   width: 100%;
   height: 100%;
 }
@@ -55,29 +44,23 @@
 .task-item-title {
   position: relative;
   z-index: 13;
-
   display: inline-block;
-
   width: 100%;
   margin: 0 0 10px 0;
   padding: 10px 0 10px 0;
-
   cursor: pointer;
   text-decoration: none;
   text-transform: uppercase;
-
   color: inherit;
   border-radius: 2px;
   background: #333332;
-
   font-size: 20px;
   font-weight: bold;
 }
 
 .task-item-description {
   padding: 0 3px 30px;
-
   text-align: left;
-
   color: #333332;
+  font-size: 16px;
 }
