@@ -12,13 +12,27 @@ const css = classNames.bind(styles);
 
 const EditTask = ({ id, title, description, editTask }) => {
 
-  function onClick(e) {
-    e.target.parentNode.parentNode.classList.toggle('js-editMode');
+  function onEditMode(e) {
+    const editBtn = e.target;
+    const editModeWrapper = editBtn.parentNode;
+    const taskDescription = editModeWrapper.parentNode.querySelector('.js-task-description');
+    const textArea = editModeWrapper.querySelector('textarea');
+    const style = window.getComputedStyle(taskDescription);
+
+    const paddingBottom = (/\d+/).exec(style.getPropertyValue('padding-bottom')).pop();
+
+    textArea.style.height = `${taskDescription.offsetHeight - paddingBottom + 10}px`;
+    editModeWrapper.parentNode.classList.add('js-editMode');
   };
+
+  function onCancel(e) {
+    e.target.parentNode.parentNode.parentNode.parentNode.classList.remove('js-editMode');
+  }
 
   function onSubmit(e) {
     const { title, description } = e.currentTarget;
     const groupFrom = findGroup(e.target);
+
     e.preventDefault();
     e.currentTarget.parentNode.parentNode.classList.remove('js-editMode');
 
@@ -27,13 +41,16 @@ const EditTask = ({ id, title, description, editTask }) => {
 
   return (
     <div className={ css('editMode-wrapper') }>
-      <button className={ css('editMode-btn', 'g-editMode-btn') } onClick={ onClick }>
+      <button className={ css('editMode-btn', 'g-editMode-btn') } onClick={ onEditMode }>
         edit
       </button>
       <form className={ css('edit-form', 'g-edit-form') } onSubmit={ onSubmit }>
         <input className={ css('edit-title') } type="text" name="title" defaultValue={ title }></input>
-        <textarea className={ css('edit-description') } name="description" defaultValue={ description } rows="3"></textarea>
-        <input type="submit" value="save"></input>
+        <textarea className={ css('edit-description') } name="description" defaultValue={ description }></textarea>
+        <div className={ css('centered-btns') }>
+          <input className={ css('save-btn', 'btn') } type="submit" name="save" value="save"></input>
+          <span className={ css('cancel-btn', 'btn') } onClick={ onCancel }>cancel</span>
+        </div>
       </form>
     </div>
   );
