@@ -3,7 +3,7 @@ import styles from './EditTask.scss';
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { findGroup } from '../../js/findUp';
+import { findGroup, findTask } from '../../js/findUp';
 import {
   editTask
 } from '../../actions/action-creators';
@@ -26,7 +26,8 @@ const EditTask = ({ id, title, description, editTask }) => {
   };
 
   function onCancel(e) {
-    e.target.parentNode.parentNode.parentNode.parentNode.classList.remove('js-editMode');
+    const task = findTask(e.target);
+    task.classList.remove('js-editMode');
   }
 
   function onSubmit(e) {
