@@ -1,10 +1,10 @@
-# kanban-app
+# Pandora's Wall
 
-Kanban-app using react and redux
+> a kanban app using react and redux
 
-[![Build Status](https://travis-ci.org/Jberivera/kanban-app.svg?branch=master)](https://travis-ci.org/Jberivera/kanban-app)
-[![Dependency Status](https://david-dm.org/jberivera/kanban-app.svg)](https://david-dm.org/jberivera/kanban-app)
-[![devDependency Status](https://david-dm.org/jberivera/kanban-app/dev-status.svg)](https://david-dm.org/jberivera/kanban-app#info=devDependencies)
+[![Build Status](https://travis-ci.org/Jberivera/pandoras-wall.svg?branch=master)](https://travis-ci.org/Jberivera/pandoras-wall)
+[![Dependency Status](https://david-dm.org/jberivera/pandoras-wall.svg)](https://david-dm.org/jberivera/pandoras-wall)
+[![devDependency Status](https://david-dm.org/jberivera/pandoras-wall/dev-status.svg)](https://david-dm.org/jberivera/pandoras-wall#info=devDependencies)
 
 ## Scripts
 

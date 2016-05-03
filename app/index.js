@@ -1,4 +1,5 @@
 import './main.scss';
+import './api/facebook';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
