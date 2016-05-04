@@ -1,10 +1,8 @@
-import { combineReducers } from 'redux';
 import tasks from './tasks';
-import user from './user';
+// import user from './user';
 
-const kanbanApp = combineReducers({
-  user,
+const kanbanApp = {
   tasks
-});
+};
 
 export default kanbanApp;

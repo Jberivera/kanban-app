@@ -30,9 +30,6 @@ const common = {
       }
     ]
   },
-  externals: {
-    fb: "this FB"
-  },
   plugins: [
     new webpack.optimize.UglifyJsPlugin()
   ]

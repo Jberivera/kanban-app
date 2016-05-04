@@ -1,4 +1,5 @@
 import expect from 'expect';
+import { combineReducers } from 'redux';
 import kanbanApp from '../../app/reducers/kanbanApp';
 import {
   addToDo,
@@ -13,9 +14,11 @@ const initialState = {
   }
 };
 
+const reducer = combineReducers(kanbanApp);
+
 describe('kanbanApp reducer', () => {
   it('should return a initial state if state is not set', () => {
-    expect(kanbanApp(undefined, {})).toEqual(initialState);
+    expect(reducer(undefined, {})).toEqual(initialState);
   });
 
   it('should add a new toDo', () => {
@@ -28,7 +31,7 @@ describe('kanbanApp reducer', () => {
     };
     const action = addToDo('1', 'new task', 'something to do');
 
-    expect(kanbanApp(initialState, action)).toEqual(after);
+    expect(reducer(initialState, action)).toEqual(after);
   });
 
   it('should move a toDo to inProgress', () => {
@@ -48,7 +51,7 @@ describe('kanbanApp reducer', () => {
     };
     const action = moveFromTo('1', 'new task', 'something to do', 'toDo', 'inProgress');
 
-    expect(kanbanApp(before, action)).toEqual(after);
+    expect(reducer(before, action)).toEqual(after);
   });
 
   it('should move an inProgress to Done', () => {
@@ -68,6 +71,6 @@ describe('kanbanApp reducer', () => {
     };
     const action = moveFromTo('1', 'new task', 'something to do', 'inProgress', 'Done');
 
-    expect(kanbanApp(before, action)).toEqual(after);
+    expect(reducer(before, action)).toEqual(after);
   });
 });
