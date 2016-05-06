@@ -1,8 +1,9 @@
 import tasks from './tasks';
-// import user from './user';
+import user from './user';
 
 const kanbanApp = {
-  tasks
+  tasks,
+  user
 };
 
 export default kanbanApp;
