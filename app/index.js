@@ -28,7 +28,7 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store);
 
 // react components
-import { Hero, TasksWall, Root } from './components';
+import { TasksWall, Root } from './components';
 
 const App = (props) => (
   <Provider store={store}>
