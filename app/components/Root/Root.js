@@ -3,18 +3,17 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 
-import { Hero, TasksWall } from '../';
+import { Hero } from '../';
 
 class Root extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render () {
     return (
       <div className="main-container">
         <Hero />
-        <TasksWall />
+        <div className="container">
+          { this.props.children }
+        </div>
       </div>
     );
   }

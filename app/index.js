@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import { Router, Route, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import createLogger from 'redux-logger';
 
@@ -28,12 +28,13 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store);
 
 // react components
-import { Hero, TasksWall, Root } from './components';
+import { TasksWall, Root } from './components';
 
 const App = (props) => (
   <Provider store={store}>
     <Router history={history}>
       <Route path="/" component={Root}>
+        <IndexRoute component={TasksWall} />
       </Route>
     </Router>
   </Provider>
