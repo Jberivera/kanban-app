@@ -3,9 +3,9 @@ import './api/facebook';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import createLogger from 'redux-logger';
@@ -38,6 +38,6 @@ const App = (props) => (
       </Route>
     </Router>
   </Provider>
-)
+);
 
 ReactDOM.render(<App />, document.querySelector('#app'));
