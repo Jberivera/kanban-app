@@ -28,16 +28,19 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store);
 
 // react components
-import { TasksWall, Root } from './components';
+import { Login, TasksWall, Root } from './components';
 
-const App = (props) => (
-  <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={Root}>
-        <IndexRoute component={TasksWall} />
-      </Route>
-    </Router>
-  </Provider>
-);
+const App = (props) => {
+
+  return (
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path="/" component={Root}>
+          <IndexRoute component={TasksWall} />
+        </Route>
+      </Router>
+    </Provider>
+  );
+};
 
 ReactDOM.render(<App />, document.querySelector('#app'));
