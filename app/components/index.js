@@ -1,3 +1,4 @@
-export { default as Hero } from './Hero/Hero';
+export { default as Nav } from './Nav/Nav';
 export { default as TasksWall } from './TasksWall/TasksWall';
 export { default as Root } from './Root/Root';
+export { default as Login } from './Login/Login';

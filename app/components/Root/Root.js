@@ -3,14 +3,14 @@ import React, {
 } from 'react';
 import { connect } from 'react-redux';
 
-import { Hero } from '../';
+import { Nav } from '../';
 
 class Root extends Component {
 
   render () {
     return (
       <div className="main-container">
-        <Hero />
+        <Nav />
         <div className="container">
           { this.props.children }
         </div>

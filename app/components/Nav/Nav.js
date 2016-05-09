@@ -1,10 +1,10 @@
 import React from 'react';
-import style from './Hero.scss';
+import style from './Nav.scss';
 import classNames from 'classnames/bind';
 
 const css = classNames.bind(style);
 
-const Hero = () => {
+const Nav = () => {
   return (
     <div className={css('hero')}>
       <h1 className={css('mainTitle')}>
@@ -14,4 +14,4 @@ const Hero = () => {
   );
 }
 
-export default Hero;
+export default Nav;
