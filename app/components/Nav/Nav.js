@@ -4,12 +4,18 @@ import classNames from 'classnames/bind';
 
 const css = classNames.bind(style);
 
+import { Login } from '../';
+
 const Nav = () => {
   return (
-    <div className={css('hero')}>
-      <h1 className={css('mainTitle')}>
+    <div className={ css('nav') }>
+      <h1 className={ css('mainTitle') }>
         Hello KanbanApp
       </h1>
+      <ul className={ css('menu') }>
+
+      </ul>
+      <Login />
     </div>
   );
 }

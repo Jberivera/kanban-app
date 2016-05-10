@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  getUserAsync
+  getUserAsync,
+  facebookLoginAsync
 } from '../../actions/user-action-creators';
 
 import style from './Login.scss';
@@ -10,45 +11,52 @@ import classNames from 'classnames/bind';
 
 const css = classNames.bind(style);
 
-const Login = ({ user, getUserAsync }) => {
-  getUserAsync();
+class Login extends Component {
 
-  function onFacebookOut(e) {
-    FB.logout(function(response) {
-      console.log(response);
-      // user is now logged out
-    });
+  constructor(props) {
+    super(props);
+    props.getUserAsync();
+
+    this.onFacebookLogin = this.onFacebookLogin.bind(this);
   }
 
-  function onFacebookLog(e) {
-    FB.login(function(response) {
-      console.log(response);
-      if (response.authResponse) {
-       FB.api('/me', function(response) {
-         console.log(response);
-         console.log('Good to see you, ' + response.name + '.');
-       });
-      } else {
-       console.log('User cancelled login or did not fully authorize.');
-      }
-    });
+  onFacebookLogin(e) {
+    this.props.facebookLoginAsync();
   }
 
-  return (
-    <div>
-      <button onClick={onFacebookLog}>
-        facebook Login
-      </button>
-      <button onClick={onFacebookOut}>
-        facebook Logout
-      </button>
-    </div>
-  );
+  render () {
+    const { user } = this.props;
+    return (
+      <div className={ css('login') }>
+        <input type="checkbox" className={ css('status-check') } id="status" />
+        <label className={ css('status') } htmlFor="status">
+          { user.res && user.res.name ? user.res.name : 'Login' }
+        </label>
+        <ul className={ css('social-menu') }>
+          <li className={ css('fb-btn') } onClick={this.onFacebookLogin}>Facebook</li>
+        </ul>
+      </div>
+    );
+  }
+};
+
+function onFacebookOut(e) {
+  FB.logout(function(response) {
+    console.log(response);
+    // user is now logged out
+  });
+}
+
+const mapStateToProps = (state, ownProps) => {
+  return Object.assign({}, {
+    user: state.user
+  });
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  getUserAsync
+  getUserAsync,
+  facebookLoginAsync
 }, dispatch);
 
 export { Login };
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

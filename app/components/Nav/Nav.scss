@@ -1,8 +1,22 @@
-.hero {
-  height: 100px;
+.nav {
+  position: relative;
+  height: 80px;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  background: #78C0A8;
+}
+
+.menu {
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
+  width: calc(100% - 405px);
 }
 
 .mainTitle {
   color: #10346b;
   font-family: 'Poiret One';
+  display: inline-block;
+  height: 100%;
+  vertical-align: top;
 }
