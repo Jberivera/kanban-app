@@ -1,13 +1,16 @@
 .nav {
   position: relative;
   height: 80px;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  background: #78C0A8;
 }
 
 .menu {
   display: inline-block;
   height: 100%;
   vertical-align: top;
-  width: calc(100% - 420px);
+  width: calc(100% - 405px);
 }
 
 .mainTitle {

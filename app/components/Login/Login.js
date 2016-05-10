@@ -21,7 +21,6 @@ class Login extends Component {
   }
 
   onFacebookLogin(e) {
-    // console.log(this.props.facebookLoginAsync)
     this.props.facebookLoginAsync();
   }
 
@@ -29,12 +28,13 @@ class Login extends Component {
     const { user } = this.props;
     return (
       <div className={ css('login') }>
-        <div className={ css('status') } onClick={this.onFacebookLogin}>
+        <input type="checkbox" className={ css('status-check') } id="status" />
+        <label className={ css('status') } htmlFor="status">
           { user.res && user.res.name ? user.res.name : 'Login' }
-        </div>
-        <div onClick={onFacebookOut}>
-          facebook Logout
-        </div>
+        </label>
+        <ul className={ css('social-menu') }>
+          <li className={ css('fb-btn') } onClick={this.onFacebookLogin}>Facebook</li>
+        </ul>
       </div>
     );
   }
