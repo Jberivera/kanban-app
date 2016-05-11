@@ -24,13 +24,17 @@ class Login extends Component {
     this.props.facebookLoginAsync();
   }
 
+  userNameFixed(name) {
+    return name.split(' ', 2).join(' ').slice(0, 13);
+  }
+
   render () {
     const { user } = this.props;
     return (
       <div className={ css('login') }>
         <input type="checkbox" className={ css('status-check') } id="status" />
         <label className={ css('status') } htmlFor="status">
-          { user.res && user.res.name ? user.res.name : 'Login' }
+          { user.res && user.res.name ? this.userNameFixed(user.res.name) : 'Login' }
         </label>
         <ul className={ css('social-menu') }>
           <li className={ css('fb-btn') } onClick={this.onFacebookLogin}>Facebook</li>
