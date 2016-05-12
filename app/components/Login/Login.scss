@@ -26,6 +26,16 @@
   cursor: pointer;
 }
 
+.account-circle {
+  font-size: 44px;
+  // background-image: url(https://lh3.googleusercontent.com/-CL7BGIfpdFI/AAAAAAAAAAI/AAAAAAAAAAA/ADhl2yrS-XmjVujupSEBf7T4psBWmM55Kw/s32-c-mo/photo.jpg);
+  overflow: hidden;
+  z-index: 0;
+  background-size: 44px 44px;
+  background-repeat: no-repeat;
+  border-radius: 50%;
+}
+
 .social-menu {
   display: none;
   position: absolute;
@@ -35,19 +45,21 @@
   background: #e0e4cc;
   width: 130%;
   min-height: 70px;
-  padding: 10px;
+  padding: 30px 10px 30px 10px;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
-
-  & li {
-    list-style-type: none;
-  }
 }
 
 .fb-btn {
   padding: 5px;
   background: #3b5998;
   color: #ffffff;
+  font-family: helvetica;
+  cursor: pointer;
+}
+
+.fb-logout {
+  padding: 5px;
   font-family: helvetica;
   cursor: pointer;
 }

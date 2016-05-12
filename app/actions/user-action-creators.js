@@ -10,13 +10,13 @@ export function getUserAsync() {
   return (dispatch) => {
     FB.getLoginStatus(function(response) {
       if (response.status === 'connected') {
-        
+        return facebookApi(dispatch);
       } else if (response.status === 'not_authorized') {
         console.log('not_authorized');
       } else {
         console.log('isnt logged in to facebook');
       }
-      dispatch(getUser(response));
+      return dispatch(getUser(response));
     });
   };
 }
@@ -30,8 +30,11 @@ function facebookLogin(response) {
 }
 
 function facebookApi(dispatch) {
-  FB.api('/me', function(response) {
-    dispatch(facebookLogin(response));
+  FB.api('/me', function(responseName) {
+
+    FB.api('/me/picture', function(responsePicture) {
+      dispatch(facebookLogin(Object.assign({}, responseName, responsePicture)));
+    });
   });
 }
 
