@@ -11,6 +11,9 @@ import classNames from 'classnames/bind';
 
 const css = classNames.bind(style);
 
+import Social from './Social';
+import UserInfo from './UserInfo';
+
 class Login extends Component {
 
   constructor(props) {
@@ -18,10 +21,16 @@ class Login extends Component {
     props.getUserAsync();
 
     this.onFacebookLogin = this.onFacebookLogin.bind(this);
+    this.onFacebookOut = this.onFacebookOut.bind(this);
   }
 
   onFacebookLogin(e) {
     this.props.facebookLoginAsync();
+  }
+  onFacebookOut(e) {
+    FB.logout((response) => {
+      this.props.getUserAsync();
+    });
   }
 
   userNameFixed(name) {
@@ -30,26 +39,37 @@ class Login extends Component {
 
   render () {
     const { user } = this.props;
+    let accountStyles = {};
+
+    if (user.res && user.res.data) {
+      accountStyles = {
+        backgroundImage: `url(${user.res.data.url})`,
+        color: 'transparent'
+      }
+    }
+    console.log(accountStyles);
     return (
       <div className={ css('login') }>
         <input type="checkbox" className={ css('status-check') } id="status" />
         <label className={ css('status') } htmlFor="status">
-          { user.res && user.res.name ? this.userNameFixed(user.res.name) : 'Login' }
+          <i className={ css('account-circle', 'material-icons')}
+            style={accountStyles}>account_circle</i>
         </label>
-        <ul className={ css('social-menu') }>
-          <li className={ css('fb-btn') } onClick={this.onFacebookLogin}>Facebook</li>
-        </ul>
+        <div className={ css('social-menu') }>
+          {
+            user.res && user.res.name ?
+              <UserInfo
+                userName={ this.userNameFixed(user.res.name)}
+                onFacebookOut={ this.onFacebookOut } /> :
+              <Social
+                onFacebookLogin={this.onFacebookLogin}
+                onFacebookOut={ this.onFacebookOut } />
+          }
+        </div>
       </div>
     );
   }
 };
-
-function onFacebookOut(e) {
-  FB.logout(function(response) {
-    console.log(response);
-    // user is now logged out
-  });
-}
 
 const mapStateToProps = (state, ownProps) => {
   return Object.assign({}, {
