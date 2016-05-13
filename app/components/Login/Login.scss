@@ -7,7 +7,6 @@
   max-width: 150px;
   float: right;
   text-align: center;
-  background: #e0e4cc;
 }
 
 .status-check {
@@ -24,16 +23,18 @@
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
+  width: 85px;
+  text-align: left;
 }
 
 .account-circle {
   font-size: 44px;
-  // background-image: url(https://lh3.googleusercontent.com/-CL7BGIfpdFI/AAAAAAAAAAI/AAAAAAAAAAA/ADhl2yrS-XmjVujupSEBf7T4psBWmM55Kw/s32-c-mo/photo.jpg);
   overflow: hidden;
   z-index: 0;
   background-size: 44px 44px;
   background-repeat: no-repeat;
   border-radius: 50%;
+  background: #e0e4cc;
 }
 
 .social-menu {
@@ -42,9 +43,9 @@
   top: 100%;
   right: 0;
   z-index: 1;
-  background: #e0e4cc;
   width: 130%;
   min-height: 70px;
+  background: #e0e4cc;
   padding: 30px 10px 30px 10px;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;

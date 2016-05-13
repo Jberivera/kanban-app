@@ -47,7 +47,7 @@ class Login extends Component {
         color: 'transparent'
       }
     }
-    console.log(accountStyles);
+
     return (
       <div className={ css('login') }>
         <input type="checkbox" className={ css('status-check') } id="status" />
