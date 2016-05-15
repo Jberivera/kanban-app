@@ -10,7 +10,7 @@ const Nav = () => {
   return (
     <div className={ css('nav') }>
       <h1 className={ css('mainTitle') }>
-        Hello KanbanApp
+        Pandora's Wall
       </h1>
       <ul className={ css('menu') }>
 
