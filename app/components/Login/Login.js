@@ -18,10 +18,13 @@ class Login extends Component {
 
   constructor(props) {
     super(props);
-    props.getUserAsync();
 
     this.onFacebookLogin = this.onFacebookLogin.bind(this);
     this.onFacebookOut = this.onFacebookOut.bind(this);
+  }
+
+  componentWillMount() {
+    this.props.getUserAsync();
   }
 
   onFacebookLogin(e) {
