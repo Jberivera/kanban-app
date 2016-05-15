@@ -1,9 +1,9 @@
 .nav {
   position: relative;
-  height: 80px;
+  height: 60px;
   white-space: nowrap;
   margin-bottom: 10px;
-  background: #78C0A8;
+  padding: 0 20px 0 20px;
 }
 
 .menu {
@@ -17,6 +17,8 @@
   color: #10346b;
   font-family: 'Poiret One';
   display: inline-block;
-  height: 100%;
   vertical-align: top;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
