@@ -22,7 +22,7 @@ export function getUserAsync() {
         console.log(authData);
         dispatch(getUser({
           name: authData[authData.provider].displayName,
-          url: authData[authData.provider].profileImageURL
+          url: getProfileUrl(authData)
         }));
       } else {
         dispatch(getUser(null));
@@ -40,4 +40,10 @@ export function facebookLoginAsync() {
       }));
     });
   };
+}
+
+function getProfileUrl(authData) {
+  if (authData.provider === 'facebook') {
+    return `https://graph.facebook.com/${authData.facebook.id}/picture?type=square`;
+  }
 }
