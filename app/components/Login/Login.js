@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
   getUserAsync,
+  logOut,
   facebookLoginAsync
 } from '../../actions/user-action-creators';
 
@@ -31,9 +32,10 @@ class Login extends Component {
     this.props.facebookLoginAsync();
   }
   onFacebookOut(e) {
-    FB.logout((response) => {
-      this.props.getUserAsync();
-    });
+    this.props.logOut();
+    // FB.logout((response) => {
+    //   this.props.getUserAsync();
+    // });
   }
 
   userNameFixed(name) {
@@ -44,9 +46,9 @@ class Login extends Component {
     const { user } = this.props;
     let accountStyles = {};
 
-    if (user.res && user.res.data) {
+    if (user.res && user.res.url) {
       accountStyles = {
-        backgroundImage: `url(${user.res.data.url})`,
+        backgroundImage: `url(${user.res.url})`,
         color: 'transparent'
       }
     }
@@ -82,6 +84,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
   getUserAsync,
+  logOut,
   facebookLoginAsync
 }, dispatch);
 

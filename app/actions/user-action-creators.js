@@ -1,4 +1,13 @@
+import Firebase from 'firebase';
+
+const ref = new Firebase('https://pandoras-wall.firebaseio.com/');
+
 export const GET_USER = 'GET_USER';
+
+export function logOut() {
+  ref.unauth();
+  return { type: 'LOGOUT' };
+}
 
 function getUser(response) {
   return {
@@ -8,44 +17,33 @@ function getUser(response) {
 
 export function getUserAsync() {
   return (dispatch) => {
-    FB.getLoginStatus(function(response) {
-      if (response.status === 'connected') {
-        return facebookApi(dispatch);
-      } else if (response.status === 'not_authorized') {
-        console.log('not_authorized');
+    ref.onAuth(function (authData) {
+      if (authData) {
+        console.log(authData);
+        dispatch(getUser({
+          name: authData[authData.provider].displayName,
+          url: getProfileUrl(authData)
+        }));
       } else {
-        console.log('isnt logged in to facebook');
+        dispatch(getUser(null));
       }
-      return dispatch(getUser(response));
     });
   };
-}
-
-export const FACEBOOK_LOGIN = 'FACEBOOK_LOGIN';
-
-function facebookLogin(response) {
-  return {
-    type: FACEBOOK_LOGIN, response
-  };
-}
-
-function facebookApi(dispatch) {
-  FB.api('/me', function(responseName) {
-
-    FB.api('/me/picture', function(responsePicture) {
-      dispatch(facebookLogin(Object.assign({}, responseName, responsePicture)));
-    });
-  });
 }
 
 export function facebookLoginAsync() {
   return (dispatch) => {
-    FB.login(function(response) {
-      if (response.authResponse) {
-        facebookApi(dispatch);
-      } else {
-       console.log('User cancelled login or did not fully authorize.');
-      }
+    ref.authWithOAuthPopup("facebook", function(error, authData) {
+      dispatch(getUser({
+        name: authData[authData.provider].displayName,
+        url: authData[authData.provider].profileImageURL
+      }));
     });
   };
+}
+
+function getProfileUrl(authData) {
+  if (authData.provider === 'facebook') {
+    return `https://graph.facebook.com/${authData.facebook.id}/picture?type=square`;
+  }
 }
