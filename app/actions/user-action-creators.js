@@ -19,10 +19,14 @@ export function getUserAsync() {
   return (dispatch) => {
     ref.onAuth(function (authData) {
       if (authData) {
-        console.log(authData);
+        ref.child('users').child(authData.uid).update({
+          provider: authData.provider,
+          name: authData[authData.provider].displayName
+        });
         dispatch(getUser({
           name: authData[authData.provider].displayName,
-          url: getProfileUrl(authData)
+          url: getProfileUrl(authData),
+          uid: authData.uid
         }));
       } else {
         dispatch(getUser(null));

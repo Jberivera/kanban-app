@@ -74,6 +74,9 @@ const actionHandlers = {
         ...auxArray.slice(index)
       ]
     });
+  },
+  'GET_USER': (state, action) => {
+    return action.tasks ? Object.assign({}, action.tasks) : Object.assign({}, initialState);
   }
 };
 
