@@ -45,7 +45,8 @@ export function facebookLoginAsync() {
     ref.authWithOAuthPopup("facebook", function(error, authData) {
       dispatch(getUser({
         name: authData[authData.provider].displayName,
-        url: authData[authData.provider].profileImageURL
+        url: getProfileUrl(authData),
+        uid: authData.uid
       }));
     });
   };
