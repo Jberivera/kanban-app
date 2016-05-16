@@ -19,9 +19,14 @@ export function getUserAsync() {
   return (dispatch) => {
     ref.onAuth(function (authData) {
       if (authData) {
-        ref.child('users').child(authData.uid).update({
-          provider: authData.provider,
-          name: authData[authData.provider].displayName
+        const user = ref.child('users').child(authData.uid);
+        user.once('value').then(function(snapshot) {
+          if (!snapshot.val()) {
+            user.set({
+              provider: authData.provider,
+              name: authData[authData.provider].displayName
+            });
+          }
         });
         dispatch(getUser({
           name: authData[authData.provider].displayName,
