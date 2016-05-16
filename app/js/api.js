@@ -3,15 +3,18 @@ const ref = new Firebase('https://pandoras-wall.firebaseio.com/users');
 
 const api = {
   'GET_USER': function (next, action) {
-    const user = ref.child(action.response.uid);
-    return user.child('tasks').once('value').then(function(snapshot) {
-      const newAction = {
-        type: 'GET_USER',
-        response: action.response,
-        tasks: snapshot.val()
-      };
-      return next(newAction);
-    });
+    if (action.response) {
+      const user = ref.child(action.response.uid);
+      return user.child('tasks').once('value').then(function(snapshot) {
+        const newAction = {
+          type: 'GET_USER',
+          response: action.response,
+          tasks: snapshot.val()
+        };
+        return next(newAction);
+      });
+    }
+    return next(action);
   }
 };
 
