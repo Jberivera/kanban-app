@@ -19,10 +19,19 @@ export function getUserAsync() {
   return (dispatch) => {
     ref.onAuth(function (authData) {
       if (authData) {
-        console.log(authData);
+        const user = ref.child('users').child(authData.uid);
+        user.once('value').then(function(snapshot) {
+          if (!snapshot.val()) {
+            user.set({
+              provider: authData.provider,
+              name: authData[authData.provider].displayName
+            });
+          }
+        });
         dispatch(getUser({
           name: authData[authData.provider].displayName,
-          url: getProfileUrl(authData)
+          url: getProfileUrl(authData),
+          uid: authData.uid
         }));
       } else {
         dispatch(getUser(null));
