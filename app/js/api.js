@@ -11,6 +11,13 @@ const api = {
           response: action.response,
           tasks: snapshot.val()
         };
+        if (!snapshot.val()) {
+          user.child('tasks').set({
+            toDo: [],
+            inProgress: [],
+            Done: []
+          });
+        }
         return next(newAction);
       });
     }
