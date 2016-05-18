@@ -4,8 +4,14 @@
   border-right-style: solid;
   border-right-color: #000000;
   flex: 1;
+  color: #ffd464;
+
+  &:first-child {
+    color: #d96459;
+  }
 
   &:last-child {
+    color: #588c73;
     border-right-width: 0;
   }
 }
@@ -29,16 +35,4 @@
   height: 100%;
   margin-top: 30px;
   margin-bottom: 15px;
-}
-
-.toDo {
-  color: #d96459;
-}
-
-.inProgress {
-  color: #ffd464;
-}
-
-.Done {
-  color: #588c73;
 }
