@@ -13,32 +13,6 @@ function getUser(response) {
   };
 }
 
-export function getUserAsync() {
-  return (dispatch) => {
-    auth.onAuthStateChanged(function(result) {
-      if (result) {
-        const { providerData } = result;
-        const user = database.ref(`users/${result.uid}`);
-        user.once('value').then(function(snapshot) {
-          if (!snapshot.val()) {
-            user.set({
-              name: providerData[0].displayName
-            });
-          }
-        });
-
-        dispatch(getUser({
-          name: providerData[0].displayName,
-          url: providerData[0].photoURL,
-          uid: result.uid
-        }));
-      } else {
-        dispatch(getUser(null));
-      }
-    });
-  };
-}
-
 export function facebookLoginAsync() {
   return (dispatch) => {
     auth.signInWithPopup(facebook).then(function(result) {

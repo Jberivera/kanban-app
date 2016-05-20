@@ -75,7 +75,7 @@ const actionHandlers = {
       ]
     });
   },
-  'GET_USER': (state, action) => {
+  '@@router/LOCATION_CHANGE': (state, action) => {
     return action.tasks ? Object.assign({}, action.tasks) : Object.assign({}, initialState);
   }
 };

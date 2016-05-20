@@ -16,36 +16,54 @@ const facebook = new firebase.auth.FacebookAuthProvider();
 const database = firebase.database();
 
 const api = {
-  'GET_USER': function (next, action) {
-    if (action.response) {
-      const user = database.ref(`users/${action.response.uid}`);
-
-      return user.child('tasks').once('value').then(function(snapshot) {
-        let newAction = {
-          type: 'GET_USER',
-          response: action.response
-        };
-        if (snapshot.val()) {
-          newAction.tasks = snapshot.val().reduce((a, b) => {
-            return a[b.name] = b.data || [], a;
-          }, {});
-        } else {
-          user.child('tasks').set([
-            {
-              name: 'toDo'
-            },
-            {
-              name: 'inProgress'
-            },
-            {
-              name: 'Done'
+  '@@router/LOCATION_CHANGE': function (next, action, state) {
+    if (action.payload.pathname === '/') {
+      auth.onAuthStateChanged(function(result) {
+        if (result) {
+          const { providerData } = result;
+          const user = database.ref(`users/${result.uid}`);
+          user.once('value').then(function(snapshot) {
+            if (!snapshot.val()) {
+              user.set({
+                name: providerData[0].displayName
+              });
             }
-          ]);
+          });
+
+          user.child('tasks').once('value').then(function(snapshot) {
+            let newAction = Object.assign({}, action, {
+              response: {
+                name: providerData[0].displayName,
+                url: providerData[0].photoURL,
+                uid: result.uid
+              }
+            });
+            if (snapshot.val()) {
+              newAction.tasks = snapshot.val().reduce((a, b) => {
+                return a[b.name] = b.data || [], a;
+              }, {});
+            } else {
+              user.child('tasks').set([
+                {
+                  name: 'toDo'
+                },
+                {
+                  name: 'inProgress'
+                },
+                {
+                  name: 'Done'
+                }
+              ]);
+            }
+            next(newAction);
+          });
+        } else {
+          next(Object.assign({}, action, { response: null }));
         }
-        return next(newAction);
       });
+    } else {
+      next(action);
     }
-    return next(action);
   },
   'ADD_TODO': setFireBaseTasks,
   'EDIT_TASK': setFireBaseTasks,
@@ -57,7 +75,7 @@ function setFireBaseTasks(next, action, store) {
   next(action);
   const state = Object.assign({}, store.getState());
 
-  ref.child(state.user.res.uid).child('tasks').set(
+  database.ref(`users/${state.user.res.uid}/tasks`).set(
     Object.keys(state.tasks).reduce((a, b, i) => {
       return a[i] = { name: b, data: state.tasks[b] }, a;
     }, [])
