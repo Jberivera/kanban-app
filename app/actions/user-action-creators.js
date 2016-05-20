@@ -1,11 +1,9 @@
-import Firebase from 'firebase';
-
-const ref = new Firebase('https://pandoras-wall.firebaseio.com/');
+import { auth, facebook, database } from '../js/api';
 
 export const GET_USER = 'GET_USER';
 
 export function logOut() {
-  ref.unauth();
+  auth.signOut();
   return { type: 'LOGOUT' };
 }
 
@@ -17,21 +15,22 @@ function getUser(response) {
 
 export function getUserAsync() {
   return (dispatch) => {
-    ref.onAuth(function (authData) {
-      if (authData) {
-        const user = ref.child('users').child(authData.uid);
+    auth.onAuthStateChanged(function(result) {
+      if (result) {
+        const { providerData } = result;
+        const user = database.ref(`users/${result.uid}`);
         user.once('value').then(function(snapshot) {
           if (!snapshot.val()) {
             user.set({
-              provider: authData.provider,
-              name: authData[authData.provider].displayName
+              name: providerData[0].displayName
             });
           }
         });
+
         dispatch(getUser({
-          name: authData[authData.provider].displayName,
-          url: getProfileUrl(authData),
-          uid: authData.uid
+          name: providerData[0].displayName,
+          url: providerData[0].photoURL,
+          uid: result.uid
         }));
       } else {
         dispatch(getUser(null));
@@ -42,12 +41,15 @@ export function getUserAsync() {
 
 export function facebookLoginAsync() {
   return (dispatch) => {
-    ref.authWithOAuthPopup("facebook", function(error, authData) {
+    auth.signInWithPopup(facebook).then(function(result) {
+      const { providerData } = result.user;
       dispatch(getUser({
-        name: authData[authData.provider].displayName,
-        url: getProfileUrl(authData),
-        uid: authData.uid
+        name: providerData[0].displayName,
+        url: providerData[0].photoURL,
+        uid: result.user.uid
       }));
+    }).catch(function(error) {
+      dispatch(getUser(null));
     });
   };
 }

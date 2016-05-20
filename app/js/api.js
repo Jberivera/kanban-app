@@ -1,10 +1,25 @@
-import Firebase from 'firebase';
-const ref = new Firebase('https://pandoras-wall.firebaseio.com/users');
+import firebase from 'firebase/app';
+import 'firebase/database';
+import 'firebase/auth';
+
+const config = {
+  apiKey: "AIzaSyC2tnPvTqMMsgRPd6OWiQXe1sORwbnzNDo",
+  authDomain: "pandoras-wall.firebaseapp.com",
+  databaseURL: "https://pandoras-wall.firebaseio.com",
+  storageBucket: "pandoras-wall.appspot.com",
+};
+const firebaseApp = firebase.initializeApp(config);
+
+const auth = firebase.auth();
+const facebook = new firebase.auth.FacebookAuthProvider();
+
+const database = firebase.database();
 
 const api = {
   'GET_USER': function (next, action) {
     if (action.response) {
-      const user = ref.child(action.response.uid);
+      const user = database.ref(`users/${action.response.uid}`);
+
       return user.child('tasks').once('value').then(function(snapshot) {
         let newAction = {
           type: 'GET_USER',
@@ -59,4 +74,5 @@ const firebaseMiddleware = store => next => {
   };
 };
 
+export { auth, facebook, database };
 export default firebaseMiddleware;
