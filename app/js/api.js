@@ -22,13 +22,6 @@ const api = {
         if (result) {
           const { providerData } = result;
           const user = database.ref(`users/${result.uid}`);
-          user.once('value').then(function(snapshot) {
-            if (!snapshot.val()) {
-              user.set({
-                name: providerData[0].displayName
-              });
-            }
-          });
 
           user.child('tasks').once('value').then(function(snapshot) {
             let newAction = Object.assign({}, action, {
