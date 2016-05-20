@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  getUserAsync,
   logOut,
   facebookLoginAsync
 } from '../../actions/user-action-creators';
@@ -24,18 +23,11 @@ class Login extends Component {
     this.onFacebookOut = this.onFacebookOut.bind(this);
   }
 
-  componentWillMount() {
-    this.props.getUserAsync();
-  }
-
   onFacebookLogin(e) {
     this.props.facebookLoginAsync();
   }
   onFacebookOut(e) {
     this.props.logOut();
-    // FB.logout((response) => {
-    //   this.props.getUserAsync();
-    // });
   }
 
   userNameFixed(name) {
@@ -83,7 +75,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  getUserAsync,
   logOut,
   facebookLoginAsync
 }, dispatch);

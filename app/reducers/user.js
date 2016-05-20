@@ -10,6 +10,11 @@ const actionHandlers = {
     return Object.assign({}, state, {
       res: action.response
     });
+  },
+  '@@router/LOCATION_CHANGE': (state, action) => {
+    return Object.assign({}, state, {
+      res: action.response
+    });
   }
 };
 
