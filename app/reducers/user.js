@@ -12,9 +12,12 @@ const actionHandlers = {
     });
   },
   '@@router/LOCATION_CHANGE': (state, action) => {
-    return Object.assign({}, state, {
-      res: action.response
-    });
+    if (action.response) {
+      return Object.assign({}, state, {
+        res: action.response
+      });
+    }
+    return state;
   }
 };
 

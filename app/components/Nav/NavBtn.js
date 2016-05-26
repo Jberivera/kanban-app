@@ -11,7 +11,9 @@ function NavBtn({ label, checked, to }) {
     <li className={ css('menu-item') }>
       <input type="radio" id={ menuLabel } defaultChecked={ !!checked } name="nav-menu-btn" className={ css('menu-check') } />
       <label htmlFor={ menuLabel } className={ css('menu-label') }>
-        <Link to={ to }><span className={ css('menu-label-btn') }>{ label }</span></Link>
+        <Link to={ to } className={ css('menu-label-btn') }>
+          { label }
+        </Link>
       </label>
     </li>
   );

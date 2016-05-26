@@ -76,7 +76,7 @@ const actionHandlers = {
     });
   },
   '@@router/LOCATION_CHANGE': (state, action) => {
-    return action.tasks ? Object.assign({}, action.tasks) : Object.assign({}, initialState);
+    return action.tasks ? Object.assign({}, action.tasks) : state;
   }
 };
 
