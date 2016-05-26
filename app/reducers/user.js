@@ -11,10 +11,16 @@ const actionHandlers = {
       res: action.response
     });
   },
+  'LOGOUT': (state, action) => {
+    return {};
+  },
   '@@router/LOCATION_CHANGE': (state, action) => {
-    return Object.assign({}, state, {
-      res: action.response
-    });
+    if (action.response) {
+      return Object.assign({}, state, {
+        res: action.response
+      });
+    }
+    return state;
   }
 };
 

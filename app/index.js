@@ -29,7 +29,7 @@ const store = createStore(
 const history = syncHistoryWithStore(browserHistory, store);
 
 // react components
-import { TasksWall, Root } from './components';
+import { TasksWall, EditProject, Root } from './components';
 
 const App = (props) => {
 
@@ -38,6 +38,8 @@ const App = (props) => {
       <Router history={history}>
         <Route path="/" component={Root}>
           <IndexRoute component={TasksWall} />
+          <Route path="/wall" component={TasksWall}/>
+          <Route path="/edit-mode" component={EditProject}/>
         </Route>
       </Router>
     </Provider>

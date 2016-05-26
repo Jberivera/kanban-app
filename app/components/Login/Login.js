@@ -47,8 +47,8 @@ class Login extends Component {
 
     return (
       <div className={ css('login') }>
-        <input type="checkbox" className={ css('status-check') } id="status" />
-        <label className={ css('status') } htmlFor="status">
+        <input type="radio" className={ css('status-check') } name="nav-menu-dropdown" id="status" />
+        <label className={ css('status') } htmlFor="status" data-uncheck>
           <i className={ css('account-circle', 'material-icons')}
             style={accountStyles}>account_circle</i>
         </label>
