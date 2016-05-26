@@ -17,12 +17,8 @@ const Nav = () => {
         </h1>
       </div>
       <ul className={ css('menu') } >
-        <Dropdown label="Projects" >
-          <ul className={ css('dropdown-group') }>
-            <li className={ css('dropdown-item') }>Work in progress</li>
-          </ul>
-        </Dropdown>
-        <NavBtn label="Edit Mode" />
+        <NavBtn label="Wall" to="/wall" checked={true} />
+        <NavBtn label="Edit Mode" to="/edit-mode" />
       </ul>
       <Login />
     </div>
