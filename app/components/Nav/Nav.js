@@ -13,7 +13,7 @@ const Nav = () => {
     <div className={ css('nav') } onClick={ unCheckRadios }>
       <div className={ css('nav-logo') }>
         <h1 className={ css('nav-title') }>
-          Pandora's Wall
+          Pandora’s Wall
         </h1>
       </div>
       <ul className={ css('menu') } >
