@@ -88,18 +88,31 @@ $on-dropdown: #fff;
 
 .menu-label {
   display: inline-block;
-  padding: 0 10px;
-  height: 60px;
+
+  &.drp {
+    padding: 0 5px;
+    height: 60px;
+  }
+
+  &.btn {
+    position: relative;
+    top: 50%;
+    margin: 0 5px;
+    transform: translateY(-50%);
+  }
 }
 
 .menu-label-dropdown, .menu-label-btn {
   display: inline-block;
-  position: relative;
-  top: 50%;
   padding: 10px;
   border: 1px solid #999;
   color: #555;
   font-weight: bold;
   border-radius: 5px;
+}
+
+.menu-label-dropdown {
+  position: relative;
+  top: 50%;
   transform: translateY(-50%);
 }
