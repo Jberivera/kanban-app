@@ -16,48 +16,53 @@ const facebook = new firebase.auth.FacebookAuthProvider();
 const database = firebase.database();
 
 const api = {
-  '@@router/LOCATION_CHANGE': function (next, action, state) {
-    if (action.payload.pathname === '/') {
-      auth.onAuthStateChanged(function(result) {
-        if (result) {
-          const { providerData } = result;
-          const user = database.ref(`users/${result.uid}`);
+  '@@router/LOCATION_CHANGE': (function () {
+    let isLoged = false;
+    return function (next, action, state) {
+      if (!isLoged) {
+        auth.onAuthStateChanged(function(result) {
+          if (result) {
+            const { providerData } = result;
+            const user = database.ref(`users/${result.uid}`);
+            isLoged = true;
 
-          user.child('tasks').once('value').then(function(snapshot) {
-            let newAction = Object.assign({}, action, {
-              response: {
-                name: providerData[0].displayName,
-                url: providerData[0].photoURL,
-                uid: result.uid
-              }
-            });
-            if (snapshot.val()) {
-              newAction.tasks = snapshot.val().reduce((a, b) => {
-                return a[b.name] = b.data || [], a;
-              }, {});
-            } else {
-              user.child('tasks').set([
-                {
-                  name: 'toDo'
-                },
-                {
-                  name: 'inProgress'
-                },
-                {
-                  name: 'Done'
+            user.child('tasks').once('value').then(function(snapshot) {
+              let newAction = Object.assign({}, action, {
+                response: {
+                  name: providerData[0].displayName,
+                  url: providerData[0].photoURL,
+                  uid: result.uid
                 }
-              ]);
-            }
-            next(newAction);
-          });
-        } else {
-          next(Object.assign({}, action, { response: null }));
-        }
-      });
-    } else {
-      next(action);
+              });
+              if (snapshot.val()) {
+                newAction.tasks = snapshot.val().reduce((a, b) => {
+                  return a[b.name] = b.data || [], a;
+                }, {});
+              } else {
+                user.child('tasks').set([
+                  {
+                    name: 'toDo'
+                  },
+                  {
+                    name: 'inProgress'
+                  },
+                  {
+                    name: 'Done'
+                  }
+                ]);
+              }
+              next(newAction);
+            });
+          } else {
+            isLoged = false;
+            next(Object.assign({}, action, { response: null }));
+          }
+        });
+      } else {
+        next(action);
+      }
     }
-  },
+  }()),
   'ADD_TODO': setFireBaseTasks,
   'EDIT_TASK': setFireBaseTasks,
   'MOVE_FROM_TO': setFireBaseTasks,
