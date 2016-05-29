@@ -22,7 +22,7 @@ const items = [
 
 const Nav = ({ pathname }) => {
   return (
-    <div className={ css('nav') }>
+    <div className={ css('nav') } onClick={ unCheckRadios }>
       <div className={ css('nav-logo') }>
         <h1 className={ css('nav-title') }>
           Pandora’s Wall
@@ -38,30 +38,15 @@ const Nav = ({ pathname }) => {
   );
 };
 
-function changeActive(e) {
-  if (['A', 'SPAN'].indexOf(e.target.tagName) !== -1) {
-    const label = e.target.parentNode;
-
-    if (!hasUncheckAttribute(label, e)) {
-      const click = new Event('click');
-      label.dispatchEvent(click);
-    }
-  } else {
-    hasUncheckAttribute(e.target, e);
-  }
-}
-
-function hasUncheckAttribute(label, e) {
-  if (label.getAttribute('data-uncheck')) {
-    const radio = label.parentNode.querySelector('input');
+function unCheckRadios(e) {
+  if (e.target.getAttribute('data-uncheck')) {
+    const radio = e.target.parentNode.querySelector('input');
 
     if (radio.checked) {
       radio.checked = false;
       e.preventDefault();
     }
-    return true;
   }
-  return false;
 }
 
 const mapStateToProps = (state, ownProps) => {
