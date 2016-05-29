@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import style from './Nav.scss';
 import classNames from 'classnames/bind';
 
@@ -8,18 +9,29 @@ import { Login } from '../';
 import Dropdown from './Dropdown';
 import NavBtn from './NavBtn';
 
-const Nav = () => {
+const items = [
+  {
+    label: 'Wall',
+    to: '/wall'
+  },
+  {
+    label: 'Edit Mode',
+    to: '/edit-mode'
+  }
+];
+
+const Nav = ({ pathname }) => {
   return (
-    <div className={ css('nav') } onClick={ changeActive }>
+    <div className={ css('nav') }>
       <div className={ css('nav-logo') }>
         <h1 className={ css('nav-title') }>
           Pandora’s Wall
         </h1>
       </div>
       <ul className={ css('menu') } >
-        <NavBtn label="Wall" to="/wall" checked={true} />
-        <NavBtn label="Edit Mode" to="/edit-mode" />
-        <Dropdown label="Menu" />
+        {
+          items.map((item, i) => <NavBtn key={ i } label={ item.label } to={ item.to } pathname={ pathname === item.to } />)
+        }
       </ul>
       <Login />
     </div>
@@ -52,4 +64,10 @@ function hasUncheckAttribute(label, e) {
   return false;
 }
 
-export default Nav;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    pathname: state.routing.locationBeforeTransitions ? state.routing.locationBeforeTransitions.pathname : '/'
+  };
+};
+
+export default connect(mapStateToProps, null)(Nav);

@@ -1,0 +1,19 @@
+.edit-wall {
+  position: relative;
+  display: flex;
+  min-height: 70%;
+  -webkit-user-select: none;
+          user-select: none;
+  background: #f1f0ee;
+  justify-content: space-around;
+
+  ul li div {
+    opacity: 0.6;
+    -webkit-filter: blur(1px);
+    filter: blur(1px);
+  }
+
+  button {
+    display: none;
+  }
+}
