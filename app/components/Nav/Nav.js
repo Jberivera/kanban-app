@@ -55,4 +55,5 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
+export { Nav };
 export default connect(mapStateToProps, null)(Nav);
