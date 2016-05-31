@@ -12,12 +12,16 @@ function EditProject({ tasks }) {
   return (
     <div className={ css('edit-wall') }>
       {
-        Object.keys(tasks).map((key, i) => {
+        Object.keys(tasks).reduce((a, b, i) => {
+          i === 0 ? a.push(<div className={ css('add-group') } key={ b + 1 }></div>) : '';
           return (
-            <TaskGroup key={ key } array={ tasks[key] } name={ key } />
+            a.push(<TaskGroup key={ b } array={ tasks[b] } name={ b } />),
+            a.push(<div className={ css('add-group') } key={ b + 2 }></div>),
+            a
           );
-        })
+        }, [])
       }
+
     </div>
   );
 }
