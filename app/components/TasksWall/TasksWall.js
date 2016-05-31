@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import styles from './TasksWall.scss';
 import classNames from 'classnames/bind';
 import {
-  addToDo,
   reOrder,
   moveFromTo
 } from '../../actions/action-creators';
@@ -26,7 +25,8 @@ class TasksWall extends Component {
   }
 
   onMouseUp ({ elem, groupFrom, id, title, description }) {
-    return function mouseUp(e) {
+    let mouseUp;
+    return  mouseUp = (e) => {
       const groupTo = findGroup(e.target);
       const task = findTask(e.target);
       let index = -1;
@@ -43,7 +43,7 @@ class TasksWall extends Component {
       } else {
         this.props.reOrder(id, title, description, groupFrom, Number(index));
       }
-    }.bind(this);
+    };
   }
 
   onMouseMove (task, content) {
@@ -77,7 +77,7 @@ class TasksWall extends Component {
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
       };
-
+      console.log(this);
       e.currentTarget.addEventListener('mouseup', this.onMouseUp(data));
       e.currentTarget.onmousemove = this.onMouseMove(task, content);
     }
@@ -106,7 +106,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  addToDo,
   reOrder,
   moveFromTo
 }, dispatch);
