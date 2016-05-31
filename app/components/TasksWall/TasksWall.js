@@ -77,7 +77,6 @@ class TasksWall extends Component {
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
       };
-      console.log(this);
       e.currentTarget.addEventListener('mouseup', this.onMouseUp(data));
       e.currentTarget.onmousemove = this.onMouseMove(task, content);
     }
