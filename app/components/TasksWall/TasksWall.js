@@ -85,7 +85,6 @@ class TasksWall extends Component {
 
   render () {
     const { tasks } = this.props;
-
     return (
       <div className={ css('tasks-wall') } onMouseDown={ this.onMouseDown }>
         {
