@@ -3,27 +3,36 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from './EditProject.scss';
 import classNames from 'classnames/bind';
+// import {
+//   addGroup
+// } from '../../actions/editwall-action-creators';
 
 const css = classNames.bind(style);
 
 import TaskGroup from '../TaskGroup/TaskGroup';
 
-function EditProject({ tasks }) {
+function EditProject({ tasks, addGroup }) {
   return (
-    <div className={ css('edit-wall') }>
+    <div className={ css('edit-wall') } onClick={ onClick }>
       {
         Object.keys(tasks).reduce((a, b, i) => {
-          i === 0 ? a.push(<div className={ css('add-group') } key={ b + 1 }></div>) : '';
+          i === 0 ? a.push(<div className={ css('add-group') } key={ i } data-i={ i }></div>) : '';
           return (
             a.push(<TaskGroup key={ b } array={ tasks[b] } name={ b } />),
-            a.push(<div className={ css('add-group') } key={ b + 2 }></div>),
+            a.push(<div className={ css('add-group') } key={ i + 1 } data-i={ i + 1}></div>),
             a
           );
         }, [])
       }
-
     </div>
   );
+}
+
+function onClick(e) {
+  const i = e.target.getAttribute('data-i');
+  if (i) {
+    addGroup(i);
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -33,9 +42,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 // const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-//   addToDo,
-//   reOrder,
-//   moveFromTo
+//   addGroup
 // }, dispatch);
 
 export default connect(mapStateToProps, null)(EditProject);

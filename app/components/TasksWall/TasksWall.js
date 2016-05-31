@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styles from './TasksWall.scss';
 import classNames from 'classnames/bind';
 import {
-  addToDo,
   reOrder,
   moveFromTo
 } from '../../actions/action-creators';
@@ -17,15 +16,17 @@ import TaskGroup from '../TaskGroup/TaskGroup';
 const css = classNames.bind(styles);
 const DRAG_ACTIVE = 'drag-active';
 
-const TasksWall = ({
-  tasks,
-  addToDo,
-  reOrder,
-  moveFromTo
-}) => {
-  function onMouseUp({ elem, groupFrom, id, title, description }) {
+class TasksWall extends Component {
 
-    return function mouseUp(e) {
+  constructor (props) {
+    super(props);
+    this.onMouseDown = this.onMouseDown.bind(this);
+    this.onMouseUp = this.onMouseUp.bind(this);
+  }
+
+  onMouseUp ({ elem, groupFrom, id, title, description }) {
+    let mouseUp;
+    return  mouseUp = (e) => {
       const groupTo = findGroup(e.target);
       const task = findTask(e.target);
       let index = -1;
@@ -38,14 +39,14 @@ const TasksWall = ({
       e.currentTarget.removeEventListener('mouseup', mouseUp);
       e.currentTarget.onmousemove = null;
       if (groupFrom !== groupTo) {
-        moveFromTo(id, title, description, groupFrom, groupTo, Number(index));
+        this.props.moveFromTo(id, title, description, groupFrom, groupTo, Number(index));
       } else {
-        reOrder(id, title, description, groupFrom, Number(index));
+        this.props.reOrder(id, title, description, groupFrom, Number(index));
       }
-    }
+    };
   }
 
-  function onMouseMove(task, content) {
+  onMouseMove (task, content) {
     let x = 0,
       y = 0,
       left = getOffsetLeft(content) + content.offsetWidth / 2;
@@ -65,7 +66,7 @@ const TasksWall = ({
     }
   }
 
-  function onMouseDown(e) {
+  onMouseDown (e) {
     const task = findTask(e.target);
     if (task && !task.classList.contains('js-editMode')) {
       const content = task.querySelector('.js-item-content');
@@ -76,23 +77,26 @@ const TasksWall = ({
         title: task.querySelector('.js-task-title').innerHTML,
         description: task.querySelector('.js-task-description').innerHTML
       };
-
-      e.currentTarget.addEventListener('mouseup', onMouseUp(data));
-      e.currentTarget.onmousemove = onMouseMove(task, content);
+      console.log(this);
+      e.currentTarget.addEventListener('mouseup', this.onMouseUp(data));
+      e.currentTarget.onmousemove = this.onMouseMove(task, content);
     }
   }
 
-  return (
-    <div className={ css('tasks-wall') } onMouseDown={ onMouseDown }>
-      {
-        Object.keys(tasks).map((key, i) => {
-          return (
-            <TaskGroup key={ key } array={ tasks[key] } name={ key } addbtn={ !i }/>
-          );
-        })
-      }
-    </div>
-  );
+  render () {
+    const { tasks } = this.props;
+    return (
+      <div className={ css('tasks-wall') } onMouseDown={ this.onMouseDown }>
+        {
+          Object.keys(tasks).map((key, i) => {
+            return (
+              <TaskGroup key={ key } array={ tasks[key] } name={ key } addbtn={ !i }/>
+            );
+          })
+        }
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
@@ -102,7 +106,6 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  addToDo,
   reOrder,
   moveFromTo
 }, dispatch);
