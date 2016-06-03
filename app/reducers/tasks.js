@@ -3,7 +3,8 @@ import {
   ADD_TODO,
   EDIT_TASK,
   RE_ORDER,
-  MOVE_FROM_TO
+  MOVE_FROM_TO,
+  ADD_GROUP
 } from '../actions/action-creators';
 
 const initialState = {
@@ -74,6 +75,18 @@ const actionHandlers = {
         ...auxArray.slice(index)
       ]
     });
+  },
+  [ADD_GROUP]: (state, action) => {
+    const { i } = action;
+    const stateKeys = Object.keys(state);
+    const tasks = [
+      ...stateKeys.slice(0, i),
+      `group ${Number(i) + 1}`,
+      ...stateKeys.slice(i, stateKeys.lenght)
+    ];
+    return tasks.reduce((a, b) => {
+      return a[b] = state[b] || [], a;
+    }, {});
   },
   'LOGOUT': (state, action) => {
     return Object.assign({}, initialState);

@@ -66,7 +66,8 @@ const api = {
   'ADD_TODO': setFireBaseTasks,
   'EDIT_TASK': setFireBaseTasks,
   'MOVE_FROM_TO': setFireBaseTasks,
-  'RE_ORDER': setFireBaseTasks
+  'RE_ORDER': setFireBaseTasks,
+  'ADD_GROUP': setFireBaseTasks
 };
 
 function setFireBaseTasks(next, action, store) {
