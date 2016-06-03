@@ -3,15 +3,21 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from './EditProject.scss';
 import classNames from 'classnames/bind';
-// import {
-//   addGroup
-// } from '../../actions/editwall-action-creators';
+import {
+  addGroup
+} from '../../actions/action-creators';
 
 const css = classNames.bind(style);
 
 import TaskGroup from '../TaskGroup/TaskGroup';
 
 function EditProject({ tasks, addGroup }) {
+  function onClick(e) {
+    const i = e.target.getAttribute('data-i');
+    if (i) {
+      addGroup(i);
+    }
+  }
   return (
     <div className={ css('edit-wall') } onClick={ onClick }>
       {
@@ -28,21 +34,14 @@ function EditProject({ tasks, addGroup }) {
   );
 }
 
-function onClick(e) {
-  const i = e.target.getAttribute('data-i');
-  if (i) {
-    addGroup(i);
-  }
-}
-
 const mapStateToProps = (state, ownProps) => {
   return {
     tasks: Object.assign({}, state.tasks)
   };
 };
 
-// const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-//   addGroup
-// }, dispatch);
+const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+  addGroup
+}, dispatch);
 
-export default connect(mapStateToProps, null)(EditProject);
+export default connect(mapStateToProps, mapDispatchToProps)(EditProject);
