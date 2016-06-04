@@ -4,14 +4,15 @@ import { bindActionCreators } from 'redux';
 import style from './EditProject.scss';
 import classNames from 'classnames/bind';
 import {
-  addGroup
+  addGroup,
+  editGroupName
 } from '../../actions/action-creators';
 
 const css = classNames.bind(style);
 
 import TaskGroup from '../TaskGroup/TaskGroup';
 
-function EditProject({ tasks, addGroup }) {
+function EditProject({ tasks, addGroup, editGroupName }) {
   function onClick(e) {
     const i = e.target.getAttribute('data-i');
     if (i) {
@@ -24,7 +25,7 @@ function EditProject({ tasks, addGroup }) {
         Object.keys(tasks).reduce((a, b, i) => {
           i === 0 ? a.push(<div className={ css('add-group') } key={ i } data-i={ i }></div>) : '';
           return (
-            a.push(<TaskGroup key={ b } array={ tasks[b] } name={ b } />),
+            a.push(<TaskGroup key={ b } array={ tasks[b] } name={ b } editMode />),
             a.push(<div className={ css('add-group') } key={ i + 1 } data-i={ i + 1}></div>),
             a
           );
@@ -41,7 +42,8 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  addGroup
+  addGroup,
+  editGroupName
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProject);

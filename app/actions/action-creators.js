@@ -7,6 +7,9 @@ export const editTask = (id, groupFrom, title, description) => ({ type: EDIT_TAS
 export const ADD_GROUP = 'ADD_GROUP';
 export const addGroup = (i) => ({ type: ADD_GROUP, i });
 
+export const EDIT_GROUP_NAME = 'EDIT_GROUP_NAME';
+export const editGroupName = (name) => ({ type: EDIT_GROUP_NAME, name });
+
 export const RE_ORDER = 'RE_ORDER';
 export const reOrder = (id, title, description, groupFrom, index) => ({
   type: RE_ORDER,
