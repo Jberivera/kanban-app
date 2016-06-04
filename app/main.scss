@@ -7,6 +7,13 @@
   box-sizing: border-box;
 }
 
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
+
 html, body {
   position: relative;
   height: 100%;
@@ -33,4 +40,14 @@ body {
   width: 95%;
   height: 100%;
   margin: auto;
+}
+
+:global .btn {
+  padding: 3px;
+  border: none;
+  border-radius: 3px;
+  color: #ffffff;
+  font-family: 'Poiret One';
+  font-size: 11px;
+  cursor: pointer;
 }
