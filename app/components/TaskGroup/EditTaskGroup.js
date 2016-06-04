@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import styles from './TaskGroup.scss';
 import classNames from 'classnames/bind';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  editGroupName
+} from '../../actions/action-creators';
 
 const css = classNames.bind(styles);
 
@@ -22,6 +27,7 @@ class TaskGroup extends Component {
     e.preventDefault();
     resetInlineStyles(this.groupTitle);
     this.btns.style.display = 'none';
+    this.props.editGroupName(this.props.name, this.groupTitle.value);
   }
 
   onChange (e) {
@@ -63,4 +69,8 @@ class TaskGroup extends Component {
   }
 };
 
-export default TaskGroup;
+const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+  editGroupName
+}, dispatch);
+
+export default connect(null, mapDispatchToProps)(TaskGroup);

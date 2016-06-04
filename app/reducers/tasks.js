@@ -4,7 +4,8 @@ import {
   EDIT_TASK,
   RE_ORDER,
   MOVE_FROM_TO,
-  ADD_GROUP
+  ADD_GROUP,
+  EDIT_GROUP_NAME
 } from '../actions/action-creators';
 
 const initialState = {
@@ -90,6 +91,15 @@ const actionHandlers = {
   },
   'LOGOUT': (state, action) => {
     return Object.assign({}, initialState);
+  },
+  [EDIT_GROUP_NAME]: (state, action) => {
+    const { nameFrom, nameTo } = action;
+
+    return Object.keys(state).map((key) => {
+      return key === nameFrom ? nameTo : key
+    }).reduce((a, b) => {
+      return state[b] ? (a[b] = state[b], a) : (a[nameTo] = state[nameFrom], a);
+    }, {});
   },
   '@@router/LOCATION_CHANGE': (state, action) => {
     return action.tasks ? Object.assign({}, action.tasks) : state;
