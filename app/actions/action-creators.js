@@ -8,7 +8,7 @@ export const ADD_GROUP = 'ADD_GROUP';
 export const addGroup = (i) => ({ type: ADD_GROUP, i });
 
 export const EDIT_GROUP_NAME = 'EDIT_GROUP_NAME';
-export const editGroupName = (name) => ({ type: EDIT_GROUP_NAME, name });
+export const editGroupName = (nameFrom, nameTo) => ({ type: EDIT_GROUP_NAME, nameFrom, nameTo });
 
 export const RE_ORDER = 'RE_ORDER';
 export const reOrder = (id, title, description, groupFrom, index) => ({
