@@ -27,7 +27,7 @@ class TaskGroup extends Component {
     e.preventDefault();
     resetInlineStyles(this.groupTitle);
     this.btns.style.display = 'none';
-    this.props.editGroupName(this.props.name, this.groupTitle.value);
+    this.props.editGroupName(this.props.name, this.groupTitle.value.trim());
   }
 
   onChange (e) {
