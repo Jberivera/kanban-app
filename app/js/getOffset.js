@@ -1,43 +1,42 @@
 function getPosition(element) {
-  return element.style.position || 'static';
+  return element.style.position || window.getComputedStyle(element).position || 'static';
 }
 
-export function getOffsetTop(element, offset = 0) {
-  const position = getPosition(element);
-  if (element.tagName === 'BODY') {
-    return offset;
+function setRelative(element, callback, offset) {
+
+  return setRelativeRecursion(element);
+
+  function setRelativeRecursion(e) {
+    const position = getPosition(e);
+    if (e.tagName === 'BODY') {
+      return callback(element, offset);
+    }
+    if (position === 'static') {
+      e.style.position = 'relative';
+    }
+    return setRelativeRecursion(e.parentNode);
   }
-  if (position === 'static') {
-    element.style.position = 'relative';
-  }
-  offset += element.offsetTop;
-  return getOffsetTop(element.parentNode, offset);
 }
 
-export function getOffsetLeft(element, offset = 0) {
-  const position = getPosition(element);
+function getOffsetRecursion(element, offset) {
   if (element.tagName === 'BODY') {
     return offset;
-  }
-  if (position === 'static') {
-    element.style.position = 'relative';
-  }
-  offset += element.offsetLeft;
-  return getOffsetLeft(element.parentNode, offset);
-}
-
-export default function getOffset(element, offset = { left: 0, top: 0 }) {
-  const position = getPosition(element);
-  if (element.tagName === 'BODY') {
-    return offset;
-  }
-  if (position === 'static') {
-    element.style.position = 'relative';
   }
   offset = {
     left: offset.left + element.offsetLeft,
     top: offset.top + element.offsetTop
   };
+  return getOffsetRecursion(element.parentNode, offset);
+}
 
-  return getOffset(element.parentNode, offset);
+export function getOffsetTop(element, offset = 0) {
+  return getOffset(element, { left: 0, top: offset }).top;
+}
+
+export function getOffsetLeft(element, offset = 0) {
+  return getOffset(element, { left: offset, top: 0 }).left;
+}
+
+export default function getOffset(element, offset = { left: 0, top: 0 }) {
+  return setRelative(element, getOffsetRecursion, offset);
 }
