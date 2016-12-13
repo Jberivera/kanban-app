@@ -48,7 +48,8 @@ module.exports = merge(common, {
       port: DEFAULT_PORT
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin()
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.DefinePlugin({ 'process.env': { 'NODE_ENV': '"development"' }})
     ]
   },
   build: {
