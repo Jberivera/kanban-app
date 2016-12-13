@@ -94,5 +94,4 @@ const firebaseMiddleware = store => next => {
   };
 };
 
-export { auth, facebook, database };
-export default firebaseMiddleware;
+export { auth, facebook, database, firebaseMiddleware };
