@@ -15,16 +15,20 @@ const initialState = {
 };
 
 const actionHandlers = {
-  [ADD_TODO]: (state, action) => Object.assign({}, state, {
-    toDo: [
-      {
-        'id': action.id,
-        'title': action.title,
-        'description': action.description
-      },
-      ...state.toDo
-    ]
-  }),
+  [ADD_TODO]: (state, action) => {
+    const firstCol = Object.keys(state)[0];
+
+    return Object.assign({}, state, {
+      [firstCol]: [
+        {
+          'id': action.id,
+          'title': action.title,
+          'description': action.description
+        },
+        ...state[firstCol]
+      ]
+    });
+  },
   [EDIT_TASK]: (state, action) => {
     const arrayFrom = state[action.groupFrom];
     const index = arrayFrom.findIndex((task) => task.id === action.id);
