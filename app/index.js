@@ -21,9 +21,9 @@ const App = (props) => {
     <Provider store={ store }>
       <Router history={ history }>
         <Route path="/" component={ Root }>
-          <IndexRoute to={ TasksWall } />
-          <Route path="/wall" component={ TasksWall }/>
-          <Route path="/edit-mode" component={ EditProject }/>
+          <IndexRoute to="/wall" />
+          <Route path="wall" component={ TasksWall } />
+          <Route path="edit-mode" component={ EditProject } />
         </Route>
       </Router>
     </Provider>
