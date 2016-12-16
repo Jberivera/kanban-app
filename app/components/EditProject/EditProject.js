@@ -4,15 +4,14 @@ import { bindActionCreators } from 'redux';
 import style from './EditProject.scss';
 import classNames from 'classnames/bind';
 import {
-  addGroup,
-  editGroupName
+  addGroup
 } from '../../actions/action-creators';
 
 const css = classNames.bind(style);
 
 import TaskGroup from '../TaskGroup/EditTaskGroup';
 
-function EditProject({ tasks, addGroup, editGroupName }) {
+function EditProject({ tasks, addGroup }) {
   function onClick(e) {
     const i = e.target.getAttribute('data-i');
     if (i) {
