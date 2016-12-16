@@ -4,7 +4,8 @@ import thunk from 'redux-thunk';
 import reducers from '../../reducers';
 
 const middlewares = [
-  thunk
+  thunk,
+  firebaseMiddleware
 ];
 
 function configureStore(preloadedState = {}) {
