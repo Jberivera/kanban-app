@@ -106,7 +106,7 @@ const actionHandlers = {
     }
 
     return Object.keys(state).map((key) => {
-      return key === nameFrom ? nameTo : key
+      return key === nameFrom ? nameTo : key;
     }).reduce((a, b) => {
       return state[b] ? (a[b] = [ ...state[b] ], a) : (a[nameTo] = [ ...state[nameFrom] ], a);
     }, {});
