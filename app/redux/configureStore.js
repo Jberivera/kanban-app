@@ -1,14 +1,15 @@
 import { createStore, applyMiddleware } from 'redux';
-import { firebaseMiddleware } from '../firebaseApi';
+import { createEpicMiddleware } from 'redux-observable';
+import { firebaseMiddleware } from '../js/firebaseApi';
 import thunk from 'redux-thunk';
-import reducers from '../../reducers';
+import { rootReducer } from './modules/root';
 
 const middlewares = [
   thunk,
   firebaseMiddleware
 ];
 
-function configureStore(preloadedState = {}) {
+export default function configureStore(preloadedState = {}) {
   // only inlcude logger in development
   if (process.env.NODE_ENV === 'development') {
     const createLogger = require('redux-logger');
@@ -17,12 +18,10 @@ function configureStore(preloadedState = {}) {
   }
 
   const store = createStore(
-    reducers,
+    rootReducer,
     preloadedState,
     applyMiddleware(...middlewares)
   );
 
   return store;
 }
-
-export default configureStore;

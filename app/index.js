@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
-import configureStore from './js/redux/configureStore';
+import configureStore from './redux/configureStore';
 
 const store = configureStore();
 
