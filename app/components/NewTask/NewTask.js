@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
-  addToDo
-} from '../../actions/action-creators';
+  addTask
+} from './actions';
 
 import style from './NewTask.scss';
 import classNames from 'classnames/bind';
@@ -13,11 +13,11 @@ const css = classNames.bind(style);
 const TITLE = 'task';
 const DESCRIPTION = 'description';
 
-const NewTask = ({ count, addToDo }) => {
+const NewTask = ({ count, addTask }) => {
 
   function onClick(e) {
     const key = generateKey(count);
-    addToDo(key, `${TITLE} ${key}`, DESCRIPTION);
+    addTask(key, `${TITLE} ${key}`, DESCRIPTION);
   }
 
   return (
@@ -35,7 +35,7 @@ const mapStateToProps = ({ tasks }, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  addToDo
+  addTask
 }, dispatch);
 
 export { NewTask };

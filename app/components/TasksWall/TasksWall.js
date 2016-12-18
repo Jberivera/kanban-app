@@ -4,9 +4,9 @@ import { bindActionCreators } from 'redux';
 import styles from './TasksWall.scss';
 import classNames from 'classnames/bind';
 import {
-  reOrder,
+  orderChange,
   moveFromTo
-} from '../../actions/action-creators';
+} from './actions';
 import { findTask, findGroup } from '../../js/findUp';
 import { getOffsetLeft, getOffsetTop } from '../../js/getOffset';
 import resetInlineStyles from '../../js/resetInlineStyles';
@@ -41,7 +41,7 @@ class TasksWall extends Component {
       if (groupFrom !== groupTo) {
         this.props.moveFromTo(id, title, description, groupFrom, groupTo, Number(index));
       } else {
-        this.props.reOrder(id, title, description, groupFrom, Number(index));
+        this.props.orderChange(id, title, description, groupFrom, Number(index));
       }
     };
   }
@@ -105,7 +105,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  reOrder,
+  orderChange,
   moveFromTo
 }, dispatch);
 

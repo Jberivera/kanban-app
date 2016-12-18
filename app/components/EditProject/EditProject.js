@@ -5,7 +5,7 @@ import style from './EditProject.scss';
 import classNames from 'classnames/bind';
 import {
   addGroup
-} from '../../actions/action-creators';
+} from './actions';
 
 const css = classNames.bind(style);
 
@@ -41,8 +41,7 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
-  addGroup,
-  editGroupName
+  addGroup
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(EditProject);

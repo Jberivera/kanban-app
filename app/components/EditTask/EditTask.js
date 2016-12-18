@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { findGroup, findTask } from '../../js/findUp';
 import {
   editTask
-} from '../../actions/action-creators';
+} from './actions';
 
 const css = classNames.bind(styles);
 

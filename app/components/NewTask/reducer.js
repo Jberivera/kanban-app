@@ -1,9 +1,9 @@
 import {
-  ADD_TODO
-} from '../../actions/action-creators';
+  ADD_TASK
+} from './actions';
 
 const actionHandlers = {
-  [ADD_TODO]: (state, action) => {
+  [ADD_TASK]: (state, action) => {
     const firstCol = Object.keys(state)[0];
 
     return Object.assign({}, state, {
