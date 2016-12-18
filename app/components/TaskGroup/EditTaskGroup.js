@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
   editGroupName
-} from '../../actions/action-creators';
+} from './actions';
 
 const css = classNames.bind(styles);
 

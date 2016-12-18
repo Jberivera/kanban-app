@@ -1,7 +1,7 @@
 import {
-  RE_ORDER,
+  ORDER_CHANGE,
   MOVE_FROM_TO
-} from '../../actions/action-creators';
+} from './actions';
 
 const actionHandlers = {
   [MOVE_FROM_TO]: (state, action) => {
@@ -22,7 +22,7 @@ const actionHandlers = {
       ]
     });
   },
-  [RE_ORDER]: (state, action) => {
+  [ORDER_CHANGE]: (state, action) => {
     const arrayFrom = state[action.groupFrom];
     const { index } = action;
 

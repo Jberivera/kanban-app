@@ -1,6 +1,6 @@
 import {
   EDIT_TASK
-} from '../../actions/action-creators';
+} from './actions';
 
 const actionHandlers = {
   [EDIT_TASK]: (state, action) => {

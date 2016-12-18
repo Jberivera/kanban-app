@@ -1,9 +1,7 @@
 import expect from 'expect';
 import reducer from '../../app/reducers/tasks';
-import {
-  addToDo,
-  moveFromTo
-} from '../../app/actions/action-creators';
+import { addTask } from '../../app/components/NewTask/actions';
+import { moveFromTo } from '../../app/components/TasksWall/actions';
 
 const initialState = {
   toDo: [],
@@ -18,7 +16,7 @@ describe('tasks reducer', () => {
       inProgress: [],
       Done: []
     };
-    const action = addToDo('1', 'new task', 'something to do');
+    const action = addTask('1', 'new task', 'something to do');
 
     expect(reducer(initialState, action)).toEqual(after);
   });

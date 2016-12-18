@@ -1,6 +1,6 @@
 import {
   ADD_GROUP
-} from '../../actions/action-creators';
+} from './actions';
 
 const actionHandlers = {
   [ADD_GROUP]: (state, action) => {

@@ -6,11 +6,11 @@ import { shallow } from 'enzyme';
 describe('<NewTask />', () => {
 
   it('simulates click event', () => {
-    const addToDo = createSpy();
+    const addTask = createSpy();
     const wrapper = shallow(
-      <NewTask addToDo={ addToDo } count={ 0 } />
+      <NewTask addTask={ addTask } count={ 0 } />
     );
     wrapper.find('button').simulate('click');
-    expect(addToDo).toHaveBeenCalled();
+    expect(addTask).toHaveBeenCalled();
   });
 });

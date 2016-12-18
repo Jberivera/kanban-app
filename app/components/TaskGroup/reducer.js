@@ -1,6 +1,6 @@
 import {
   EDIT_GROUP_NAME
-} from '../../actions/action-creators';
+} from './actions';
 
 const actionHandlers = {
   [EDIT_GROUP_NAME]: (state, action) => {
