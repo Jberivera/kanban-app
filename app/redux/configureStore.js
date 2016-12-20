@@ -1,11 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 import { firebaseMiddleware } from '../js/firebaseApi';
-import thunk from 'redux-thunk';
 import { rootReducer } from './modules/root';
 
 const middlewares = [
-  thunk,
   firebaseMiddleware
 ];
 
