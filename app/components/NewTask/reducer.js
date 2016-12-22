@@ -1,5 +1,6 @@
 import {
-  ADD_TASK
+  ADD_TASK,
+  addTaskEpic
 } from './actions';
 
 const actionHandlers = {
@@ -20,3 +21,4 @@ const actionHandlers = {
 };
 
 export default actionHandlers;
+export { addTaskEpic };
