@@ -1,4 +1,3 @@
-import 'rxjs';
 import 'rxjs/add/operator/mapTo';
 import createReducer from 'redux-createreducer';
 import { combineEpics } from 'redux-observable';
