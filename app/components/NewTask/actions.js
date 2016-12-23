@@ -6,5 +6,6 @@ export const taskStored = () => ({ type: TASK_STORED });
 
 export const addTaskEpic = (action$) => {
   return action$.ofType(ADD_TASK)
+    .debounceTime(500)
     .mapTo(taskStored());
 };

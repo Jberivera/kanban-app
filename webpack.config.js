@@ -1,7 +1,5 @@
 const webpack = require('webpack');
-
 const path = require('path');
-const merge = require('webpack-merge');
 
 const TARGET = process.env.npm_lifecycle_event;
 const DEFAULT_PORT = process.env.PORT || 5000;
@@ -35,7 +33,7 @@ const common = {
   ]
 };
 
-module.exports = merge(common, {
+module.exports = Object.assign(common, {
   start: {
     devtool: 'eval-source-map',
     devServer: {
