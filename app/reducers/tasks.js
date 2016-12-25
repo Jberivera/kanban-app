@@ -4,7 +4,7 @@ import 'rxjs/add/operator/debounceTime';
 import createReducer from 'redux-createreducer';
 import { combineEpics } from 'redux-observable';
 import editProject from '../components/EditProject/reducer';
-import editTask from '../components/EditTask/reducer';
+import editTask, { editTaskEpic } from '../components/EditTask/reducer';
 import newTask, { addTaskEpic } from '../components/NewTask/reducer';
 import taskGroup from '../components/TaskGroup/reducer';
 import tasksWall from '../components/TasksWall/reducer';
@@ -32,7 +32,8 @@ const actionHandlers = Object.assign(
 );
 
 export const tasksEpic = combineEpics(
-  addTaskEpic
+  addTaskEpic,
+  editTaskEpic
 );
 
 export default createReducer(initialState, actionHandlers);
