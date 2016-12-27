@@ -1,5 +1,6 @@
 import {
-  EDIT_GROUP_NAME
+  EDIT_GROUP_NAME,
+  editGroupNameEpic
 } from './actions';
 
 const actionHandlers = {
@@ -21,3 +22,4 @@ const actionHandlers = {
 };
 
 export default actionHandlers;
+export { editGroupNameEpic };
