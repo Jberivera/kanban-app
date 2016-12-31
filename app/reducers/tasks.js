@@ -7,7 +7,7 @@ import editProject from '../components/EditProject/reducer';
 import editTask, { editTaskEpic } from '../components/EditTask/reducer';
 import newTask, { addTaskEpic } from '../components/NewTask/reducer';
 import taskGroup, { editGroupNameEpic } from '../components/TaskGroup/reducer';
-import tasksWall from '../components/TasksWall/reducer';
+import tasksWall, { moveFromToEpic, orderChangeEpic } from '../components/TasksWall/reducer';
 
 const initialState = {
   toDo: [],
@@ -34,7 +34,9 @@ const actionHandlers = Object.assign(
 export const tasksEpic = combineEpics(
   addTaskEpic,
   editTaskEpic,
-  editGroupNameEpic
+  editGroupNameEpic,
+  moveFromToEpic,
+  orderChangeEpic
 );
 
 export default createReducer(initialState, actionHandlers);
