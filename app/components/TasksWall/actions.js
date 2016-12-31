@@ -8,7 +8,7 @@ export const orderChange = (id, title, description, groupFrom, index) => ({
   index
 });
 
-export const ORDER_CHANGE_STORED = 'ORDER_CHANGE_STORED';
+const ORDER_CHANGE_STORED = 'ORDER_CHANGE_STORED';
 const orderChangeStored = () => ({ type: ORDER_CHANGE_STORED });
 
 export const orderChangeEpic = (action$) => {
@@ -27,7 +27,7 @@ export const moveFromTo = (id, title, description, groupFrom, groupTo, index) =>
   index
 });
 
-export const MOVE_FROM_TO_STORED = 'MOVE_FROM_TO_STORED';
+const MOVE_FROM_TO_STORED = 'MOVE_FROM_TO_STORED';
 const moveFromToStored = () => ({ type: MOVE_FROM_TO_STORED });
 
 export const moveFromToEpic = (action$) => {
