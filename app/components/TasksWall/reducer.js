@@ -1,6 +1,8 @@
 import {
   ORDER_CHANGE,
-  MOVE_FROM_TO
+  MOVE_FROM_TO,
+  orderChangeEpic,
+  moveFromToEpic
 } from './actions';
 
 const actionHandlers = {
@@ -43,3 +45,4 @@ const actionHandlers = {
 };
 
 export default actionHandlers;
+export { moveFromToEpic, orderChangeEpic };
