@@ -1,5 +1,6 @@
 import {
-  ADD_GROUP
+  ADD_GROUP,
+  addGroupEpic
 } from './actions';
 
 const actionHandlers = {
@@ -18,3 +19,4 @@ const actionHandlers = {
 };
 
 export default actionHandlers;
+export { addGroupEpic };
