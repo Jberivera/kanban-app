@@ -4,18 +4,37 @@ import { addTask } from '../../app/components/NewTask/actions';
 import { moveFromTo } from '../../app/components/TasksWall/actions';
 
 const initialState = {
-  toDo: [],
-  inProgress: [],
-  Done: []
+  'toDo': {
+    data: [],
+    name: 'toDo'
+  },
+  'inProgress': {
+    data: [],
+    name: 'inProgress'
+  },
+  'Done': {
+    data: [],
+    name: 'Done'
+  }
 };
 
 describe('tasks reducer', () => {
   it('should add a new toDo', () => {
     const after = {
-      toDo: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
-      inProgress: [],
-      Done: []
+      'toDo': {
+        data: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
+        name: 'toDo'
+      },
+      'inProgress': {
+        data: [],
+        name: 'inProgress'
+      },
+      'Done': {
+        data: [],
+        name: 'Done'
+      }
     };
+
     const action = addTask('1', 'new task', 'something to do');
 
     expect(reducer(initialState, action)).toEqual(after);
@@ -23,14 +42,32 @@ describe('tasks reducer', () => {
 
   it('should move a toDo to inProgress', () => {
     const before = {
-      toDo: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
-      inProgress: [],
-      Done: []
+      'toDo': {
+        data: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
+        name: 'toDo'
+      },
+      'inProgress': {
+        data: [],
+        name: 'inProgress'
+      },
+      'Done': {
+        data: [],
+        name: 'Done'
+      }
     };
     const after = {
-      toDo: [],
-      inProgress: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
-      Done: []
+      'toDo': {
+        data: [],
+        name: 'toDo'
+      },
+      'inProgress': {
+        data: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
+        name: 'inProgress'
+      },
+      'Done': {
+        data: [],
+        name: 'Done'
+      }
     };
     const action = moveFromTo('1', 'new task', 'something to do', 'toDo', 'inProgress');
 
@@ -39,14 +76,32 @@ describe('tasks reducer', () => {
 
   it('should move an inProgress to Done', () => {
     const before = {
-      toDo: [],
-      inProgress: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
-      Done: []
+      'toDo': {
+        data: [],
+        name: 'toDo'
+      },
+      'inProgress': {
+        data: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
+        name: 'inProgress'
+      },
+      'Done': {
+        data: [],
+        name: 'Done'
+      }
     };
     const after = {
-      toDo: [],
-      inProgress: [],
-      Done: [{ id: '1', 'title': 'new task', 'description': 'something to do' }]
+      'toDo': {
+        data: [],
+        name: 'toDo'
+      },
+      'inProgress': {
+        data: [],
+        name: 'inProgress'
+      },
+      'Done': {
+        data: [{ id: '1', 'title': 'new task', 'description': 'something to do' }],
+        name: 'Done'
+      }
     };
     const action = moveFromTo('1', 'new task', 'something to do', 'inProgress', 'Done');
 
