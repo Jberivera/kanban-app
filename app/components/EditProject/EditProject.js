@@ -21,13 +21,13 @@ function EditProject({ tasks, addGroup }) {
   return (
     <div className={ css('edit-wall') } onClick={ onClick }>
       {
-        Object.keys(tasks).reduce((a, b, i) => {
-          i === 0 ? a.push(<div className={ css('add-group') } key={ i } data-i={ i }></div>) : '';
-          return (
-            a.push(<TaskGroup key={ b } array={ tasks[b] } name={ b } />),
-            a.push(<div className={ css('add-group') } key={ i + 1 } data-i={ i + 1}></div>),
-            a
-          );
+        Object.keys(tasks).reduce((array, key, i) => {
+          i === 0 && array.push(<div className={ css('add-group') } key={ i } data-i={ i }></div>);
+          return [
+            ...array,
+            <TaskGroup key={ `edit-wall-${key}` } array={ tasks[key].data } name={ tasks[key].name } />,
+            <div className={ css('add-group') } key={ i + 1 } data-i={ i + 1}></div>
+          ];
         }, [])
       }
     </div>

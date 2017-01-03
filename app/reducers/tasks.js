@@ -9,9 +9,18 @@ import taskGroup, { editGroupNameEpic } from '../components/TaskGroup/reducer';
 import tasksWall, { moveFromToEpic, orderChangeEpic } from '../components/TasksWall/reducer';
 
 const initialState = {
-  toDo: [],
-  inProgress: [],
-  Done: []
+  'toDo': {
+    data: [],
+    name: 'toDo'
+  },
+  'inProgress': {
+    data: [],
+    name: 'inProgress'
+  },
+  'Done': {
+    data: [],
+    name: 'Done'
+  }
 };
 
 const actionHandlers = Object.assign(
@@ -19,8 +28,8 @@ const actionHandlers = Object.assign(
     'LOGOUT': (state, action) => {
       return Object.assign({}, initialState);
     },
-    '@@router/LOCATION_CHANGE': (state, action) => {
-      return action.tasks ? Object.assign({}, action.tasks) : state;
+    'LOGIN': (state, { payload }) => {
+      return payload.tasks ? Object.assign({}, sanitizeDataFromFireBase(payload.tasks)) : state;
     }
   },
   newTask,
@@ -29,6 +38,12 @@ const actionHandlers = Object.assign(
   taskGroup,
   tasksWall
 );
+
+function sanitizeDataFromFireBase (tasks) {
+  return Object.keys(tasks).reduce((obj, key) => {
+    return tasks[key].data ? obj[key] = tasks[key] : obj[key] = Object.assign({}, tasks[key], { data: []}), obj;
+  }, {});
+}
 
 export const tasksEpic = combineEpics(
   addTaskEpic,

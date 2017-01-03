@@ -11,20 +11,16 @@ const taskStored = () => ({ type: TASK_STORED });
 const SET_USER_REJECTED = 'SET_USER_REJECTED';
 
 function setRef (refValue, tasks) {
-  const setPromise = database.ref(refValue).set(
-    Object.keys(tasks).reduce((a, b, i) => {
-      return a[i] = { name: b, data: tasks[b] }, a;
-    }, [])
-  );
+  const setPromise = database.ref(refValue).set(tasks);
 
   return Observable.fromPromise(setPromise);
 }
 
-export const addTaskEpic = (action$) => {
+export const addTaskEpic = (action$, store) => {
   return action$.ofType(ADD_TASK)
     .debounceTime(500)
     .flatMap((action) =>
-      setRef(`users/${action.userUid}/tasks`, action.tasks)
+      setRef(`users/${action.userUid}/tasks`, store.getState().tasks)
         .mapTo(taskStored())
         .catch(error => Observable.of({
             type: SET_USER_REJECTED,

@@ -8,14 +8,16 @@ const actionHandlers = {
     const firstCol = Object.keys(state)[0];
 
     return Object.assign({}, state, {
-      [firstCol]: [
-        {
-          'id': action.id,
-          'title': action.title,
-          'description': action.description
-        },
-        ...state[firstCol]
-      ]
+      [firstCol]: Object.assign({}, state[firstCol], {
+        data: [
+          {
+            'id': action.id,
+            'title': action.title,
+            'description': action.description
+          },
+          ...state[firstCol].data
+        ]
+      })
     });
   }
 };
