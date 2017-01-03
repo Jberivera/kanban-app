@@ -19,8 +19,8 @@ const actionHandlers = Object.assign(
     'LOGOUT': (state, action) => {
       return Object.assign({}, initialState);
     },
-    '@@router/LOCATION_CHANGE': (state, action) => {
-      return action.tasks ? Object.assign({}, action.tasks) : state;
+    'LOGIN': (state, { payload }) => {
+      return payload.tasks ? Object.assign({}, payload.tasks) : state;
     }
   },
   newTask,

@@ -14,10 +14,10 @@ const actionHandlers = {
   'LOGOUT': (state, action) => {
     return {};
   },
-  '@@router/LOCATION_CHANGE': (state, action) => {
-    if (action.response) {
+  'LOGIN': (state, { payload }) => {
+    if (payload.response) {
       return Object.assign({}, state, {
-        res: action.response
+        res: payload.response
       });
     }
     return state;

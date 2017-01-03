@@ -20,11 +20,11 @@ function setRef (refValue, tasks) {
   return Observable.fromPromise(setPromise);
 }
 
-export const addTaskEpic = (action$) => {
+export const addTaskEpic = (action$, store) => {
   return action$.ofType(ADD_TASK)
     .debounceTime(500)
     .flatMap((action) =>
-      setRef(`users/${action.userUid}/tasks`, action.tasks)
+      setRef(`users/${action.userUid}/tasks`, store.getState().tasks)
         .mapTo(taskStored())
         .catch(error => Observable.of({
             type: SET_USER_REJECTED,
