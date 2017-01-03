@@ -15,8 +15,18 @@ const actionHandlers = {
 
     return Object.keys(state).map((key) => {
       return key === nameFrom ? nameTo : key;
-    }).reduce((a, b) => {
-      return state[b] ? (a[b] = [ ...state[b].data ], a) : (a[nameTo] = [ ...state[nameFrom].data ], a);
+    }).reduce((obj, key) => {
+      if (state[key]) {
+        return obj[key] = Object.assign({}, state[key], {
+          name: key,
+          data: [ ...state[key].data ]
+        }), obj;
+      } else {
+        return obj[nameTo] = Object.assign({}, state[key], {
+          name: key,
+          data: [ ...state[nameFrom].data ]
+        }), obj;
+      }
     }, {});
   }
 };
