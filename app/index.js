@@ -21,7 +21,7 @@ class App extends Component {
   }
 
   componentDidMount () {
-    // setOnAuthStateChange(store.dispatch);
+    setOnAuthStateChange(store.dispatch);
   }
 
   render () {

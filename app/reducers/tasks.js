@@ -29,7 +29,7 @@ const actionHandlers = Object.assign(
       return Object.assign({}, initialState);
     },
     'LOGIN': (state, { payload }) => {
-      return payload.tasks ? Object.assign({}, payload.tasks) : state;
+      return payload.tasks ? Object.assign({}, sanitizeDataFromFireBase(payload.tasks)) : state;
     }
   },
   newTask,
@@ -38,6 +38,12 @@ const actionHandlers = Object.assign(
   taskGroup,
   tasksWall
 );
+
+function sanitizeDataFromFireBase (tasks) {
+  return Object.keys(tasks).reduce((obj, key) => {
+    return tasks[key].data ? obj[key] = tasks[key] : obj[key] = Object.assign({}, tasks[key], { data: []}), obj;
+  }, {});
+}
 
 export const tasksEpic = combineEpics(
   addTaskEpic,

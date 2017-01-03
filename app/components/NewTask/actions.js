@@ -11,11 +11,7 @@ const taskStored = () => ({ type: TASK_STORED });
 const SET_USER_REJECTED = 'SET_USER_REJECTED';
 
 function setRef (refValue, tasks) {
-  const setPromise = database.ref(refValue).set(
-    Object.keys(tasks).reduce((a, b, i) => {
-      return a[i] = { name: b, data: tasks[b] }, a;
-    }, [])
-  );
+  const setPromise = database.ref(refValue).set(tasks);
 
   return Observable.fromPromise(setPromise);
 }

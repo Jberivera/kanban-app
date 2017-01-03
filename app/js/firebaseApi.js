@@ -33,21 +33,19 @@ function setOnAuthStateChange (dispatch) {
           }
         };
         if (snapshot.val()) {
-          payload.tasks = snapshot.val().reduce((a, b) => {
-            return a[b.name] = b.data || [], a;
-          }, {});
+          payload.tasks = snapshot.val();
         } else {
-          user.child('tasks').set([
-            {
+          user.child('tasks').set({
+            'toDo': {
               name: 'toDo'
             },
-            {
+            'inProgress': {
               name: 'inProgress'
             },
-            {
+            'Done': {
               name: 'Done'
             }
-          ]);
+          });
         }
         dispatch(login(payload));
       });
