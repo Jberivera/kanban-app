@@ -9,9 +9,18 @@ import taskGroup, { editGroupNameEpic } from '../components/TaskGroup/reducer';
 import tasksWall, { moveFromToEpic, orderChangeEpic } from '../components/TasksWall/reducer';
 
 const initialState = {
-  toDo: [],
-  inProgress: [],
-  Done: []
+  'toDo': {
+    data: [],
+    name: 'toDo'
+  },
+  'inProgress': {
+    data: [],
+    name: 'inProgress'
+  },
+  'Done': {
+    data: [],
+    name: 'Done'
+  }
 };
 
 const actionHandlers = Object.assign(

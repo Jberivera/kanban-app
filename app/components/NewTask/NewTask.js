@@ -21,8 +21,7 @@ const NewTask = ({ count, addTask, uid }) => {
   }
 
   return (
-    <button onClick={ onClick } className={ css('addTask-btn') }>
-    </button>
+    <button onClick={ onClick } className={ css('addTask-btn') } />
   );
 }
 
@@ -30,7 +29,7 @@ const mapStateToProps = ({ tasks, user }, ownProps) => {
   return {
     uid: user.res && user.res.uid,
     count: Object.keys(tasks).reduce((acum, key) => {
-      return tasks[key].length + acum;
+      return tasks[key].data.length + acum;
     }, 0)
   };
 };
