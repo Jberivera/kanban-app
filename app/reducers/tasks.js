@@ -1,6 +1,5 @@
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mapTo';
-import 'rxjs/add/operator/debounceTime';
+import '../js/customObservable';
 import createReducer from 'redux-createreducer';
 import { combineEpics } from 'redux-observable';
 import editProject, { addGroupEpic } from '../components/EditProject/reducer';
