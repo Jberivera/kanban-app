@@ -35,16 +35,8 @@ function setOnAuthStateChange (dispatch) {
         if (snapshot.val()) {
           payload.tasks = snapshot.val();
         } else {
-          user.child('tasks').set({
-            'toDo': {
-              name: 'toDo'
-            },
-            'inProgress': {
-              name: 'inProgress'
-            },
-            'Done': {
-              name: 'Done'
-            }
+          ['toDo', 'inProgress', 'Done'].forEach((key) => {
+            user.child('tasks').push({ name: key });
           });
         }
         dispatch(login(payload));
