@@ -1,10 +1,11 @@
 import { auth, facebook, database } from '../js/firebaseApi';
 
 export const GET_USER = 'GET_USER';
+export const LOGOUT = 'LOGOUT';
 
 export function logOut() {
   auth.signOut();
-  return { type: 'LOGOUT' };
+  return { type: LOGOUT };
 }
 
 function getUser(response) {
