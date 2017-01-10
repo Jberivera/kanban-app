@@ -7,7 +7,7 @@ const css = classNames.bind(styles);
 
 const TASKS_MARGINBOTTOM = 7;
 
-const Task = ({ id, title, description }, i) => {
+const Task = ({ id, title, description, i }) => {
 
   function onMouseOut(e) {
     const task = e.target.parentNode;
@@ -24,7 +24,7 @@ const Task = ({ id, title, description }, i) => {
   }
 
   return (
-    <li key={ id } className={ css('task-item', 'g-task-item') } data-id={ id } data-index={ i }>
+    <li className={ css('task-item', 'g-task-item') } data-id={ id } data-index={ i }>
       <div className={ css('fake-ondrag', 'g-fake-ondrag') } onMouseEnter={ onMouseEnter }></div>
       <div className={ css('task-item-content', 'js-item-content') }>
         <a href={ `#${id}` } className={ css('task-item-title', 'js-task-title') } draggable="false">{ title }</a>

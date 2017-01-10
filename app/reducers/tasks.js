@@ -10,15 +10,15 @@ import tasksWall, { moveFromToEpic, orderChangeEpic } from '../components/TasksW
 
 const initialState = {
   'toDo': {
-    data: [],
+    data: {},
     name: 'toDo'
   },
   'inProgress': {
-    data: [],
+    data: {},
     name: 'inProgress'
   },
   'Done': {
-    data: [],
+    data: {},
     name: 'Done'
   }
 };

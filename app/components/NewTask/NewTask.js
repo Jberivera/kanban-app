@@ -17,7 +17,7 @@ const NewTask = ({ count, addTask, uid }) => {
 
   function onClick(e) {
     const key = generateKey(count);
-    addTask(key, `${TITLE} ${key}`, DESCRIPTION, uid);
+    addTask({ key, title: `${TITLE} ${key}`, description: DESCRIPTION }, uid);
   }
 
   return (
@@ -29,7 +29,7 @@ const mapStateToProps = ({ tasks, user }, ownProps) => {
   return {
     uid: user.res && user.res.uid,
     count: Object.keys(tasks).reduce((acum, key) => {
-      return tasks[key].data.length + acum;
+      return Object.keys(tasks[key].data).length + acum;
     }, 0)
   };
 };

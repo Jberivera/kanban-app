@@ -1,22 +1,18 @@
 import {
   ADD_TASK,
+  TASK_STORED,
   addTaskEpic
 } from './actions';
 
 const actionHandlers = {
-  [ADD_TASK]: (state, action) => {
+  [TASK_STORED]: (state, { task, key }) => {
     const firstCol = Object.keys(state)[0];
 
     return Object.assign({}, state, {
       [firstCol]: Object.assign({}, state[firstCol], {
-        data: [
-          {
-            'id': action.id,
-            'title': action.title,
-            'description': action.description
-          },
-          ...state[firstCol].data
-        ]
+        data: Object.assign({}, state[firstCol].data, {
+          [key]: task
+        })
       })
     });
   }
