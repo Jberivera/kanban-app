@@ -18,7 +18,6 @@ function setRef (refValue, tasks) {
 
 export const addTaskEpic = (action$, store) => {
   return action$.ofType(ADD_TASK)
-    .debounceTime(500)
     .flatMap((action) => {
       const { tasks } = store.getState();
       const firstCol = Object.keys(tasks)[0];
