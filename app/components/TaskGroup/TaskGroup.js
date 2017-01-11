@@ -17,19 +17,7 @@ const TaskGroup = ({ array, name, addbtn }) => {
         }
       </h2>
       <ul className={ css('task-group-list', name) }>
-        {
-          Object.keys(array).map((key, i) => {
-            return (
-              <Task
-                key={ key }
-                i={ i }
-                id={ key }
-                title={ array[key].title }
-                description={ array[key].description }
-              />
-            );
-          })
-        }
+        { array.map(Task) }
       </ul>
     </div>
   );
