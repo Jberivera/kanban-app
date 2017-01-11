@@ -6,7 +6,7 @@ export const ADD_TASK = 'ADD_TASK';
 export const addTask = (task, userUid) => ({ type: ADD_TASK, task, userUid });
 
 export const TASK_STORED = 'TASK_STORED';
-export const taskStored = (task, key) => ({ type: TASK_STORED, task, key });
+const taskStored = (task, key) => ({ type: TASK_STORED, task, key });
 
 const SET_USER_REJECTED = 'SET_USER_REJECTED';
 
