@@ -7,17 +7,17 @@ import {
 
 import style from './NewTask.scss';
 import classNames from 'classnames/bind';
-import generateKey from '../../js/generateKey';
+import uuid from 'uuid/v1';
 
 const css = classNames.bind(style);
-const TITLE = 'task';
+const TITLE = 'new task';
 const DESCRIPTION = 'description';
 
-const NewTask = ({ count, addTask, uid }) => {
+const NewTask = ({ addTask, uid }) => {
 
   function onClick(e) {
-    const key = generateKey(count);
-    addTask(key, `${TITLE} ${key}`, DESCRIPTION, uid);
+    const key = uuid();
+    addTask(key, `${TITLE}`, DESCRIPTION, uid);
   }
 
   return (
@@ -27,10 +27,7 @@ const NewTask = ({ count, addTask, uid }) => {
 
 const mapStateToProps = ({ tasks, user }, ownProps) => {
   return {
-    uid: user.res && user.res.uid,
-    count: Object.keys(tasks).reduce((acum, key) => {
-      return tasks[key].data.length + acum;
-    }, 0)
+    uid: user.res && user.res.uid
   };
 };
 
