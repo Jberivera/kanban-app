@@ -3,32 +3,27 @@ import '../../js/customObservable';
 import { database } from '../../js/firebaseApi';
 
 export const ADD_TASK = 'ADD_TASK';
-export const addTask = (task, userUid) => ({ type: ADD_TASK, task, userUid });
+export const addTask = (id, title, description, userUid) => ({ type: ADD_TASK, id, title, description, userUid });
 
-export const TASK_STORED = 'TASK_STORED';
-export const taskStored = (task, key) => ({ type: TASK_STORED, task, key });
+const TASK_STORED = 'TASK_STORED';
+const taskStored = () => ({ type: TASK_STORED });
 
 const SET_USER_REJECTED = 'SET_USER_REJECTED';
 
-function pushTask (refValue, task) {
-  const pushPromise = new Promise(function (resolve, reject) {
-    const ref = database.ref(refValue).push(task);
-    resolve(ref.key);
-  });
+function setRef (refValue, tasks) {
+  const setPromise = database.ref(refValue).set(tasks);
 
-  return Observable.fromPromise(pushPromise);
+  return Observable.fromPromise(setPromise);
 }
 
 export const addTaskEpic = (action$, store) => {
   return action$.ofType(ADD_TASK)
-    .flatMap(({ task, userUid }) => {
+    .flatMap((action) => {
       const { tasks } = store.getState();
       const firstCol = Object.keys(tasks)[0];
 
-      return pushTask(`users/${userUid}/tasks/${firstCol}/data`, task)
-        .map(function (key) {
-          return taskStored(task, key);
-        })
+      return setRef(`users/${action.userUid}/tasks/${firstCol}/data`, tasks[firstCol].data)
+        .mapTo(taskStored())
         .catch(error => Observable.of({
             type: SET_USER_REJECTED,
             payload: error,
