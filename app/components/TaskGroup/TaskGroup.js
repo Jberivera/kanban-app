@@ -7,9 +7,9 @@ const css = classNames.bind(styles);
 import Task from '../Task/Task';
 import NewTask from '../NewTask/NewTask';
 
-const TaskGroup = ({ array, name, addbtn }) => {
+const TaskGroup = ({ array, name, addbtn, groupKey }) => {
   return (
-    <div className={ css('task-group', 'js-task-group') } data-group={ name }>
+    <div className={ css('task-group', 'js-task-group') } data-group={ groupKey }>
       <h2 className={ css('task-group-title') }>
         { name }
         {

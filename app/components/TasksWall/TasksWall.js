@@ -89,7 +89,7 @@ class TasksWall extends Component {
         {
           Object.keys(tasks).map((key, i) => {
             return (
-              <TaskGroup key={ `task-wall-${key}` } array={ tasks[key].data } name={ tasks[key].name } addbtn={ !i }/>
+              <TaskGroup key={ `task-wall-${key}` } array={ tasks[key].data } groupKey={ key } name={ tasks[key].name } addbtn={ !i }/>
             );
           })
         }
