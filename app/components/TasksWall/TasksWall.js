@@ -21,8 +21,6 @@ class TasksWall extends Component {
 
   constructor (props) {
     super(props);
-    this.onMouseDown = this.onMouseDown.bind(this);
-    this.onMouseUp = this.onMouseUp.bind(this);
   }
 
   componentDidMount () {
@@ -55,6 +53,17 @@ class TasksWall extends Component {
           .takeUntil(mouseUp);
       });
 
+      const mouseBufferDrag = mouseDrag
+        .buffer(mouseUp)
+        .filter((arr) => arr.length)
+        .map((arr) => arr[arr.length - 1]);
+
+      const mouseDragUp = Observable.zip(
+        mouseBufferDrag,
+        mouseUp,
+        (obj, e) => ({ obj, e })
+      )
+
     mouseDrag.subscribe(({ drag, e }) => {
       const { task, data, content, left } = drag;
       let top = getOffsetTop(content) - 10,
@@ -72,14 +81,8 @@ class TasksWall extends Component {
       content.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    mouseDragUp.subscribe((e) => {
-      console.log(e);
-    });
-  }
-
-  onMouseUp ({ elem, groupFrom, id, title, description }) {
-    let mouseUp;
-    return  mouseUp = (e) => {
+    mouseDragUp.subscribe(({ obj, e }) => {
+      const { elem, groupFrom, id, title, description } = obj.drag.data;
       const groupTo = findGroup(e.target);
       const task = findTask(e.target);
       let index = -1;
@@ -89,56 +92,19 @@ class TasksWall extends Component {
       }
       resetInlineStyles(elem, document.body, elem.parentNode.firstChild);
       document.body.classList.remove(DRAG_ACTIVE);
-      e.currentTarget.removeEventListener('mouseup', mouseUp);
-      e.currentTarget.onmousemove = null;
+
       if (groupFrom !== groupTo) {
         this.props.moveFromTo(id, title, description, groupFrom, groupTo, Number(index));
       } else {
         this.props.orderChange(id, title, description, groupFrom, Number(index));
       }
-    };
-  }
-
-  onMouseMove (task, content) {
-    let x = 0,
-      y = 0,
-      left = getOffsetLeft(content) + content.offsetWidth / 2;
-
-    return function mouseMove(e) {
-      if (!document.body.classList.contains(DRAG_ACTIVE)) {
-        document.body.classList.add(DRAG_ACTIVE);
-        content.style.position = 'relative';
-        task.firstChild.style.display = 'none';
-        task.style.background = 'rgba(0, 0, 0, 0.1)';
-        document.body.style.cursor = 'move';
-      }
-      let top = getOffsetTop(content) - 10;
-      x = e.x - left;
-      y = e.y - top + document.scrollingElement.scrollTop;
-      content.style.transform = `translate(${x}px, ${y}px)`;
-    }
-  }
-
-  onMouseDown (e) {
-    // const task = findTask(e.target);
-    // if (task && !task.classList.contains('js-editMode')) {
-    //   const content = task.querySelector('.js-item-content');
-    //   let data = {
-    //     elem: content,
-    //     groupFrom: findGroup(task),
-    //     id: task.getAttribute('data-id'),
-    //     title: task.querySelector('.js-task-title').innerHTML,
-    //     description: task.querySelector('.js-task-description').innerHTML
-    //   };
-    //   e.currentTarget.addEventListener('mouseup', this.onMouseUp(data));
-    //   e.currentTarget.onmousemove = this.onMouseMove(task, content);
-    // }
+    });
   }
 
   render () {
     const { tasks } = this.props;
     return (
-      <div className={ css('tasks-wall') } ref={ (elem)=> this._wall = elem } onMouseDown={ this.onMouseDown }>
+      <div className={ css('tasks-wall') } ref={ (elem)=> this._wall = elem }>
         {
           Object.keys(tasks).map((key, i) => {
             return (
