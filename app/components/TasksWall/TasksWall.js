@@ -24,11 +24,11 @@ class TasksWall extends Component {
   }
 
   componentDidMount () {
-    const mouseDown = Observable.fromEvent(this._wall, 'mousedown');
-    const mouseMove = Observable.fromEvent(this._wall, 'mousemove');
-    const mouseUp = Observable.fromEvent(this._wall, 'mouseup');
+    const mouseDown$ = Observable.fromEvent(this._wall, 'mousedown');
+    const mouseMove$ = Observable.fromEvent(this._wall, 'mousemove');
+    const mouseUp$ = Observable.fromEvent(this._wall, 'mouseup');
 
-    const mouseDrag = mouseDown
+    const mouseDrag$ = mouseDown$
       .flatMap((e) => {
         const task = findTask(e.target);
 
@@ -48,23 +48,12 @@ class TasksWall extends Component {
           });
       })
       .flatMap((drag) => {
-        return mouseMove
+        return mouseMove$
           .map((e) => ({ drag, e }))
-          .takeUntil(mouseUp);
+          .takeUntil(mouseUp$);
       });
 
-      const mouseBufferDrag = mouseDrag
-        .buffer(mouseUp)
-        .filter((arr) => arr.length)
-        .map((arr) => arr[arr.length - 1]);
-
-      const mouseDragUp = Observable.zip(
-        mouseBufferDrag,
-        mouseUp.filter((e) => e.target.classList.contains('g-fake-ondrag')),
-        (obj, e) => ({ obj, e })
-      );
-
-    mouseDrag.subscribe(({ drag, e }) => {
+    mouseDrag$.subscribe(({ drag, e }) => {
       const { task, data, content, left } = drag;
       let top = getOffsetTop(content) - 10,
         x = e.x - left,
@@ -81,7 +70,14 @@ class TasksWall extends Component {
       content.style.transform = `translate(${x}px, ${y}px)`;
     });
 
-    mouseDragUp.subscribe(({ obj, e }) => {
+    const mouseDragStop$ = mouseDrag$
+      .flatMap((drag) => {
+        return mouseUp$
+          .map((e) => ({ obj: drag, e }))
+      })
+      .debounceTime(50);
+
+    mouseDragStop$.subscribe(({ obj, e }) => {
       const { elem, groupFrom, id, title, description } = obj.drag.data;
       const groupTo = findGroup(e.target);
       const task = findTask(e.target);

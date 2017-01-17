@@ -13,3 +13,4 @@ import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/zip';
 import 'rxjs/add/observable/zip';
 import 'rxjs/add/operator/buffer';
+import 'rxjs/add/operator/debounceTime';
