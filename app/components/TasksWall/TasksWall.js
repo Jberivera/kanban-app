@@ -60,9 +60,9 @@ class TasksWall extends Component {
 
       const mouseDragUp = Observable.zip(
         mouseBufferDrag,
-        mouseUp,
+        mouseUp.filter((e) => e.target.classList.contains('g-fake-ondrag')),
         (obj, e) => ({ obj, e })
-      )
+      );
 
     mouseDrag.subscribe(({ drag, e }) => {
       const { task, data, content, left } = drag;
