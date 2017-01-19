@@ -18,7 +18,6 @@ const css = classNames.bind(styles);
 const DRAG_ACTIVE = 'drag-active';
 
 class TasksWall extends Component {
-
   constructor (props) {
     super(props);
   }
