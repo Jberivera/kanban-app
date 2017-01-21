@@ -72,6 +72,7 @@ class TasksWall extends Component {
     const mouseDragStop$ = mouseDrag$
       .flatMap((drag) => {
         return mouseUp$
+          .takeUntil(mouseDown$)
           .map((e) => ({ obj: drag, e }))
       })
       .debounceTime(50);
