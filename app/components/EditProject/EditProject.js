@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import style from './EditProject.scss';
@@ -11,8 +11,8 @@ const css = classNames.bind(style);
 
 import TaskGroup from '../TaskGroup/EditTaskGroup';
 
-function EditProject() {
-  contructor (props) {
+class EditProject extends Component {
+  constructor (props) {
     super(props);
     this.onClickHandler = this.onClickHandler.bind(this);
   }
@@ -28,14 +28,14 @@ function EditProject() {
     const { tasks } = this.props;
 
     return (
-      <div className={ css('edit-wall') } onClick={ onClickHandler }>
+      <div className={ css('edit-wall') } onClick={ this.onClickHandler }>
         {
           Object.keys(tasks).reduce((array, key, i) => {
-            i === 0 && array.push(<div className={ css('add-group') } key={ i } data-i={ i }></div>);
+            i === 0 && array.push(<div className={ css('add-group') } key={ `edit-wall-${i}` } data-i={ i }></div>);
             return [
               ...array,
               <TaskGroup key={ `edit-wall-${key}` } array={ tasks[key].data } name={ tasks[key].name } />,
-              <div className={ css('add-group') } key={ i + 1 } data-i={ i + 1}></div>
+              <div className={ css('add-group') } key={ `edit-wall-${i + 1}` } data-i={ i + 1 }></div>
             ];
           }, [])
         }
