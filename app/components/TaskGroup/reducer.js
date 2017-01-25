@@ -18,7 +18,7 @@ const actionHandlers = {
     }).reduce((obj, key) => {
       if (state[key]) {
         return obj[key] = Object.assign({}, state[key], {
-          name: key,
+          name: state[key].name,
           data: [ ...state[key].data ]
         }), obj;
       } else {
