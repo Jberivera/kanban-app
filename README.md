@@ -1,10 +1,10 @@
-# Pandora's Wall
+# Pandora’s Wall
 
-> a kanban app using react and redux
+> A kanban app exercise using react, redux and cool stuff
 
 [![Build Status](https://travis-ci.org/Jberivera/pandoras-wall.svg?branch=master)](https://travis-ci.org/Jberivera/pandoras-wall)
 [![Dependency Status](https://david-dm.org/jberivera/pandoras-wall.svg)](https://david-dm.org/jberivera/pandoras-wall)
-[![devDependency Status](https://david-dm.org/jberivera/pandoras-wall/dev-status.svg)](https://david-dm.org/jberivera/pandoras-wall#info=devDependencies)
+[![devDependency Status](https://david-dm.org/jberivera/pandoras-wall/dev-status.svg)](https://david-dm.org/jberivera/pandoras-wall?type=dev)
 
 ## Scripts
 
@@ -15,8 +15,10 @@
 ## Technologies
 
 - [React](https://facebook.github.io/react/)
-- [Redux](https://github.com/reactjs/redux)
 - [Sass](http://sass-lang.com/)
+- [ReactiveX](https://github.com/ReactiveX/rxjs)
+- [Redux](https://github.com/reactjs/redux)
+  - [Redux-Observable](https://github.com/redux-observable/redux-observable)
 
 ## Tools
 
