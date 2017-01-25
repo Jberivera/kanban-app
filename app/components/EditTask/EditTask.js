@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import styles from './EditTask.scss';
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
@@ -10,9 +10,9 @@ import {
 
 const css = classNames.bind(styles);
 
-const EditTask = ({ id, title, description, editTask }) => {
+class EditTask extends Component {
 
-  function onEditMode(e) {
+  editModeHandler (e) {
     const editBtn = e.target;
     const editModeWrapper = editBtn.parentNode;
     const taskDescription = editModeWrapper.parentNode.querySelector('.js-task-description');
@@ -23,15 +23,16 @@ const EditTask = ({ id, title, description, editTask }) => {
 
     textArea.style.height = `${taskDescription.offsetHeight - paddingBottom + 10}px`;
     editModeWrapper.parentNode.classList.add('js-editMode');
-  };
+  }
 
-  function onCancel(e) {
+  cancelHandler (e) {
     const task = findTask(e.target);
     task.classList.remove('js-editMode');
   }
 
-  function onSubmit(e) {
+  submitHandler (e) {
     const { title, description } = e.currentTarget;
+    const { editTask } = this.props;
     const groupFrom = findGroup(e.target);
 
     e.preventDefault();
@@ -40,21 +41,25 @@ const EditTask = ({ id, title, description, editTask }) => {
     editTask(id, groupFrom, title.value, description.value);
   }
 
-  return (
-    <div className={ css('editMode-wrapper') }>
-      <button className={ css('editMode-btn', 'g-editMode-btn') } onClick={ onEditMode }>
-        edit
-      </button>
-      <form className={ css('edit-form', 'g-edit-form') } onSubmit={ onSubmit }>
-        <input className={ css('edit-title') } type="text" name="title" defaultValue={ title }></input>
-        <textarea className={ css('edit-description') } name="description" defaultValue={ description }></textarea>
-        <div className={ css('centered-btns') }>
-          <input className={ css('save-btn', 'btn') } type="submit" name="save" value="save"></input>
-          <span className={ css('cancel-btn', 'btn') } onClick={ onCancel }>cancel</span>
-        </div>
-      </form>
-    </div>
-  );
+  render () {
+    const { id, title, description } = this.props;
+
+    return (
+      <div className={ css('editMode-wrapper') }>
+        <button className={ css('editMode-btn', 'g-editMode-btn') } onClick={ this.editModeHandler }>
+          edit
+        </button>
+        <form className={ css('edit-form', 'g-edit-form') } onSubmit={ this.submitHandler }>
+          <input className={ css('edit-title') } type="text" name="title" defaultValue={ title }></input>
+          <textarea className={ css('edit-description') } name="description" defaultValue={ description }></textarea>
+          <div className={ css('centered-btns') }>
+            <input className={ css('save-btn', 'btn') } type="submit" name="save" value="save"></input>
+            <span className={ css('cancel-btn', 'btn') } onClick={ this.cancelHandler }>cancel</span>
+          </div>
+        </form>
+      </div>
+    );
+  }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
