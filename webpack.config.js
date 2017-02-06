@@ -15,15 +15,19 @@ const common = {
     filename: 'bundle.js'
   },
   module: {
-    loaders: [
+    rules: [
       {
         test: /\.scss$/,
-        loader: 'style!css?sourceMap&modules!sass?sourceMap',
+        use: [
+          'style-loader',
+          'css-loader?sourceMap&modules',
+          'sass-loader?sourceMap'
+        ],
         include: PATHS.app
       },
       {
         test: /\.js$/,
-        loaders: ['babel?cacheDirectory'],
+        loader: 'babel-loader?cacheDirectory',
         include: PATHS.app
       }
     ]
@@ -40,7 +44,6 @@ module.exports = Object.assign(common, {
       historyApiFallback: true,
       hot: true,
       inline: true,
-      progress: true,
       stats: 'errors-only',
       host: process.env.HOST,
       port: DEFAULT_PORT
