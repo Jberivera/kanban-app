@@ -11,6 +11,10 @@ import {
 const css = classNames.bind(styles);
 
 class EditTask extends Component {
+  constructor (props) {
+    super(props);
+    this.submitHandler = this.submitHandler.bind(this);
+  }
 
   editModeHandler (e) {
     const editBtn = e.target;
@@ -32,17 +36,17 @@ class EditTask extends Component {
 
   submitHandler (e) {
     const { title, description } = e.currentTarget;
-    const { editTask } = this.props;
+    const { id, editTask } = this.props;
     const groupFrom = findGroup(e.target);
 
     e.preventDefault();
     e.currentTarget.parentNode.parentNode.classList.remove('js-editMode');
 
-    editTask(id, groupFrom, title.value, description.value);
+    this.props.editTask(id, groupFrom, title.value, description.value);
   }
 
   render () {
-    const { id, title, description } = this.props;
+    const { title, description } = this.props;
 
     return (
       <div className={ css('editMode-wrapper') }>

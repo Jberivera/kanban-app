@@ -14,7 +14,7 @@ import NewTask from '../NewTask/NewTask';
 
 import resetInlineStyles from '../../js/resetInlineStyles';
 
-class TaskGroup extends Component {
+class EditTaskGroup extends Component {
 
   constructor (props) {
     super(props);
@@ -62,7 +62,19 @@ class TaskGroup extends Component {
           </div>
         </form>
         <ul className={ css('task-group-list', this.name) }>
-          { array.map(Task) }
+          {
+            array.map((item, i) => {
+              return (
+                <Task
+                  key={ item.id }
+                  i={ i }
+                  id={ item.id }
+                  title={ item.title }
+                  description={ item.description }
+                />
+              );
+            })
+          }
         </ul>
       </div>
     );
@@ -73,4 +85,4 @@ const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
   editGroupName
 }, dispatch);
 
-export default connect(null, mapDispatchToProps)(TaskGroup);
+export default connect(null, mapDispatchToProps)(EditTaskGroup);
