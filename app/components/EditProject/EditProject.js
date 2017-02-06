@@ -9,7 +9,7 @@ import {
 
 const css = classNames.bind(style);
 
-import TaskGroup from '../TaskGroup/EditTaskGroup';
+import EditTaskGroup from '../TaskGroup/EditTaskGroup';
 
 class EditProject extends Component {
   constructor (props) {
@@ -34,7 +34,7 @@ class EditProject extends Component {
             i === 0 && array.push(<div className={ css('add-group') } key={ `edit-wall-${i}` } data-i={ i }></div>);
             return [
               ...array,
-              <TaskGroup key={ `edit-wall-${key}` } array={ tasks[key].data } name={ tasks[key].name } />,
+              <EditTaskGroup key={ `edit-wall-${key}` } array={ tasks[key].data } name={ tasks[key].name } />,
               <div className={ css('add-group') } key={ `edit-wall-${i + 1}` } data-i={ i + 1 }></div>
             ];
           }, [])
