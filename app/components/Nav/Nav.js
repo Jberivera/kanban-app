@@ -51,7 +51,7 @@ function unCheckRadios(e) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    pathname: state.routing.locationBeforeTransitions ? state.routing.locationBeforeTransitions.pathname : '/'
+    pathname: state.router.locationBeforeTransitions ? state.router.locationBeforeTransitions.pathname : '/'
   };
 };
 
