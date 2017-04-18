@@ -21,13 +21,25 @@ class Login extends Component {
 
     this.onFacebookLogin = this.onFacebookLogin.bind(this);
     this.onFacebookOut = this.onFacebookOut.bind(this);
+    this.openMenuHandler = this.openMenuHandler.bind(this);
+
+    this.state = {
+      open: false
+    };
   }
 
   onFacebookLogin(e) {
     this.props.facebookLoginAsync();
   }
+
   onFacebookOut(e) {
     this.props.logOut();
+  }
+
+  openMenuHandler(e) {
+    this.setState({
+      open: !this.state.open
+    });
   }
 
   userNameFixed(name) {
@@ -36,6 +48,8 @@ class Login extends Component {
 
   render () {
     const { user } = this.props;
+    const { open } = this.state;
+
     let accountStyles = {};
 
     if (user.res && user.res.url) {
@@ -47,12 +61,13 @@ class Login extends Component {
 
     return (
       <div className={ css('login') }>
-        <input type="radio" className={ css('status-check') } name="nav-menu-dropdown" id="status" />
-        <label className={ css('status') } htmlFor="status" data-uncheck>
+        <label className={ css('status') } onClick={ this.openMenuHandler }>
           <i className={ css('account-circle', 'material-icons')}
-            style={accountStyles}>account_circle</i>
+            style={ accountStyles }>
+              account_circle
+          </i>
         </label>
-        <div className={ css('social-menu') }>
+        <div className={ css('social-menu', open && 'social-menu--open') }>
           {
             user.res && user.res.name ?
               <UserInfo
