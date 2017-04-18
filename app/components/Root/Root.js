@@ -1,7 +1,6 @@
 import React, {
   Component
 } from 'react';
-import { connect } from 'react-redux';
 
 import { Nav } from '../';
 
@@ -19,9 +18,4 @@ class Root extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return Object.assign({}, state);
-}
-
-export { React }
-export default connect(mapStateToProps, null)(Root);
+export default Root;

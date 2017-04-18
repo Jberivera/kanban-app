@@ -7,7 +7,7 @@ import user from '../../reducers/user';
 export const rootReducer = combineReducers({
   tasks,
   user,
-  routing: routerReducer
+  router: routerReducer
 });
 
 export const rootEpic = combineEpics(
