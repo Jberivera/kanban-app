@@ -9,14 +9,6 @@
   text-align: center;
 }
 
-.status-check {
-  display: none;
-
-  &:checked ~ .social-menu {
-    display: block;
-  }
-}
-
 .status {
   display: inline-block;
   position: relative;
@@ -52,6 +44,10 @@
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 3px;
   box-shadow: -3px 5px 6px -3px rgba(0,0,0,.2);
+
+  &--open {
+    display: block;
+  }
 }
 
 .fb-btn {
