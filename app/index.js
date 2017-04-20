@@ -3,7 +3,7 @@ import './main.scss';
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { ConnectedRouter } from 'react-router-redux';
 import configureStore from './redux/configureStore';
 import { setOnAuthStateChange } from './js/firebaseApi';
