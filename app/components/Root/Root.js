@@ -1,10 +1,8 @@
-import React, {
-  Component
-} from 'react';
+import React from 'react';
 
 import { Nav } from '../';
 
-class Root extends Component {
+class Root extends React.Component {
 
   render () {
     return (

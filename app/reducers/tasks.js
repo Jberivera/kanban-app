@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable'; // eslint-disable-line no-unused-vars
 import '../js/customObservable';
 import createReducer from 'redux-createreducer';
 import { combineEpics } from 'redux-observable';
@@ -25,7 +25,7 @@ const initialState = {
 
 const actionHandlers = Object.assign(
   {
-    'LOGOUT': (state, action) => {
+    'LOGOUT': () => {
       return Object.assign({}, initialState);
     },
     'LOGIN': (state, { payload }) => {

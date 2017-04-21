@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './TaskGroup.scss';
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
@@ -10,11 +10,10 @@ import {
 const css = classNames.bind(styles);
 
 import Task from '../Task/Task';
-import NewTask from '../NewTask/NewTask';
 
 import resetInlineStyles from '../../js/resetInlineStyles';
 
-class EditTaskGroup extends Component {
+class EditTaskGroup extends React.Component {
 
   constructor (props) {
     super(props);
@@ -38,7 +37,7 @@ class EditTaskGroup extends Component {
   }
 
   onCancel (name) {
-    return (e) => {
+    return (e) => { // eslint-disable-line no-unused-vars
       this.groupTitle.value = name;
       resetInlineStyles(this.groupTitle);
       this.btns.style.display = 'none';
@@ -46,7 +45,7 @@ class EditTaskGroup extends Component {
   }
 
   render () {
-    const { array, name, addbtn, editMode } = this.props;
+    const { array, name } = this.props;
     return (
       <div className={ css('task-group', 'js-task-group') } data-group={ name }>
         <form className={ css('edit-form') } onSubmit={ this.onSubmit }>
@@ -79,9 +78,9 @@ class EditTaskGroup extends Component {
       </div>
     );
   }
-};
+}
 
-const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
   editGroupName
 }, dispatch);
 

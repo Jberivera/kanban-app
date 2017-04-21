@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './EditTask.scss';
 import classNames from 'classnames/bind';
 import { connect } from 'react-redux';
@@ -10,7 +10,7 @@ import {
 
 const css = classNames.bind(styles);
 
-class EditTask extends Component {
+class EditTask extends React.Component {
   constructor (props) {
     super(props);
     this.submitHandler = this.submitHandler.bind(this);
@@ -42,7 +42,7 @@ class EditTask extends Component {
     e.preventDefault();
     e.currentTarget.parentNode.parentNode.classList.remove('js-editMode');
 
-    this.props.editTask(id, groupFrom, title.value, description.value);
+    editTask(id, groupFrom, title.value, description.value);
   }
 
   render () {
@@ -66,7 +66,7 @@ class EditTask extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
   editTask
 }, dispatch);
 

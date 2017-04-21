@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -13,13 +13,13 @@ const css = classNames.bind(style);
 const TITLE = 'new task';
 const DESCRIPTION = 'description';
 
-class NewTask extends Component {
+class NewTask extends React.Component {
   constructor (props) {
     super(props);
     this.onClick = this.onClick.bind(this);
   }
 
-  onClick (e) {
+  onClick (e) { // eslint-disable-line no-unused-vars
     const { addTask, uid } = this.props;
     const key = uuid();
 
@@ -33,13 +33,13 @@ class NewTask extends Component {
   }
 }
 
-const mapStateToProps = ({ tasks, user }, ownProps) => {
+const mapStateToProps = ({ user }) => {
   return {
     uid: user.res && user.res.uid
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
   addTask
 }, dispatch);
 

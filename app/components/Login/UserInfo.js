@@ -1,6 +1,4 @@
-import React, {
-  Component
-} from 'react';
+import React from 'react';
 
 import style from './Login.scss';
 import classNames from 'classnames/bind';

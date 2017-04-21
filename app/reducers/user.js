@@ -11,7 +11,7 @@ const actionHandlers = {
       res: action.response
     });
   },
-  'LOGOUT': (state, action) => {
+  'LOGOUT': () => {
     return {};
   },
   'LOGIN': (state, { payload }) => {
