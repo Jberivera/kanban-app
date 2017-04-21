@@ -1,8 +1,5 @@
-const webpack = require('webpack');
 const path = require('path');
 
-const TARGET = process.env.npm_lifecycle_event;
-const DEFAULT_PORT = process.env.PORT || 5000;
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'dist')
@@ -22,6 +19,17 @@ const common = {
         use: [
           'style-loader',
           'css-loader?sourceMap&modules',
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: function () {
+                return [
+                  require('postcss-flexbugs-fixes'),
+                  require('autoprefixer')({ browsers: ['last 2 versions'] })
+                ];
+              }
+            }
+          },
           'sass-loader?sourceMap'
         ],
         include: PATHS.app
@@ -35,29 +43,17 @@ const common = {
         include: PATHS.app
       }
     ]
-  },
-  plugins: [
-    new webpack.optimize.UglifyJsPlugin()
-  ]
+  }
 };
 
-module.exports = Object.assign(common, {
-  start: {
-    devtool: 'eval-source-map',
-    devServer: {
-      historyApiFallback: true,
-      hot: true,
-      inline: true,
-      stats: 'errors-only',
-      host: process.env.HOST,
-      port: DEFAULT_PORT
-    },
-    plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.DefinePlugin({ 'process.env': { 'NODE_ENV': '"development"' }})
-    ]
-  },
-  build: {
+function cleanRules (rules, ...args) {
+  return args.reduce((res, clean) => {
+    return res.filter((rule) => !rule.test.test(`.${clean}`));
+  }, [ ...rules ]);
+}
 
-  }
-}[TARGET]);
+module.exports = {
+  common,
+  cleanRules,
+  PATHS
+};

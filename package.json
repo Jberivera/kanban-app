@@ -6,8 +6,8 @@
   "scripts": {
     "test:watch": "karma start karma.config.js --auto-watch --no-single-run",
     "test": "karma start karma.config.js --no-auto-watch --single-run",
-    "build": "webpack",
-    "start": "webpack-dev-server"
+    "build": "webpack --config webpack.config.production",
+    "start": "webpack-dev-server --config webpack.config.development"
   },
   "keywords": [
     "kanban",
@@ -34,6 +34,7 @@
     "eslint-loader": "^1.7.1",
     "eslint-plugin-react": "^6.10.3",
     "expect": "^1.20.2",
+    "extract-text-webpack-plugin": "^2.1.0",
     "isparta-loader": "^2.0.0",
     "karma": "^1.5.0",
     "karma-coverage": "^1.1.1",
@@ -46,6 +47,7 @@
     "node-sass": "^4.5.1",
     "phantomjs-polyfill": "0.0.2",
     "phantomjs-prebuilt": "^2.1.14",
+    "postcss-flexbugs-fixes": "^2.1.1",
     "postcss-loader": "^1.3.3",
     "react-addons-test-utils": "^15.4.2",
     "sass-loader": "^6.0.3",
