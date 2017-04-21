@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import styles from './TasksWall.scss';
@@ -17,7 +17,7 @@ import TaskGroup from '../TaskGroup/TaskGroup';
 const css = classNames.bind(styles);
 const DRAG_ACTIVE = 'drag-active';
 
-class TasksWall extends Component {
+class TasksWall extends React.Component {
   constructor (props) {
     super(props);
   }
@@ -53,7 +53,7 @@ class TasksWall extends Component {
       });
 
     mouseDrag$.subscribe(({ drag, e }) => {
-      const { task, data, content, left } = drag;
+      const { task, content, left } = drag;
       let top = getOffsetTop(content) - 10,
         x = e.x - left,
         y = e.y - top + document.scrollingElement.scrollTop;
@@ -73,7 +73,7 @@ class TasksWall extends Component {
       .flatMap((drag) => {
         return mouseUp$
           .takeUntil(mouseDown$)
-          .map((e) => ({ obj: drag, e }))
+          .map((e) => ({ obj: drag, e }));
       })
       .debounceTime(50);
 
@@ -113,13 +113,13 @@ class TasksWall extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     tasks: Object.assign({}, state.tasks)
   };
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
   orderChange,
   moveFromTo
 }, dispatch);

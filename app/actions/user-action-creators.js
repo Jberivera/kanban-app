@@ -33,13 +33,13 @@ export function facebookLoginAsync() {
         url: providerData[0].photoURL,
         uid: result.user.uid
       }));
-    }).catch(function(error) {
+    }).catch(function() {
       dispatch(getUser(null));
     });
   };
 }
 
-function getProfileUrl(authData) {
+function getProfileUrl(authData) { // eslint-disable-line no-unused-vars
   if (authData.provider === 'facebook') {
     return `https://graph.facebook.com/${authData.facebook.id}/picture?type=square`;
   }

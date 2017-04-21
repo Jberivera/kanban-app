@@ -6,7 +6,6 @@ import classNames from 'classnames/bind';
 const css = classNames.bind(style);
 
 import { Login } from '../';
-import Dropdown from './Dropdown';
 import NavBtn from './NavBtn';
 
 const items = [
@@ -30,8 +29,8 @@ const Nav = ({ pathname }) => {
       </div>
       <ul className={ css('menu') } >
         {
-          items.map((item, i) => (
-            <NavBtn key={ i } label={ item.label } to={ item.to } pathname={ pathname === item.to } />
+          items.map((item) => (
+            <NavBtn key={ `${item.label}-${item.to}` } label={ item.label } to={ item.to } pathname={ pathname === item.to } />
           ))
         }
       </ul>
@@ -40,7 +39,7 @@ const Nav = ({ pathname }) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     pathname: state.router.location ? state.router.location.pathname : '/'
   };

@@ -27,7 +27,10 @@ const common = {
       },
       {
         test: /\.js$/,
-        loader: 'babel-loader?cacheDirectory',
+        use: [
+          'babel-loader?cacheDirectory',
+          'eslint-loader'
+        ],
         include: PATHS.app
       }
     ]

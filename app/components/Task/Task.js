@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './Task.scss';
 import classNames from 'classnames/bind';
 import EditTask from '../EditTask/EditTask';
@@ -7,7 +7,7 @@ const css = classNames.bind(styles);
 
 const TASKS_MARGINBOTTOM = 7;
 
-class Task extends Component {
+class Task extends React.Component {
   constructor (props) {
     super(props);
     this.mouseOutHandler = this.mouseOutHandler.bind(this);

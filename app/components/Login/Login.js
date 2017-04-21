@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import {
@@ -14,7 +14,7 @@ const css = classNames.bind(style);
 import Social from './Social';
 import UserInfo from './UserInfo';
 
-class Login extends Component {
+class Login extends React.Component {
 
   constructor(props) {
     super(props);
@@ -28,15 +28,15 @@ class Login extends Component {
     };
   }
 
-  onFacebookLogin(e) {
+  onFacebookLogin () {
     this.props.facebookLoginAsync();
   }
 
-  onFacebookOut(e) {
+  onFacebookOut () {
     this.props.logOut();
   }
 
-  openMenuHandler(e) {
+  openMenuHandler () {
     this.setState({
       open: !this.state.open
     });
@@ -56,7 +56,7 @@ class Login extends Component {
       accountStyles = {
         backgroundImage: `url(${user.res.url})`,
         color: 'transparent'
-      }
+      };
     }
 
     return (
@@ -81,15 +81,15 @@ class Login extends Component {
       </div>
     );
   }
-};
+}
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return Object.assign({}, {
     user: state.user
   });
 };
 
-const mapDispatchToProps = (dispatch, ownProps) => bindActionCreators({
+const mapDispatchToProps = (dispatch) => bindActionCreators({
   logOut,
   facebookLoginAsync
 }, dispatch);

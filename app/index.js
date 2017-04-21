@@ -1,6 +1,6 @@
 import './main.scss';
 
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
@@ -13,7 +13,7 @@ const { store, history } = configureStore();
 // react components
 import { Root, Home, TasksWall, EditProject } from './components';
 
-class App extends Component {
+class App extends React.Component {
   constructor (props) {
     super(props);
   }

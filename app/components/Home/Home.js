@@ -1,10 +1,8 @@
-import React, {
-  Component
-} from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
-class Home extends Component {
+class Home extends React.Component {
 
   render () {
     const { user: { uid } } = this.props;
@@ -29,5 +27,5 @@ function mapStateToProps (state) {
   };
 }
 
-export { Home }
+export { Home };
 export default connect(mapStateToProps, null)(Home);

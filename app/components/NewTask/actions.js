@@ -25,9 +25,9 @@ export const addTaskEpic = (action$, store) => {
       return setRef(`users/${action.userUid}/tasks/${firstCol}/data`, tasks[firstCol].data)
         .mapTo(taskStored())
         .catch(error => Observable.of({
-            type: SET_USER_REJECTED,
-            payload: error,
-            error: true
+          type: SET_USER_REJECTED,
+          payload: error,
+          error: true
         }));
     });
 };

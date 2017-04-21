@@ -3,12 +3,12 @@ import 'firebase/database';
 import 'firebase/auth';
 
 const config = {
-  apiKey: "AIzaSyC2tnPvTqMMsgRPd6OWiQXe1sORwbnzNDo",
-  authDomain: "pandoras-wall.firebaseapp.com",
-  databaseURL: "https://pandoras-wall.firebaseio.com",
-  storageBucket: "pandoras-wall.appspot.com",
+  apiKey: 'AIzaSyC2tnPvTqMMsgRPd6OWiQXe1sORwbnzNDo',
+  authDomain: 'pandoras-wall.firebaseapp.com',
+  databaseURL: 'https://pandoras-wall.firebaseio.com',
+  storageBucket: 'pandoras-wall.appspot.com',
 };
-const firebaseApp = firebase.initializeApp(config);
+const firebaseApp = firebase.initializeApp(config); // eslint-disable-line no-unused-vars
 
 const auth = firebase.auth();
 const facebook = new firebase.auth.FacebookAuthProvider();
