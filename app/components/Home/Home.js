@@ -9,7 +9,7 @@ class Home extends React.Component {
 
     if (uid) {
       return (
-        <Redirect to="/wall"/>
+        <Redirect to="/wall" />
       );
     }
 

@@ -52,7 +52,7 @@ class EditTaskGroup extends React.Component {
           <input
             className={ css('edit-group-title') }
             type="text"
-            defaultValue={name}
+            defaultValue={ name }
             onChange={ this.onChange }
             ref={ (ref) => this.groupTitle = ref } />
           <div className={ css('centered-btns') } ref={ (ref) => this.btns = ref } >

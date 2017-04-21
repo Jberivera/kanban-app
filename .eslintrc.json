@@ -49,6 +49,17 @@
         ],
         "react/no-array-index-key": [
             "warn"
+        ],
+        "react/jsx-space-before-closing": [
+            "error",
+            "always"
+        ],
+        "react/jsx-wrap-multilines": [
+            "error"
+        ],
+        "react/jsx-curly-spacing": [
+            "error",
+            "always"
         ]
     }
 }

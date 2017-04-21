@@ -62,7 +62,7 @@ class Login extends React.Component {
     return (
       <div className={ css('login') }>
         <label className={ css('status') } onClick={ this.openMenuHandler }>
-          <i className={ css('account-circle', 'material-icons')}
+          <i className={ css('account-circle', 'material-icons') }
             style={ accountStyles }>
               account_circle
           </i>
@@ -71,10 +71,10 @@ class Login extends React.Component {
           {
             user.res && user.res.name ?
               <UserInfo
-                userName={ this.userNameFixed(user.res.name)}
+                userName={ this.userNameFixed(user.res.name) }
                 onFacebookOut={ this.onFacebookOut } /> :
               <Social
-                onFacebookLogin={this.onFacebookLogin}
+                onFacebookLogin={ this.onFacebookLogin }
                 onFacebookOut={ this.onFacebookOut } />
           }
         </div>

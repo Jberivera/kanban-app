@@ -8,7 +8,7 @@ const css = classNames.bind(style);
 const Social = ({ onFacebookLogin }) => {
   return (
     <div>
-      <div className={ css('fb-btn') } onClick={onFacebookLogin}>Facebook</div>
+      <div className={ css('fb-btn') } onClick={ onFacebookLogin }>Facebook</div>
     </div>
   );
 };
