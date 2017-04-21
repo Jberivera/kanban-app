@@ -18,7 +18,7 @@ module.exports = function(config) {
     },
     reporters: ['spec', 'coverage'],
     coverageReporter: {
-      dir: 'build/reports/coverage',
+      dir: 'reports/coverage',
       reporters: [
         { type: 'html', subdir: 'report-html' },
         { type: 'lcov', subdir: 'report-lcov' },
@@ -67,8 +67,8 @@ module.exports = function(config) {
       ]
     },
     webpackMiddleware: {
-     noInfo: true,
-     stats: 'errors-only'
-   }
+      noInfo: true,
+      stats: 'errors-only'
+    }
   });
 };
